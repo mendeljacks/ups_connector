@@ -57,13 +57,17 @@ const open_api_to_typescript = (s, file_name) => {
 */
 export const ${fn_name} = async (
     base_url: string, 
-    token: string, ${
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, ${
         pth.length > 0
             ? `
     path: {${path_type}},`
             : ``
     } ${
-                body.length > 0
+                !!body_type
                     ? `
     body: ${body_type},`
                     : ``
@@ -78,13 +82,13 @@ export const ${fn_name} = async (
     return axios({
         method: '${method.toUpperCase()}', 
         url: \`${`\${base_url}${sanitize_route_str(route_str)}`}\`,
-        headers: { Authorization: \`Bearer \${ token }\` },${
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },${
             query.length > 0
                 ? `
         params: query,`
                 : ''
         }${
-                body.length > 0
+                !!body_type
                     ? `
         data: body,`
                     : ''

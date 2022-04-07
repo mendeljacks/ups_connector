@@ -6,13 +6,19 @@ export type post_acceptance_audit_pre_check_type = {AcceptanceAuditPreCheckRespo
 */
 export const post_acceptance_audit_pre_check = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {AcceptanceAuditPreCheckRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, OriginRecordTransactionTimestamp?: string, Shipment: {ShipperNumber: string, ShipFromAddress: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, ShipToAddress: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, Service: {Code: string, Description?: string, }, RegulationSet?: string, Package: {PackageIdentifier: string, PackageWeight: {Weight: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, QValue?: string, OverPackedIndicator?: string, TransportationMode?: string, EmergencyPhone?: string, EmergencyContact?: string, ChemicalRecord: {ChemicalRecordIdentifier: string, ReportableQuantity?: string, ClassDivisionNumber?: string, SubRiskClass?: string, IDNumber?: string, PackagingGroupType?: string, Quantity?: string, UOM?: string, PackagingInstructionCode?: string, ProperShippingName?: string, TechnicalName?: string, AdditionalDescription?: string, PackagingType?: string, HazardLabelRequired?: string, PackagingTypeQuantity?: string, CommodityRegulatedLevelCode: string, TransportCategory?: string, TunnelRestrictionCode?: string, AllPackedInOneIndicator?: string, }, }, }, }, }, 
     axios: Function
 ): Promise<{data: post_acceptance_audit_pre_check_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/dangerousgoods/v1/acceptanceauditprecheck`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_a_v_type = {AddressValidationResponse: {Response: {TransactionReference: {CustomerContext?: string, TransactionIdentifier?: string, XpciVersion?: string, ToolVersion?: string, }, ResponseStatusCode: string, ResponseStatusDescription?: string, Error: {ErrorSeverity: string, ErrorCode: string, ErrorDescription?: string, MinimumRetrySeconds?: string, ErrorLocation: {ErrorLocationElementName?: string, ErrorLocationAttributeName?: string, }, ErrorDigest?: string, }, }, AddressValidationResult: {Rank: string, Quality: string, Address: {City: string, StateProvinceCode: string, }, PostalCodeLowEnd: string, PostalCodeHighEnd: string, }, }, }
@@ -23,13 +29,19 @@ export type post_a_v_type = {AddressValidationResponse: {Response: {TransactionR
 */
 export const post_a_v = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {AddressValidationRequest: {Request: {TransactionReference?: {CustomerContext?: string, }, RequestAction: string, RequestOption?: string, }, Address: {City: string, StateProvinceCode: string, CountryCode: string, PostalCode?: string, }, }, }, 
     axios: Function
 ): Promise<{data: post_a_v_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/AV`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_chemical_reference_data_type = {ChemicalReferenceDataResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, ChemicalData?: {ChemicalDetail?: {RegulationSet?: string, IDNumber?: string, HazardousMaterialsDescription?: string, ClassDivisionNumber?: string, SubRiskClass?: string, PackagingGroupType?: string, SpecialPermit?: string, TechnicalNameRequiredIndicator?: string, AdditionalShippingInformationRequiredIndicator?: string, TunnelRestrictionCode?: string, TransportCategory?: string, TransportMultiplierQuantity?: string, ChannelTunnelAcceptedIndicator?: string, ChemicalType?: string, CAToUSShipmentAllowedIndicator?: string, }, ProperShippingNameDetail?: {ProperShippingName: string, }, PackageQuantityLimitDetail?: {PackageQuantityLimitTypeCode?: string, Quantity?: string, UOM?: string, PackagingInstructionCode?: string, }, }, }, }
@@ -40,14 +52,20 @@ export type post_chemical_reference_data_type = {ChemicalReferenceDataResponse: 
 */
 export const post_chemical_reference_data = async (
     base_url: string, 
-    token: string, 
-    path: {version: undefined},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: undefined}, 
+    body: {ChemicalReferenceDataRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, IDNumber?: string, ProperShippingName?: string, ShipperNumber: string, }, }, 
     axios: Function
 ): Promise<{data: post_chemical_reference_data_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/dangerousgoods/${path.version}/chemicalreferencedata`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_delete_type = {DeleteResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, }, }
@@ -58,13 +76,19 @@ export type post_delete_type = {DeleteResponse: {Response: {ResponseStatus: {Cod
 */
 export const post_delete = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {DeleteRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, ShipperNumber: string, DocumentID: string, }, }, 
     axios: Function
 ): Promise<{data: post_delete_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/PaperlessDocumentAPI`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_denied_party_screener_type = {DeniedPartyScreenerResponse: {Response: {Warning?: string, DeniedPartySearchStatus: string, }, TransactionInfo: {Date: string, Time: string, TransactionCharge: {MonetaryValue: string, CurrencyCode: string, }, }, GovernmentList?: {ListDescription?: {ListName?: string, Description?: string, ControlAgency?: string, LastRegulatoryUpdate?: string, }, DeniedParty?: {Names?: {Name?: string, }, Addresses?: {Address?: {AddressLine?: string, City?: string, State?: string, PostalCode?: string, County?: string, CountryCode?: string, }, }, Remarks?: string, }, }, }, }
@@ -75,13 +99,19 @@ export type post_denied_party_screener_type = {DeniedPartyScreenerResponse: {Res
 */
 export const post_denied_party_screener = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {DeniedPartyScreenerRequest: {Request: {RequestAction: string, RequestOption?: string, }, Party: {ScreenType: string, ContactName?: string, CompanyName?: string, Address?: {AddressLine?: string, City?: string, State?: string, PostalCode?: string, County?: string, CountryCode?: string, }, MatchLevel?: string, }, TransactionReferenceID?: string, ShippingHistoryUserKey?: string, }, }, 
     axios: Function
 ): Promise<{data: post_denied_party_screener_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/tradeability/v1/restrictedparties`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_freight_cancel_pickup__type = {FreightCancelPickupResponse: {Response: {ResponseStatus: string, Alert: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, FreightCancelStatus: string, }, }
@@ -92,13 +122,19 @@ export type post_freight_cancel_pickup__type = {FreightCancelPickupResponse: {Re
 */
 export const post_freight_cancel_pickup_ = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {FreightCancelPickupRequest: {Request: {TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, PickupRequestConfirmationNumber: string, }, }, 
     axios: Function
 ): Promise<{data: post_freight_cancel_pickup__type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/v1/freight/pickups`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_freight_pickup_type = {FreightPickupResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, PickupRequestConfirmationNumber: string, }, }
@@ -109,13 +145,19 @@ export type post_freight_pickup_type = {FreightPickupResponse: {Response: {Respo
 */
 export const post_freight_pickup = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {FreightPickupRequest: {Request: {RequestOption?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, PickupRequestConfirmationNumber?: string, DestinationPostalCode?: string, DestinationCountryCode: string, Requester: {ThirdPartyIndicator?: string, AttentionName: string, EMailAddress: string, Name: string, Phone: {Number?: string, Extension?: string, }, }, ShipFrom: {AttentionName: string, Name: string, Address: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode?: string, }, Phone: {Number?: string, Extension?: string, }, EMailAddress?: string, }, ShipTo?: {AttentionName?: string, Address?: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode?: string, }, Phone?: {Number?: string, Extension?: string, }, EMailAddress?: string, }, PickupDate: string, EarliestTimeReady: string, LatestTimeReady: string, ShipmentServiceOptions?: {FreezableProtectionIndicator?: string, LimitedAccessPickupIndicator?: string, LimitedAccessDeliveryIndicator?: string, ExtremeLengthIndicator?: string, }, ShipmentDetail?: {HazmatIndicator?: string, PackagingType: {Code: string, Description?: string, }, NumberOfPieces: string, DescriptionOfCommodity: string, Weight: {UnitOfMeasurement: {Code: string, Description?: string, }, Value: string, }, }, ExistingShipmentID?: {ShipmentNumber: string, BOLID: string, }, POM?: {POMNumber?: string, POMNumberType?: string, PickupNotifications?: {CompanyName?: string, EMailNotification?: {EMailAddress?: string, EventType?: string, }, FailedEMail?: string, }, }, PickupInstructions?: string, AdditionalComments?: string, HandlingInstructions?: string, SpecialInstructions?: string, DeliveryInstructions?: string, }, }, 
     axios: Function
 ): Promise<{data: post_freight_pickup_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/v1/freight/pickups`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_freight_rate_type = {FreightRateResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, Rate?: {Type: {Code: string, Description?: string, }, Factor: {Value: string, UnitOfMeasurement?: {Code: string, Description?: string, }, }, }, FreightDensityRate?: {Density: string, TotalCubicFeet: string, }, Commodity: {CommodityID?: string, Description: string, Weight: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, AdjustedWeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, }, TotalShipmentCharge?: {CurrencyCode: string, MonetaryValue: string, }, BillableShipmentWeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, DimensionalWeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, Service?: {Code: string, Description?: string, }, GuaranteedIndicator?: string, MinimumChargeAppliedIndicator?: string, AlternateRatesResponse?: {AlternateRateType: {Code: string, Description?: string, }, Rate: {Type: {Code: string, Description?: string, }, SubTypeCode?: string, Factor: {Value: string, UnitOfMeasurement?: {Code: string, Description?: string, }, }, }, FreightDensityRate?: {Density: string, TotalCubicFeet: string, }, BillableShipmentWeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, TimeInTransit?: {DaysInTransit: string, }, }, TimeInTransit?: {DaysInTransit: string, }, HandlingUnits?: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, AdjustedHeight: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, }, QuoteNumber?: string, }, }
@@ -126,14 +168,20 @@ export type post_freight_rate_type = {FreightRateResponse: {Response: {ResponseS
 */
 export const post_freight_rate = async (
     base_url: string, 
-    token: string, 
-    path: {version: string,requestoption: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: string,requestoption: string}, 
+    body: {FreightRateRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, }, }, ShipFrom: {Name?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, }, AttentionName?: string, }, ShipTo: {Name?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, }, AttentionName?: string, }, PaymentInformation: {Payer: {Name: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, ShipperNumber?: string, AttentionName?: string, }, ShipmentBillingOption: {Code: string, Description?: string, }, }, Service: {Code: string, Description?: string, }, HandlingUnitOne?: {Quantity: string, Type: {Code: string, Description?: string, }, }, HandlingUnitTwo?: {Quantity: string, Type: {Code: string, Description?: string, }, }, Commodity: {CommodityID?: string, Description: string, Weight: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, AdjustedWeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, Dimensions?: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, NumberOfPieces: string, PackagingType: {Code: string, Description?: string, }, DangerousGoodsIndicator?: string, CommodityValue?: {CurrencyCode?: string, MonetaryValue: string, }, FreightClass?: string, NMFCCommodityCode?: string, NMFCCommodity?: {PrimeCode?: string, SubCode?: string, }, }, ShipmentServiceOptions?: {PickupOptions?: {HolidayPickupIndicator?: string, InsidePickupIndicator?: string, ResidentialPickupIndicator?: string, WeekendPickupIndicator?: string, LiftGateRequiredIndicator?: string, LimitedAccessPickupIndicator?: string, }, DeliveryOptions?: {CallBeforeDeliveryIndicator?: string, HolidayDeliveryIndicator?: string, InsideDeliveryIndicator?: string, ResidentialDeliveryIndicator?: string, WeekendDeliveryIndicator?: string, LiftGateRequiredIndicator?: string, LimitedAccessDeliveryIndicator?: string, }, OverSeasLeg?: {Dimensions: {Volume?: string, Height: string, Length: string, Width: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, Value: {Cube?: {CurrencyCode: string, MonetaryValue: string, }, CWT?: {CurrencyCode: string, MonetaryValue: string, }, }, }, COD?: {CODValue: {CurrencyCode: string, MonetaryValue: string, }, CODPaymentMethod: {Code: string, Description?: string, }, CODBillingOption: {Code: string, Description?: string, }, RemitTo: {Name: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, AttentionName?: string, }, }, DangerousGoods?: {Name: string, Phone: {Number: string, Extension?: string, }, TransportationMode?: {Code: string, Description?: string, }, }, SortingAndSegregating?: {Quantity: string, }, ExcessDeclaredValue?: {CurrencyCode: string, MonetaryValue: string, }, HandlingCharge?: {Percentage?: string, Amount?: {CurrencyCode: string, MonetaryValue: string, }, }, FreezableProtectionIndicator?: string, ExtremeLengthIndicator?: string, LinearFeet?: string, AdjustedHeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, }, PickupRequest?: {PickupDate: string, AdditionalComments?: string, }, AlternateRateOptions?: {Code: string, Description?: string, }, GFPOptions?: {GPFAccesorialRateIndicator?: string, OnCallInformation?: {OnCallPickupIndicator?: string, }, }, HandlingUnitWeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, AdjustedWeightIndicator?: string, TimeInTransitIndicator?: string, HandlingUnits?: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, }, AdjustedHeightIndicator?: string, DensityEligibleIndicator?: string, QuoteNumberIndicator?: string, }, }, 
     axios: Function
 ): Promise<{data: post_freight_rate_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/${path.version}/freight/rating/${path.requestoption}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_freight_ship_type = {FreightShipResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, ShipmentResults: {PickupRequestConfirmationNumber?: string, DeliveryDate?: string, ShipmentNumber?: string, BOLID?: string, GuaranteedIndicator?: string, MinimumChargeAppliedIndicator?: string, Rate?: {Type: {Code: string, Description: string, }, Factor: {Value: string, UnitOfMeasurement?: {Code: string, Description?: string, }, }, }, FreightDensityRate?: {Density?: string, TotalCubicFeet?: string, }, TotalShipmentCharge?: {CurrencyCode: string, MonetaryValue: string, }, BillableShipmentWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Value: string, }, Service?: {Code: string, Description?: string, }, Documents?: {Image?: {Type: {Code: string, Description: string, }, GraphicImage: string, Format: {Code: string, Description: string, }, }, Forms?: {Type: {Code: string, Description: string, }, GraphicImage: string, Format: {Code: string, Description: string, }, }, }, TimeInTransit?: {DaysInTransit?: string, }, }, }, }
@@ -144,14 +192,20 @@ export type post_freight_ship_type = {FreightShipResponse: {Response: {ResponseS
 */
 export const post_freight_ship = async (
     base_url: string, 
-    token: string, 
-    path: {version: string,requestoption: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: string,requestoption: string}, 
+    body: {FreightShipRequest: {Request: {RequestOption: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, }, }, Shipment: {ShipFrom: {Name: string, TaxIdentificationNumber?: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, AttentionName?: string, Phone: {Number: string, Extension?: string, }, FaxNumber?: string, EMailAddress?: string, }, ShipperNumber: string, ShipTo: {Name: string, TaxIdentificationNumber?: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, AttentionName?: string, Phone?: {Number: string, Extension?: string, }, FaxNumber?: string, EMailAddress?: string, }, PaymentInformation: {Payer: {Name: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, ShipperNumber?: string, AttentionName?: string, Phone?: {Number: string, Extension?: string, }, FaxNumber?: string, EMailAddress?: string, }, ShipmentBillingOption: {Code: string, Description?: string, }, }, Service: {Code: string, Description?: string, }, HandlingUnitOne?: {Quantity: string, Type: {Code: string, Description: string, }, }, HandlingUnitTwo?: {Quantity: string, Type: {Code: string, Description: string, }, }, ExistingShipmentID?: {ShipmentNumber: string, BOLID?: string, ConfirmationNumber?: {Type: {Code: string, Description: string, }, Value: string, }, }, HandlingInstructions?: string, DeliveryInstructions?: string, PickupInstructions?: string, Commodity: {CommodityID?: string, Description?: string, Weight?: string, Dimensions?: {Length: string, Width: string, Height: string, }, NumberOfPieces?: string, PackagingType?: {Code: string, Description?: string, }, DangerousGoodsIndicator?: string, CommodityValue?: string, FreightClass: string, NMFCCommodityCode?: string, NMFCCommodity?: {PrimeCode?: string, SubCode?: string, }, }, Reference?: {Number: {Code: string, Value: string, }, BarCodeIndicator?: string, NumberOfCartons?: string, Weight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Value: string, }, }, ShipmentServiceOptions?: {EMailInformation?: {EMailType: {Code: string, Description?: string, }, EMail: {EMailAddress: string, EMailText?: string, UndeliverableEMailAddress: string, Subject?: string, }, }, PickupOptions?: {HolidayPickupIndicator?: string, InsidePickupIndicator?: string, ResidentialPickupIndicator?: string, WeekendPickupIndicator?: string, LiftGateRequiredIndicator?: string, LimitedAccessPickupIndicator?: string, }, DeliveryOptions?: {CallBeforeDeliveryIndicator?: string, HolidayDeliveryIndicator?: string, InsideDeliveryIndicator?: string, ResidentialDeliveryIndicator?: string, WeekendDeliveryIndicator?: string, LiftGateRequiredIndicator?: string, LimitedAccessDeliveryIndicator?: string, }, OverSeasLeg?: {Dimensions: {Volume?: string, Height: string, Length: string, Width: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, Value: {Cube?: {CurrencyCode: string, MonetaryValue: string, }, CWT?: {CurrencyCode: string, MonetaryValue: string, }, }, }, COD?: {CODValue: {CurrencyCode: string, MonetaryValue: string, }, CODPaymentMethod: {Code: string, Description?: string, }, CODBillingOption: {Code: string, Description?: string, }, RemitTo: {Name: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, AttentionName?: string, Phone?: {Number: string, Extension?: string, }, FaxNumber?: string, EMailAddress?: string, }, }, DangerousGoods?: {Name: string, Phone: {Number: string, Extension?: string, }, }, SortingAndSegregating?: {Quantity: string, }, DeclaredValue?: {CurrencyCode: string, MonetaryValue: string, }, ExcessDeclaredValue?: {CurrencyCode: string, MonetaryValue: string, }, HandlingCharge?: {Percentage?: string, Amount?: {CurrencyCode: string, MonetaryValue: string, }, }, FreezableProtectionIndicator?: string, ExtremeLengthIndicator?: string, LinearFeet?: string, }, PickupRequest?: {AdditionalComments?: string, Requester?: {ThirdPartyIndicator?: string, AttentionName: string, EMailAddress: string, Name: string, Phone: {Number: string, Extension?: string, }, }, PickupDate: string, EarliestTimeReady?: string, LatestTimeReady: string, POM?: {POMNumber: string, POMNumberType: string, PickupNotifications: {CompanyName?: string, EMailNotification: {EMailAddress: string, EventType: string, }, FailedEMail: string, }, }, }, Documents?: {Image?: {Type: {Code: string, Description: string, }, GraphicImage: string, Format: {Code: string, Description: string, }, }, PackingList?: {ShipFrom?: {Name: string, AttentionName?: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, PhoneNumber?: string, EMailAddress?: string, PhoneExtension?: string, }, ShipTo?: {Name: string, AttentionName?: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, PhoneNumber?: string, EMailAddress?: string, PhoneExtension?: string, }, Reference?: {Label?: string, Value: string, }, HandlingUnit?: {Commodity?: {NumberOfPieces?: string, PackagingType?: {Code: string, Description?: string, }, DangerousGoodsIndicator?: string, Description?: string, NMFCCommodityCode?: string, FreightClass: string, Dimensions?: {Length: string, Width: string, Height: string, }, Weight?: string, CommodityValue?: string, }, SpecialInstructions?: string, TotalNumberOfPieces?: string, TotalWeight?: string, UnitOfMeasurement?: {Code: string, Description?: string, }, CurrencyCode?: string, }, }, }, TimeInTransitIndicator?: string, HandlingUnits?: {Quantity: string, Type: {Code: string, Description: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, }, DensityEligibleIndicator?: string, }, }, }, 
     axios: Function
 ): Promise<{data: post_freight_ship_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/${path.version}/freight/shipments/${path.requestoption}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_label_recovery_type = {LabelRecoveryResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, ShipmentIdentificationNumber?: string, LegacyLabelDeliveryLabelURL?: string, LabelResults: {TrackingNumber?: string, LabelImage?: {LabelImageFormat: {Code: string, }, GraphicImage: string, HTMLImage?: string, PDF417?: string, InternationalSignatureGraphicImage?: string, URL?: string, }, MailInnovationsTrackingNumber?: string, MailInnovationsLabelImage?: {LabelImageFormat: {Code: string, }, GraphicImage: string, HTMLImage?: string, PDF417?: string, InternationalSignatureGraphicImage?: string, URL?: string, }, Receipt?: {HTMLImage?: string, Image?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, URL?: string, }, ReturnSlip?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, Form?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, }, CODTurnInPage?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, Form?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, HighValueReport?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, TrackingCandidate?: {TrackingNumber: string, DestinationPostalCode?: string, DestinationCountryCode?: string, PickupDateRange?: {BeginDate: string, EndDate: string, }, }, }, }
@@ -162,14 +216,20 @@ export type post_label_recovery_type = {LabelRecoveryResponse: {Response: {Respo
 */
 export const post_label_recovery = async (
     base_url: string, 
-    token: string, 
-    path: {version: undefined},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: undefined}, 
+    body: {LabelRecoveryRequest: {Request: {SubVersion?: string, RequestOption?: string, TransactionReference?: {CustomerContext?: string, }, }, LabelSpecification?: {HTTPUserAgent?: string, LabelImageFormat?: {Code: string, }, LabelStockSize?: {Height: string, Width: string, }, }, Translate?: {LanguageCode: string, DialectCode: string, Code: string, }, LabelDelivery?: {LabelLinkIndicator?: string, ResendEMailIndicator?: string, EMailMessage?: {EMailAddress: string, }, }, TrackingNumber?: string, MailInnovationsTrackingNumber?: string, ReferenceValues?: {ReferenceNumber: {Value: string, }, ShipperNumber: string, }, ShippingHistoryUserKey?: string, LabelInstructionSet?: {Title?: string, Print?: string, InvoiceTitle?: string, InvoiceText?: string, Fold?: string, FoldSentence?: string, CustomersWithNoDailyPickup?: string, CollectionDropOff?: string, GettingShipments?: string, DropOff?: string, Collection?: string, Ground3DaySelect?: string, ToSchedule?: string, DailyCollectionCustomers?: string, AirShipments?: string, Signature?: string, DateOfShipment?: string, FoldHere?: string, CustomersWithDailyPickup?: string, DailyPickupCustomers?: string, Acceptance?: string, PrintSentence?: string, }, Locale?: string, UPSPremiumCareForm?: {PageSize: string, PrintType: string, }, }, }, 
     axios: Function
 ): Promise<{data: post_label_recovery_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/LBRecovery`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_landed_cost_type = {LandedCostResponse: {Response: {Warning?: string, }, QueryResponse?: {Shipment: {Product: {TariffCode: string, Question?: {Name: string, Text: string, Type: string, Options?: {Option: {Key: string, Value: string, }, }, }, }, Question?: {Name: string, Text: string, Type: string, Options?: {Option: {Key: string, Value: string, }, }, }, }, TransactionDigest: string, SuppressQuestionIndicator?: string, }, EstimateResponse?: {TransactionInfo: {Date: string, Time: string, TransactionCharge: {MonetaryValue: string, CurrencyCode: string, }, }, ShipmentEstimate: {CurrencyCode: string, ShipmentCharges: {TaxesAndFees: string, AdditionalInsuranceCost?: string, TransportationCost?: string, SubTotal: string, }, ProductsCharges: {Product: {TariffCode: string, Charges: {Duties?: string, TaxesAndFees?: string, VAT?: string, CostOfGoods: string, SubTotal: string, }, }, ProductsSubTotal: string, }, TotalLandedCost: string, }, SuppressQuestionIndicator?: string, }, }, }
@@ -180,13 +240,19 @@ export type post_landed_cost_type = {LandedCostResponse: {Response: {Warning?: s
 */
 export const post_landed_cost = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {LandedCostRequest: {Request: {RequestAction: string, RequestOption?: string, }, QueryRequest?: {Shipment: {OriginCountryCode: string, OriginStateProvinceCode?: string, DestinationCountryCode: string, DestinationStateProvinceCode?: string, TransportationMode?: string, FreightCharges?: {MonetaryValue: string, CurrencyCode?: string, }, AdditionalInsurance?: {MonetaryValue: string, CurrencyCode?: string, }, TariffCodeAlert?: string, Product: {TariffCode: string, Question?: {Name: string, Text: string, Type: string, Options?: {Option: {Key: string, Value: string, }, }, }, }, ResultCurrencyCode?: string, }, TransactionReferenceID?: string, SuppressQuestionIndicator?: string, }, EstimateRequest?: {Shipment: {Product: {TariffCode: string, Question?: {Name: string, Text: string, Type: string, Options?: {Option: {Key: string, Value: string, }, }, }, }, Question?: {Name: string, Text: string, Type: string, Options?: {Option: {Key: string, Value: string, }, }, }, }, TransactionDigest: string, }, ShippingHistoryUserKey?: string, }, }, 
     axios: Function
 ): Promise<{data: post_landed_cost_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/tradeability/v1/landedcost/queries`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_locator_type = {LocatorResponse: {Response: {TransactionReference?: {CustomerContext?: string, XpciVersion?: string, }, ResponseStatusCode: string, ResponseStatusDescription?: string, Error?: {ErrorSeverity: string, ErrorCode: string, ErrorDescription?: string, MinimumRetrySeconds?: string, ErrorLocation?: {ErrorLocationElementName?: string, ErrorLocationAttributeName?: string, }, ErrorDigest?: string, }, }, Geocode?: {Latitude: string, Longitude: string, }, SearchResults: {GeocodeCandidate?: {AddressKeyFormat: {ConsigneeName?: string, AddressLine: string, PoliticalDivision3?: string, PoliticalDivision2: string, PoliticalDivision1: string, PostcodePrimaryLow: string, PostcodeExtendedLow?: string, CountryCode: string, }, Geocode: {Latitude: string, Longitude: string, }, LandmarkName?: string, }, Disclaimer?: string, DropLocation?: {LocationID: string, OriginOrDestination: string, IVR: {PhraseID: string, TextToSpeechIndicator?: string, }, Geocode: {Latitude: string, Longitude: string, }, AddressKeyFormat: {ConsigneeName?: string, AddressLine: string, PoliticalDivision3?: string, PoliticalDivision2: string, PoliticalDivision1: string, PostcodePrimaryLow: string, PostcodeExtendedLow?: string, CountryCode: string, }, PhoneNumber: string, FaxNumber?: string, EMailAddress?: string, LocationAttribute: {OptionType: {Code: string, Description: string, }, OptionCode: {Category?: string, Code: string, Description: string, Name?: string, TransportationPickUpSchedule?: {PickUp: {DayOfWeek: string, PickUpDetails: {PickUpTime?: string, NoPickUpIndicator: string, }, }, }, }, }, Distance: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, SpecialInstructions?: {Segment: string, }, LatestGroundDropOffTime?: string, LatestAirDropOffTime?: string, AdditionalChargeIndicator?: string, StandardHoursOfOperation?: string, NonStandardHoursOfOperation?: string, WillCallHoursOfOperation?: string, Number?: string, HomePageURL?: string, Comments?: string, AdditionalComments?: {CommentType: {Code: string, Text: string, }, }, Disclaimer?: string, SLIC?: string, Timezone: string, FacilityType?: string, OperatingHours?: {StandardHours?: {HoursType: string, DayOfWeek: {Day: string, OpenHours?: string, CloseHours?: string, LatestDropOffHours?: string, PrepHours?: string, ClosedIndicator?: string, Open24HoursIndicator?: string, }, }, }, LocalizedInstruction?: {Locale: string, Last50ftInstruction: string, }, PromotionInformation?: {Locale: string, Promotion: string, }, SortCode?: {HubSortCode?: string, FreightSortFacilityCode?: string, }, ServiceOfferingList?: {ServiceOffering: {Code: string, Description: string, }, }, DisplayPhoneNumberIndicator?: string, AccessPointInformation?: {PublicAccessPointID?: string, ImageURL?: string, LoadCapacityRatio?: string, BusinessClassificationList?: {BusinessClassification: {Code: string, Description: string, }, }, AccessPointStatus?: {Code: string, Description: string, }, FacilitySLIC?: string, PrivateNetworkList?: {PrivateNetwork: {NetworkID: string, NetworkDescription: string, }, }, Availability?: {ShippingAvailability?: {AvailableIndicator?: string, UnavailableReason?: {Code: string, Description: string, }, }, DCRAvailability?: {AvailableIndicator?: string, UnavailableReason?: {Code: string, Description: string, }, }, }, }, LocationImage?: {SecureURL?: string, NonSecureURL?: string, }, LocationNewIndicator?: string, PromotionalLinkURL?: string, FeaturedRank?: string, WillCallLocationIndicator?: string, }, MapNavigation?: {Number?: string, MapDimensions: {Height: string, Width: string, }, ZoomFactor: string, PanX?: string, PanY?: string, MapID: string, MapURL: string, ImageMap: {LocationID: string, XCoordinate: string, YCoordinate: string, }, }, DrivingDirections?: {Directions?: {Segment: string, Distance?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, Time?: string, }, TotalDistance: {Distance?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, }, TotalTime: string, }, AvailableLocationAttributes?: {OptionType: {Code: string, Description: string, }, OptionCode: {Code: string, Description: string, Name?: string, Category?: string, TransportationPickUpSchedule?: {PickUp: {DayOfWeek: string, PickUpDetails: {PickUpTime?: string, NoPickUpIndicator: string, }, }, }, }, }, ActiveAvailableAccessPointIndicator?: string, }, AllowAllConfidenceLevels: string, }, }
@@ -197,13 +263,19 @@ export type post_locator_type = {LocatorResponse: {Response: {TransactionReferen
 */
 export const post_locator = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {LocatorRequest: {Request: {TransactionReference?: {CustomerContext?: string, }, RequestAction: string, RequestOption: string, }, OriginAddress: {Geocode?: {Latitude: string, Longitude: string, }, AddressKeyFormat: {ConsigneeName?: string, AddressLine: string, AddressLine2?: string, AddressLine3?: string, PoliticalDivision3?: string, PoliticalDivision2: string, PoliticalDivision1: string, PostcodePrimaryLow: string, PostcodeExtendedLow?: string, CountryCode: string, SingleLineAddress?: string, }, MaximumListSize?: string, }, Translate: {LanguageCode: string, Locale?: string, }, UnitOfMeasurement?: {Code: string, }, LocationID?: string, LocationSearchCriteria?: {SearchOption?: {OptionType: {Code: string, }, OptionCode: {Code: string, Name?: string, }, Relation?: {Description?: string, Code: string, }, }, MaximumListSize?: string, SearchRadius?: string, ServiceSearch?: {Time?: string, ServiceCode?: {Code: string, }, ServiceOptionCode?: {Code: string, Description: string, }, }, FreightWillCallSearch?: {FreightWillCallRequestType: string, FacilityAddress: {SLIC?: string, AddressLine?: string, City?: string, PostalCodePrimaryLow?: string, PostalCodeExtendedLow?: string, State?: string, CountryCode: string, }, OriginOrDestination: string, FormatPostalCode: string, DayOfWeekCode?: string, }, AccessPointSearch?: {PublicAccessPointID?: string, AccessPointStatus?: string, AccountNumber?: string, IncludeCriteria?: {MerchantAccountNumberList?: {MerchantAccountNumber: string, }, SearchFilter?: {DCRIndicator?: string, ShippingAvailabilityIndicator?: string, ShipperPreparationDelay?: string, ClickAndCollectSortWithDistance?: string, }, ServiceOfferingList?: {ServiceOffering: {Code: string, Description: string, }, }, }, ExcludeFromResult?: {BusinessClassificationCode?: string, BusinessName?: string, Radius?: string, PostalCodeList?: {PostalCode: {PrimaryPostalCode: string, SecondaryPostalCode?: string, }, }, }, SearchIdCriteria?: string, ExactMatchIndicator?: string, ExistIndicator?: string, }, OpenTimeCriteria?: {DayOfWeekCode?: string, FromTime?: string, ToTime?: string, }, BrexitFilter?: string, }, SortCriteria?: {SortType?: string, }, AllowAllConfidenceLevels?: string, SearchOptionCode?: string, ServiceGeoUnit?: {ServiceCode: string, GeoPoliticalUnit: string, }, FreightIndicator?: string, }, }, 
     axios: Function
 ): Promise<{data: post_locator_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/Locator`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_pickup_cancel_type = {PickupCancelResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, PickupType: string, GWNStatus?: {Code: string, Description?: string, }, }, }
@@ -214,14 +286,20 @@ export type post_pickup_cancel_type = {PickupCancelResponse: {Response: {Respons
 */
 export const post_pickup_cancel = async (
     base_url: string, 
-    token: string, 
-    path: {cancelby: undefined},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {cancelby: undefined}, 
+    body: {PickupCancelRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, }, }, CancelBy: string, AccountNumber?: string, ServiceDate?: string, GMTOffset?: string, PRN?: string, }, }, 
     axios: Function
 ): Promise<{data: post_pickup_cancel_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/v1/pickups/${path.cancelby}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_pickup_creation_type = {PickupCreationResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, PRN?: string, WeekendServiceTerritory?: {SatWST: string, SunWST: string, }, WeekendServiceTerritoryIndicator?: string, RateStatus: {Code: string, Description?: string, }, RateResult?: {Disclaimer?: {Code: string, Description: string, }, RateType?: string, CurrencyCode?: string, ChargeDetail?: {ChargeCode: string, ChargeDescription?: string, ChargeAmount: string, IncentedAmount?: string, TaxAmount?: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalTax?: string, GrandTotalOfAllCharge: string, GrandTotalOfAllIncentedCharge?: string, PreTaxTotalCharge?: string, PreTaxTotalIncentedCharge?: string, }, }, }
@@ -232,14 +310,20 @@ export type post_pickup_creation_type = {PickupCreationResponse: {Response: {Res
 */
 export const post_pickup_creation = async (
     base_url: string, 
-    token: string, 
-    path: {version: undefined},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: undefined}, 
+    body: {PickupCreationRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, }, }, RatePickupIndicator: string, TaxInformationIndicator?: string, UserLevelDiscountIndicator?: string, Shipper?: {Account?: {AccountNumber: string, AccountCountryCode: string, }, ChargeCard?: {CardHolderName?: string, CardType: string, CardNumber: string, ExpirationDate: string, SecurityCode: string, CardAddress: {AddressLine?: string, City?: string, StateProvince?: string, PostalCode?: string, CountryCode: string, }, }, PaymentGUID?: string, PaymentMediaTypeCode?: string, }, PickupDateInfo: {CloseTime: string, ReadyTime: string, PickupDate: string, }, PickupAddress: {CompanyName: string, ContactName: string, AddressLine: string, Room?: string, Floor?: string, City: string, StateProvince?: string, Urbanization?: string, PostalCode?: string, CountryCode: string, ResidentialIndicator: string, PickupPoint?: string, Phone: {Number: string, Extension?: string, }, }, AlternateAddressIndicator: string, PickupPiece: {ServiceCode: string, Quantity: string, DestinationCountryCode: string, ContainerCode: string, }, TotalWeight?: {Weight: string, UnitOfMeasurement: string, }, OverweightIndicator?: string, TrackingData?: {TrackingNumber?: string, }, TrackingDataWithReferenceNumber?: {TrackingNumber: string, ReferenceNumber?: string, }, PaymentMethod: string, PaymentAccount?: {AccountNumber: string, PostalCode: string, CountryCode: string, }, SpecialInstruction?: string, ReferenceNumber?: string, Notification?: {ConfirmationEmailAddress?: string, UndeliverableEmailAddress?: string, }, FreightOptions?: {ShipmentServiceOptions?: {OriginLiftGateIndicator?: string, DropoffAtUPSFacilityIndicator?: string, HoldForPickupIndicator?: string, }, OriginServiceCenterCode?: string, OriginServiceCountryCode?: string, DestinationAddress?: {City?: string, StateProvince?: string, PostalCode?: string, CountryCode: string, }, ShipmentDetail: {HazmatIndicator?: string, PalletInformation?: {Dimensions?: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, }, }, }, ServiceCategory?: string, CashType?: string, ShippingLabelsAvailable?: string, }, }, 
     axios: Function
 ): Promise<{data: post_pickup_creation_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/${path.version}/pickups`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_pickup_get_political_division_1_list_type = {PickupGetPoliticalDivision1ListResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description?: string, }, TransactionReference?: {CustomerContext?: string, }, }, PoliticalDivision1?: string, }, }
@@ -250,14 +334,20 @@ export type post_pickup_get_political_division_1_list_type = {PickupGetPolitical
 */
 export const post_pickup_get_political_division_1_list = async (
     base_url: string, 
-    token: string, 
-    path: {countrycode: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {countrycode: string}, 
+    body: {PickupGetPoliticalDivision1ListRequest: {Request: {TransactionReference?: {CustomerContext?: string, }, }, CountryCode: string, }, }, 
     axios: Function
 ): Promise<{data: post_pickup_get_political_division_1_list_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/v1/pickup/countries/${path.countrycode}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_pickup_get_service_center_facilities_type = {PickupGetServiceCenterFacilitiesResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, ServiceCenterLocation: {DropOffFacilities?: {Name: string, Address: {AddressLine: string, City: string, StateProvince: string, PostalCode: string, CountryCode: string, ResidentialIndicator: string, }, SLIC: string, Type: string, Timezone: string, Phone: string, Fax: string, FacilityTime?: {DayOfWeek: {Day: string, EarliestDropOfforPickup?: string, LatestDropOfforPickup?: string, OpenHours: string, CloseHours: string, PrepTime?: string, LastDrop?: string, }, }, OriginOrDestination: string, LocalizedInstruction?: {Locale?: string, Last50ftInstruction?: string, }, Distance?: {Value?: string, UnitOfMeasurement?: string, }, }, PickupFacilities?: {Name: string, Address: {AddressLine: string, City: string, StateProvince: string, PostalCode: string, CountryCode: string, ResidentialIndicator: string, }, SLIC: string, Type: string, Timezone: string, Phone: string, Fax: string, FacilityTime?: {DayOfWeek: {Day: string, EarliestDropOfforPickup?: string, LatestDropOfforPickup?: string, OpenHours: string, CloseHours: string, PrepTime?: string, LastDrop?: string, }, }, AirportCode?: string, SortCode?: string, }, }, }, }
@@ -268,13 +358,19 @@ export type post_pickup_get_service_center_facilities_type = {PickupGetServiceCe
 */
 export const post_pickup_get_service_center_facilities = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {PickupGetServiceCenterFacilitiesRequest: {Request: {TransactionReference?: {CustomerContext?: string, }, }, PickupPiece: {ServiceCode: string, ContainerCode: string, }, OriginAddress?: {StreetAddress?: string, City?: string, StateProvince?: string, PostalCode?: string, CountryCode: string, OriginSearchCriteria?: {SearchRadius?: string, DistanceUnitOfMeasure: string, MaximumLocation?: string, }, }, DestinationAddress?: {City?: string, StateProvince?: string, PostalCode?: string, CountryCode: string, }, Locale: string, ProximitySearchIndicator?: string, }, }, 
     axios: Function
 ): Promise<{data: post_pickup_get_service_center_facilities_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/v1/pickup/servicecenterlocations`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_pickup_pending_status_type = {PickupPendingStatusResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, PendingStatus: {PickupType: string, ServiceDate: string, PRN: string, GWNStatusCode?: string, OnCallStatusCode?: string, PickupStatusMessage: string, BillingCode?: string, ContactName?: string, ReferenceNumber?: string, }, }, }
@@ -285,14 +381,20 @@ export type post_pickup_pending_status_type = {PickupPendingStatusResponse: {Res
 */
 export const post_pickup_pending_status = async (
     base_url: string, 
-    token: string, 
-    path: {pickuptype: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {pickuptype: string}, 
+    body: {PickupPendingStatusRequest: {Request: {RequestOption?: string, TransactionReference?: {CustomerContext?: string, }, }, PickupType: string, AccountNumber: string, }, }, 
     axios: Function
 ): Promise<{data: post_pickup_pending_status_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/v1/pickups/${path.pickuptype}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_pickup_rate_type = {PickupRateResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, RateResult: {Disclaimer?: {Code: string, Description: string, }, RateType?: string, CurrencyCode: string, ChargeDetail?: {ChargeCode: string, ChargeDescription?: string, ChargeAmount: string, IncentedAmount?: string, TaxAmount?: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalTax?: string, GrandTotalOfAllCharge?: string, GrandTotalOfAllIncentedCharge?: string, PreTaxTotalCharge?: string, PreTaxTotalIncentedCharge?: string, }, WeekendServiceTerritoryIndicator?: string, WeekendServiceTerritory?: {SatWST: string, SunWST: string, }, }, }
@@ -303,14 +405,20 @@ export type post_pickup_rate_type = {PickupRateResponse: {Response: {ResponseSta
 */
 export const post_pickup_rate = async (
     base_url: string, 
-    token: string, 
-    path: {version: undefined},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: undefined}, 
+    body: {PickupRateRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, }, }, ShipperAccount?: {AccountNumber: string, AccountCountryCode: string, }, PickupAddress: {AddressLine?: string, City: string, StateProvince: string, PostalCode: string, CountryCode: string, ResidentialIndicator: string, }, AlternateAddressIndicator: string, ServiceDateOption: string, PickupDateInfo?: {CloseTime: string, ReadyTime: string, PickupDate: string, }, TaxInformationIndicator?: string, UserLevelDiscountIndicator?: string, }, }, 
     axios: Function
 ): Promise<{data: post_pickup_rate_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/${path.version}/pickups/rating`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_pre_notification_type = {PreNotificationResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, }, }
@@ -321,13 +429,19 @@ export type post_pre_notification_type = {PreNotificationResponse: {Response: {R
 */
 export const post_pre_notification = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {PreNotificationRequest: {Request: {TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, Shipment: {ShipperNumber: string, ShipmentIdentificationNumber: string, ShipToAddress: {AddressLine: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, ShipFromAddress: {AddressLine: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, PickupDate: string, Service: {Code: string, Description?: string, }, RegulationSet: string, Package: {TrackingNumber: string, PackageWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, TransportationMode?: string, VoidIndicator?: string, PackagePoints?: string, ChemicalRecord: {ReportableQuantity?: string, ClassDivisionNumber?: string, SubRiskClass?: string, IDNumber?: string, PackagingGroupType?: string, Quantity?: string, UOM?: string, PackagingInstructionCode?: string, EmergencyPhone?: string, EmergencyContact?: string, ProperShippingName?: string, TechnicalName?: string, AdditionalDescription?: string, PackagingType?: string, HazardLabelRequired?: string, PackagingTypeQuantity?: string, CommodityRegulatedLevelCode: string, TransportCategory?: string, TunnelRestrictionCode?: string, QValue?: string, OverPackedIndicator?: string, AllPackedInOneIndicator?: string, }, }, }, }, }, 
     axios: Function
 ): Promise<{data: post_pre_notification_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/dangerousgoods/v1/prenotification`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_push_to_image_repository_type = {PushToImageRepositoryResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, FormsGroupID?: string, }, }
@@ -338,13 +452,19 @@ export type post_push_to_image_repository_type = {PushToImageRepositoryResponse:
 */
 export const post_push_to_image_repository = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {PushToImageRepositoryRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, ShipperNumber: string, FormsHistoryDocumentID: {DocumentID: string, }, FormsGroupID?: string, ShipmentIdentifier: string, ShipmentDateAndTime?: string, ShipmentType: string, PRQConfirmationNumber?: string, TrackingNumber?: string, }, }, 
     axios: Function
 ): Promise<{data: post_push_to_image_repository_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/PaperlessDocumentAPI`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_quantum_view_type = {QuantumViewResponse: {Response: {TransactionReference: {CustomerContext?: string, XpciVersion?: string, ToolVersion?: string, }, ResponseStatusCode: string, ResponseStatusDescription?: string, Error?: {ErrorSeverity?: string, ErrorCode?: string, ErrorDescription?: string, MinimumRetrySeconds?: string, ErrorLocation: {ErrorLocationElementName?: string, ErrorLocationAttributeName?: string, }, ErrorDigest?: string, }, }, QuantumViewEvents: {SubscriberID: string, SubscriptionEvents: {Name?: string, Number?: string, SubscriptionStatus: {Code: string, Description?: string, }, DateRange?: {BeginDate: string, EndDate?: string, }, SubscriptionFile?: {FileName: string, StatusType: {Code: string, Description: string, }, Manifest?: {Shipper: {Name: string, AttentionName?: string, TaxIdentificationNumber?: string, PhoneNumber?: string, FaxNumber?: string, ShipperNumber?: string, EMailAddress?: string, Address?: {AddressLine1?: string, AddressLine2?: string, AddressLine3?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode?: string, ResidentialAddressIndicator: string, }, }, ShipTo: {ShipperAssignedIdentificationNumber?: string, CompanyName?: string, AttentionName?: string, PhoneNumber?: string, TaxIdentificationNumber?: string, FaxNumber?: string, EMailAddress?: string, Address?: {ConsigneeName?: string, AddressLine1?: string, AddressLine2?: string, AddressLine3?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode?: string, }, LocationID?: string, ReceivingAddressName?: string, }, ReferenceNumber?: {Number?: string, Code?: string, Value: string, }, Service?: {Code: string, Description?: string, }, PickupDate?: string, ScheduledDeliveryDate?: string, ScheduledDeliveryTime?: string, DocumentsOnly?: string, Package?: {Activity?: {Date?: string, Time?: string, }, Description?: string, Dimensions?: {Length: string, Width: string, Height: string, }, DimensionalWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, PackageWeight?: {Weight: string, }, LargePackage?: string, TrackingNumber?: string, ReferenceNumber?: {Number?: string, Code?: string, Value: string, }, PackageServiceOptions?: {COD?: {CODCode?: string, CODAmount?: {CurrencyCode?: string, MonetaryValue?: string, }, }, InsuredValue?: {CurrencyCode?: string, MonetaryValue: string, }, EarliestDeliveryTime?: string, HazardousMaterialsCode?: string, HoldForPickup: string, }, UPSPremiumCareIndicator?: string, }, ShipmentServiceOptions?: {SaturdayPickup: string, SaturdayDelivery: string, CallTagARS?: {Number?: string, Code?: string, }, }, ManufactureCountry?: string, HarmonizedCode?: string, CustomsValue?: {MonetaryValue: string, }, SpecialInstructions?: string, ShipmentChargeType?: string, BillToAccount?: {Option: string, Number: string, }, ConsigneeBillIndicator: string, CollectBillIndicator: string, LocationAssured?: string, ImportControl?: string, LabelDeliveryMethod?: string, CommercialInvoiceRemoval?: string, PostalServiceTrackingID?: string, ReturnsFlexibleAccess?: string, UPScarbonneutral?: string, Product?: string, UPSReturnsExchange?: string, LiftGateOnDelivery?: string, LiftGateOnPickUp?: string, PickupPreference?: string, DeliveryPreference?: string, HoldForPickupAtUPSAccessPoint?: string, UAPAddress?: {CompanyName?: string, AttentionName?: string, Address?: {AddressLine1?: string, AddressLine2?: string, AddressLine3?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode?: string, }, PhoneNumber?: string, }, DeliverToAddresseeOnlyIndicator?: string, UPSAccessPointCODIndicator?: string, ClinicalTrialIndicator?: string, ClinicalTrialIndicationNumber?: string, CategoryAHazardousIndicator?: string, DirectDeliveryIndicator?: string, PackageReleaseCodeIndicator?: string, ProactiveResponseIndicator?: string, WhiteGloveDeliveryIndicator?: string, RoomOfChoiceIndicator?: string, InstallationDeliveryIndicator?: string, ItemDisposalIndicator?: string, LeadShipmentTrackingNumber?: string, SaturdayNonPremiumCommercialDeliveryIndicator?: string, SundayNonPremiumCommercialDeliveryIndicator?: string, UPSPremierAccessorialIndicator?: string, UPSPremierCategoryCode?: string, }, Origin?: {PackageReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, ShipmentReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, ShipperNumber: string, TrackingNumber: string, Date: string, Time: string, ActivityLocation?: {AddressArtifactFormat: {PoliticalDivision2?: string, PoliticalDivision1?: string, CountryCode?: string, }, }, BillToAccount?: {Option: string, Number: string, }, ScheduledDeliveryDate?: string, ScheduledDeliveryTime?: string, }, Exception?: {PackageReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, ShipmentReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, ShipperNumber: string, TrackingNumber: string, Date: string, Time: string, UpdatedAddress?: {ConsigneeName?: string, StreetNumberLow?: string, StreetPrefix?: string, StreetName?: string, StreetType?: string, StreetSuffix?: string, AddressExtendedInformation?: {Type?: string, Low?: string, High?: string, }, PoliticalDivision3?: string, PoliticalDivision2?: string, PoliticalDivision1?: string, CountryCode?: string, PostcodePrimaryLow?: string, }, StatusCode?: string, StatusDescription?: string, ReasonCode?: string, ReasonDescription?: string, Resolution?: {Code: string, Description?: string, }, RescheduledDeliveryDate?: string, RescheduledDeliveryTime?: string, ActivityLocation?: {AddressArtifactFormat: {PoliticalDivision2?: string, PoliticalDivision1?: string, CountryCode?: string, }, }, BillToAccount?: {Option: string, Number: string, }, AccessPointLocationID?: string, }, Delivery?: {PackageReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, ShipmentReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, ShipperNumber: string, TrackingNumber: string, Date: string, Time: string, DriverRelease?: string, ActivityLocation?: {AddressArtifactFormat: {PoliticalDivision2?: string, PoliticalDivision1?: string, CountryCode?: string, }, }, DeliveryLocation?: {AddressArtifactFormat: {ConsigneeName?: string, StreetNumberLow?: string, StreetPrefix?: string, StreetName?: string, StreetType?: string, StreetSuffix?: string, BuildingName?: string, AddressExtendedInformation?: {Type?: string, Low?: string, High?: string, }, PoliticalDivision3?: string, PoliticalDivision2?: string, PoliticalDivision1?: string, CountryCode?: string, PostcodePrimaryLow?: string, PostcodeExtendedLow?: string, ResidentialAddressIndicator: string, }, Code?: string, Description?: string, SignedForByName?: string, }, COD?: {CODAmount?: {CurrencyCode?: string, MonetaryValue?: string, }, }, BillToAccount?: {Option: string, Number: string, }, LastPickupDate?: string, AccessPointLocationID?: string, }, Generic?: {ActivityType: string, TrackingNumber: string, ShipperNumber?: string, ShipmentReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, PackageReferenceNumber?: {BarCodeIndicator?: string, Number?: string, Code?: string, Value: string, }, Service?: {Code: string, Description?: string, }, Activity?: {Date?: string, Time?: string, }, BillToAccount?: {Option: string, Number: string, }, ShipTo?: {LocationID?: string, ReceivingAddressName?: string, Bookmark?: string, }, RescheduledDeliveryDate?: string, FailureNotification?: {FailedEmailAddress?: string, FailureNotificationCode?: {Code?: string, Description?: string, }, }, }, }, }, }, Bookmark?: string, }, }
@@ -355,13 +475,19 @@ export type post_quantum_view_type = {QuantumViewResponse: {Response: {Transacti
 */
 export const post_quantum_view = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {QuantumViewRequest: {Request: {TransactionReference?: {CustomerContext?: string, XpciVersion?: string, ToolVersion?: string, }, RequestAction: string, }, SubscriptionRequest?: {Name?: string, DateTimeRange?: {BeginDateTime?: string, EndDateTime?: string, }, FileName?: string, }, Bookmark?: string, }, }, 
     axios: Function
 ): Promise<{data: post_quantum_view_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/QVEvents`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_rate_type = any
@@ -372,16 +498,22 @@ export type post_rate_type = any
 */
 export const post_rate = async (
     base_url: string, 
-    token: string, 
-    path: {version: string,requestoption: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: string,requestoption: string}, 
+    body: {RateRequest: {Request: {RequestOption: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, }, }, PickupType?: {Code: string, Description?: string, }, CustomerClassification?: {Code: string, Description?: string, }, Shipment: {OriginRecordTransactionTimestamp?: string, Shipper: {Name?: string, AttentionName?: string, ShipperNumber?: string, Address: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, ShipTo: {Name?: string, AttentionName?: string, Address: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, }, }, ShipFrom?: {Name?: string, AttentionName?: string, Address: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, AlternateDeliveryAddress?: {Name?: string, Address: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, POBoxIndicator?: string, }, }, ShipmentIndicationType?: {Code: string, Description?: string, }, PaymentDetails?: {ShipmentCharge: {Type: string, BillShipper?: {AccountNumber: string, }, BillReceiver?: {AccountNumber: string, Address?: {PostalCode?: string, }, }, BillThirdParty?: {AccountNumber: string, Address: {PostalCode?: string, CountryCode: string, }, }, ConsigneeBilledIndicator?: string, }, SplitDutyVATIndicator?: string, }, FRSPaymentInformation?: {Type: {Code: string, Description?: string, }, AccountNumber?: string, Address?: {PostalCode?: string, CountryCode: string, }, }, FreightShipmentInformation?: {FreightDensityInfo?: {AdjustedHeightIndicator?: string, AdjustedHeight?: {Value: string, UnitOfMeasurement: {Code: string, Description: string, }, }, HandlingUnits: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description: string, }, Length: string, Width: string, Height: string, }, }, }, DensityEligibleIndicator?: string, }, GoodsNotInFreeCirculationIndicator?: string, Service?: {Code: string, Description?: string, }, NumOfPieces?: string, ShipmentTotalWeight?: {UnitOfMeasurement: {Code: string, Description: string, }, Weight: string, }, DocumentsOnlyIndicator?: string, Package: {PackagingType?: {Code: string, Description?: string, }, Dimensions?: {UnitOfMeasurement: {Code: string, Description: string, }, Length: string, Width: string, Height: string, }, DimWeight?: {UnitOfMeasurement?: {Code: string, Description: string, }, Weight?: string, }, PackageWeight?: {UnitOfMeasurement: {Code: string, Description: string, }, Weight: string, }, Commodity?: {FreightClass: string, NMFC?: {PrimeCode: string, SubCode?: string, }, }, LargePackageIndicator?: string, PackageServiceOptions?: {DeliveryConfirmation?: {DCISType: string, }, AccessPointCOD?: {CurrencyCode: string, MonetaryValue: string, }, COD?: {CODFundsCode: string, CODAmount: {CurrencyCode: string, MonetaryValue: string, }, }, DeclaredValue?: {CurrencyCode: string, MonetaryValue: string, }, ShipperDeclaredValue?: {CurrencyCode: string, MonetaryValue: string, }, ShipperReleaseIndicator?: string, ProactiveIndicator?: string, RefrigerationIndicator?: string, UPSPremiumCareIndicator?: string, HazMat?: {PackageIdentifier?: string, QValue?: string, OverPackedIndicator?: string, AllPackedInOneIndicator?: string, HazMatChemicalRecord: {ChemicalRecordIdentifier?: string, ClassDivisionNumber?: string, IDNumber?: string, TransportationMode: string, RegulationSet: string, EmergencyPhone?: string, EmergencyContact?: string, ReportableQuantity?: string, SubRiskClass?: string, PackagingGroupType?: string, Quantity?: string, UOM?: string, PackagingInstructionCode?: string, ProperShippingName?: string, TechnicalName?: string, AdditionalDescription?: string, PackagingType?: string, HazardLabelRequired?: string, PackagingTypeQuantity?: string, CommodityRegulatedLevelCode?: string, TransportCategory?: string, TunnelRestrictionCode?: string, }, }, DryIce?: {RegulationSet: string, DryIceWeight: {UnitOfMeasurement: {Code: string, Description: string, }, Weight: string, }, MedicalUseIndicator?: string, AuditRequired?: string, }, NonMachineableIndicator?: string, }, AdditionalHandlingIndicator?: string, SimpleRate?: {Code: string, Description?: string, }, UPSPremier?: {Category: string, }, OversizeIndicator?: string, MinimumBillableWeightIndicator?: string, }, ShipmentServiceOptions?: {SaturdayPickupIndicator?: string, SaturdayDeliveryIndicator?: string, SundayDeliveryIndicator?: string, AvailableServicesOption?: string, OnCallPickup?: {ServiceCategory?: string, Schedule: {PickupDay: string, Method: string, }, }, AccessPointCOD?: {CurrencyCode: string, MonetaryValue: string, }, DeliverToAddresseeOnlyIndicator?: string, DirectDeliveryOnlyIndicator?: string, COD?: {CODFundsCode: string, CODAmount: {CurrencyCode: string, MonetaryValue: string, }, }, DeliveryConfirmation?: {DCISType: string, }, ReturnOfDocumentIndicator?: string, UPScarbonneutralIndicator?: string, CertificateOfOriginIndicator?: string, PickupOptions?: {LiftGateAtPickupIndicator?: string, HoldForPickupIndicator?: string, }, DeliveryOptions?: {LiftGateAtDeliveryIndicator?: string, DropOffAtUPSFacilityIndicator?: string, }, RestrictedArticles?: {AlcoholicBeveragesIndicator?: string, DiagnosticSpecimensIndicator?: string, PerishablesIndicator?: string, PlantsIndicator?: string, SeedsIndicator?: string, SpecialExceptionsIndicator?: string, TobaccoIndicator?: string, ECigarettesIndicator?: string, HempCBDIndicator?: string, }, ShipperExportDeclarationIndicator?: string, CommercialInvoiceRemovalIndicator?: string, ImportControl?: {Code: string, Description?: string, }, ReturnService?: {Code: string, Description?: string, }, SDLShipmentIndicator?: string, EPRAIndicator?: string, SimplifiedReturnIndicator?: string, InsideDelivery?: string, ItemDisposalIndicator?: string, }, ShipmentRatingOptions?: {NegotiatedRatesIndicator?: string, FRSShipmentIndicator?: string, RateChartIndicator?: string, UserLevelDiscountIndicator?: string, TPFCNegotiatedRatesIndicator?: string, }, InvoiceLineTotal?: {CurrencyCode: string, MonetaryValue: string, }, ItemizedChargesRequestedIndicator?: string, RatingMethodRequestedIndicator?: string, BillingOption?: string, ThirdPartyShipper?: {Name?: string, ShipperNumber: string, Address: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, POBoxIndicator?: string, }, }, ThirdPartyConsignee?: {Name?: string, ShipperNumber?: string, Address: {AddressLine?: string, City?: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, POBoxIndicator?: string, }, }, TaxInformationIndicator?: string, InformationSourceCode?: string, SDS?: {SDSID: string, MatchLevel: string, }, PromotionalDiscountInformation?: {PromoCode: string, PromoAliasCode: string, }, DeliveryTimeInformation?: {PackageBillType: string, Pickup?: {Date: string, Time?: string, }, IncludeAllServicesIndicator?: string, ReturnContractServices?: {Code: string, Description?: string, }, }, MasterCartonIndicator?: string, WWEShipmentIndicator?: string, ShipmentDate?: string, }, }, }, 
     query: {additionalinfo: string},
     axios: Function
 ): Promise<{data: post_rate_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/${path.version}/rating/${path.requestoption}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
         params: query,
+        data: body,
     })
 }
 export type post_ship_accept_type = {ShipAcceptResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, ShipmentResults: {Disclaimer?: {Code: string, Description: string, }, InvoiceNumber?: string, ShipmentCharges?: {RateChart?: string, BaseServiceCharge?: {CurrencyCode: string, MonetaryValue: string, }, TransportationCharges: {CurrencyCode: string, MonetaryValue: string, }, AccessorialCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, SurCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ServiceOptionsCharges: {CurrencyCode: string, MonetaryValue: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalCharges: {CurrencyCode: string, MonetaryValue: string, }, TotalChargesWithTaxes?: {CurrencyCode: string, MonetaryValue: string, }, }, NegotiatedRateCharges?: {AccessorialCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, SurCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, TransportationCharges?: {CurrencyCode: string, MonetaryValue: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalCharge?: {CurrencyCode: string, MonetaryValue: string, }, TotalChargesWithTaxes?: {CurrencyCode: string, MonetaryValue: string, }, }, FRSShipmentData?: {TransportationCharges: {GrossCharge: {CurrencyCode: string, MonetaryValue: string, }, DiscountAmount: {CurrencyCode: string, MonetaryValue: string, }, DiscountPercentage: string, NetCharge: {CurrencyCode: string, MonetaryValue: string, }, }, FreightDensityRate?: {Density: string, TotalCubicFeet: string, }, HandlingUnits?: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, AdjustedHeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, }, }, RatingMethod?: string, BillableWeightCalculationMethod?: string, BillingWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, ShipmentIdentificationNumber: string, MIDualReturnShipmentKey?: string, PickupRequestNumber: string, PackageResults?: {TrackingNumber: string, BaseServiceCharge?: {CurrencyCode: string, MonetaryValue: string, }, ServiceOptionsCharges?: {CurrencyCode: string, MonetaryValue: string, }, NonMachineableCharges?: {CurrencyCode: string, MonetaryValue: string, }, NonDDUCharges?: {CurrencyCode: string, MonetaryValue: string, }, SurePostDasCharges?: {CurrencyCode: string, MonetaryValue: string, }, ShippingLabel?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, GraphicImagePart: string, InternationalSignatureGraphicImage?: string, HTMLImage?: string, PDF417?: string, }, ShippingReturnSlip?: {Image?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, ShippingReceipt?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, USPSPICNumber?: string, CN22Number?: string, Accessorial?: {Code: string, Description?: string, }, SimpleRate?: {Code: string, }, SensorID: string, Form?: {Code: string, Description: string, Image?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, FormGroupId?: string, FormGroupIdName?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, NegotiatedCharges?: {ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, }, }, ControlLogReceipt?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, Form?: {Code: string, Description: string, Image?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, FormGroupId?: string, FormGroupIdName?: string, }, CODTurnInPage?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, HighValueReport?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, LabelURL?: string, LocalLanguageLabelURL?: string, ReceiptURL?: string, LocalLanguageReceiptURL?: string, DGPaperImage?: string, MasterCartonID?: string, }, }, }
@@ -394,13 +526,19 @@ using the Internet
 */
 export const post_ship_accept = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {ShipAcceptRequest: {Request: {RequestOption: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, }, }, PickupInformation?: {PickupRequestNumber: string, PickupCharge: string, PickupTaxAmount?: string, PickupDate: string, PickupWindow: {EarliestTimeReady: string, LatestTimeReady: string, }, }, PaymentGUID: string, LabelInstructionSet?: {Title?: string, Print?: string, InvoiceTitle?: string, InvoiceText?: string, Fold?: string, FoldSentence?: string, CustomersWithNoDailyPickup?: string, CollectionDropOff?: string, GettingShipments?: string, DropOff?: string, Collection?: string, Ground3DaySelect?: string, ToSchedule?: string, DailyCollectionCustomers?: string, AirShipments?: string, Signature?: string, DateOfShipment?: string, FoldHere?: string, CustomerswithDailyPickup?: string, DailyPickupCustomers?: string, Acceptance?: string, PrintSentence?: string, IncludeAccessPointsIndicator?: string, AccessPointDropOff?: string, RequestLabelInstruction?: string, }, ShipmentDigest: string, }, }, 
     axios: Function
 ): Promise<{data: post_ship_accept_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/Ship`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_ship_confirm_type = {ShipConfirmResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, ShipmentResults: {Disclaimer?: {Code: string, Description: string, }, ShipmentCharges?: {RateChart?: string, BaseServiceCharge?: {CurrencyCode: string, MonetaryValue: string, }, TransportationCharges: {CurrencyCode: string, MonetaryValue: string, }, AccessorialCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, SurCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ServiceOptionsCharges: {CurrencyCode: string, MonetaryValue: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalCharges: {CurrencyCode: string, MonetaryValue: string, }, TotalChargesWithTaxes?: {CurrencyCode: string, MonetaryValue: string, }, }, NegotiatedRateCharges?: {AccessorialCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, SurCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, TransportationCharges?: {CurrencyCode: string, MonetaryValue: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalCharge?: {CurrencyCode: string, MonetaryValue: string, }, TotalChargesWithTaxes?: {CurrencyCode: string, MonetaryValue: string, }, }, FRSShipmentData?: {TransportationCharges: {GrossCharge: {CurrencyCode: string, MonetaryValue: string, }, DiscountAmount: {CurrencyCode: string, MonetaryValue: string, }, DiscountPercentage: string, NetCharge: {CurrencyCode: string, MonetaryValue: string, }, }, FreightDensityRate?: {Density: string, TotalCubicFeet: string, }, HandlingUnits?: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, AdjustedHeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, }, }, RatingMethod?: string, BillableWeightCalculationMethod?: string, BillingWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, ShipmentIdentificationNumber: string, MIDualReturnShipmentKey?: string, ShipmentDigest?: string, }, }, }
@@ -413,13 +551,19 @@ using the Internet
 */
 export const post_ship_confirm = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {ShipConfirmRequest: {Request: {RequestOption: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, Shipment: {Description?: string, ShippingHistoryUserKey?: string, ReturnService?: {Code: string, Description?: string, }, DocumentsOnlyIndicator?: string, Shipper: {Name: string, AttentionName?: string, CompanyDisplayableName?: string, TaxIdentificationNumber?: string, Phone?: {Number: string, Extension?: string, }, ShipperNumber: string, TaccountIndicator?: string, FaxNumber?: string, EMailAddress?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, ShipTo: {Name: string, AttentionName?: string, CompanyDisplayableName?: string, TaxIdentificationNumber?: string, Phone?: {Number: string, Extension?: string, }, FaxNumber?: string, EMailAddress?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, POBoxIndicator?: string, }, LocationID?: string, }, AlternateDeliveryAddress?: {Name: string, AttentionName?: string, UPSAccessPointID?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, POBoxIndicator?: string, }, }, ShipFrom?: {Name: string, AttentionName?: string, CompanyDisplayableName?: string, TaxIdentificationNumber?: string, TaxIDType?: {Code: string, Description?: string, }, Phone?: {Number: string, Extension?: string, }, ShipFromAccountNumber?: string, FaxNumber?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, VendorInfo?: {VendorCollectIDTypeCode: string, VendorCollectIDNumber: string, ConsigneeType?: string, }, }, CustomerAddress?: {Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, PaymentInformation?: {ShipmentCharge: {Type: string, BillShipper?: {AccountNumber?: string, CreditCard?: {Type: string, Number: string, ExpirationDate: string, SecurityCode: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, AlternatePaymentMethod?: string, PreAuthorizedPaymentInformation?: {PaymentMediaType: string, PaymentGUID: string, }, VatTaxID?: string, TaxIDType?: string, CertifiedElectronicMail?: string, InterchangeSystemCode?: string, }, BillReceiver?: {AccountNumber: string, Address?: {PostalCode?: string, }, }, BillThirdParty?: {AccountNumber?: string, Name?: string, AttentionName?: string, VatTaxID?: string, TaxIDType?: string, CertifiedElectronicMail?: string, InterchangeSystemCode?: string, SuppressPrintInvoiceIndicator?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, ConsigneeBilledIndicator?: string, }, SplitDutyVATIndicator?: string, }, FRSPaymentInformation?: {Type: string, AccountNumber: string, Address?: {PostalCode?: string, CountryCode: string, }, }, FreightShipmentInformation?: {FreightDensityInfo?: {AdjustedHeightIndicator?: string, AdjustedHeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, HandlingUnits?: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, }, }, DensityEligibleIndicator?: string, }, GoodsNotInFreeCirculationIndicator?: string, PromotionalDiscountInformation?: {PromoCode: string, PromoAliasCode: string, }, DGSignatoryInfo?: {Name?: string, Title?: string, Place?: string, Date?: string, ShipperDeclaration?: string, UploadOnlyIndicator?: string, }, ShipmentRatingOptions?: {NegotiatedRatesIndicator?: string, FRSShipmentIndicator?: string, RateChartIndicator?: string, TPFCNegotiatedRatesIndicator?: string, UserLevelDiscountIndicator?: string, }, MovementReferenceNumber?: string, ReferenceNumber?: {BarCodeIndicator?: string, Code?: string, Value: string, }, Service: {Code: string, Description?: string, }, InvoiceLineTotal?: {CurrencyCode: string, MonetaryValue: string, }, NumOfPiecesInShipment?: string, USPSEndorsement?: string, MILabelCN22Indicator?: string, SubClassification?: string, CostCenter?: string, CostCenterBarcodeIndicator?: string, PackageID?: string, PackageIDBarcodeIndicator?: string, IrregularIndicator?: string, SurePostShipment?: {USPSEndorsement?: string, SubClassification?: string, }, ShipmentIndicationType?: {Code: string, Description?: string, }, ItemizedChargesRequestedIndicator?: string, MIDualReturnShipmentKey?: string, MIDualReturnShipmentIndicator?: string, RatingMethodRequestedIndicator?: string, TaxInformationIndicator?: string, SDS?: {SDSID: string, MatchLevel: string, }, ShipmentServiceOptions?: {SaturdayDeliveryIndicator?: string, SaturdayPickupIndicator?: string, SundayDeliveryIndicator?: string, OnCall?: {PickupDetails: {DistrictCode?: string, PickupDate: string, EarliestTimeReady: string, LatestTimeReady: string, SuiteRoomID?: string, FloorID?: string, Location?: string, ContactInfo?: {Name: string, Phone?: {Number: string, Extension?: string, }, }, }, }, COD?: {CODFundsCode: string, CODAmount: {CurrencyCode: string, MonetaryValue: string, }, }, AccessPointCOD?: {CurrencyCode: string, MonetaryValue: string, }, DeliverToAddresseeOnlyIndicator?: string, DirectDeliveryOnlyIndicator?: string, Notification?: {NotificationCode: string, EMail: {EMailAddress: string, UndeliverableEMailAddress?: string, FromEMailAddress?: string, FromName?: string, Memo?: string, Subject?: string, SubjectCode?: string, }, VoiceMessage?: {PhoneNumber: string, }, TextMessage?: {PhoneNumber: string, }, Locale?: {Language: string, Dialect: string, }, }, LabelDelivery?: {EMail?: {EMailAddress: string, UndeliverableEMailAddress?: string, FromEMailAddress?: string, FromName?: string, Memo?: string, Subject?: string, SubjectCode?: string, }, LabelLinksIndicator?: string, }, InternationalForms?: {FormType: string, UserCreatedForm?: {DocumentID: string, }, UPSPremiumCareForm?: {ShipmentDate: string, PageSize: string, PrintType: string, NumOfCopies: string, LanguageForUPSPremiumCare: {Language: string, }, }, CN22Form?: {LabelSize: string, PrintsPerPage: string, LabelPrintType: string, CN22Type: string, CN22OtherDescription?: string, FoldHereText?: string, CN22Content: {CN22ContentQuantity: string, CN22ContentDescription: string, CN22ContentWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, CN22ContentTotalValue: string, CN22ContentCurrencyCode: string, CN22ContentCountryOfOrigin?: string, CN22ContentTariffNumber?: string, }, }, AdditionalDocumentIndicator?: string, FormGroupIdName?: string, SEDFilingOption?: string, EEIFilingOption?: {Code: string, EMailAddress?: string, Description?: string, UPSFiled?: {POA: {Code: string, Description?: string, }, }, ShipperFiled?: {Code: string, Description?: string, PreDepartureITNNumber?: string, ExemptionLegend?: string, EEIShipmentReferenceNumber?: string, }, }, Contacts?: {ForwardAgent?: {CompanyName: string, TaxIdentificationNumber: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, }, UltimateConsignee?: {CompanyName: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, UltimateConsigneeType?: {Code: string, Description?: string, }, }, IntermediateConsignee?: {CompanyName: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, }, Producer?: {Option?: string, CompanyName?: string, TaxIdentificationNumber?: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, AttentionName?: string, Phone?: {Number: string, Extension?: string, }, EMailAddress?: string, }, SoldTo?: {Name: string, AttentionName: string, TaxIdentificationNumber?: string, Phone?: {Number: string, Extension?: string, }, Option?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, EMailAddress?: string, }, }, Product: {Description: string, Unit?: {Number: string, UnitOfMeasurement: {Code: string, Description?: string, }, Value: string, }, CommodityCode?: string, PartNumber?: string, OriginCountryCode?: string, JointProductionIndicator?: string, NetCostCode?: string, NetCostDateRange?: {BeginDate: string, EndDate: string, }, PreferenceCriteria?: string, ProducerInfo?: string, MarksAndNumbers?: string, NumberOfPackagesPerCommodity?: string, ProductWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, VehicleID?: string, ScheduleB?: {Number: string, Quantity?: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, ExportType?: string, SEDTotalValue?: string, ExcludeFromForm?: {FormType: string, }, ProductCurrencyCode?: string, PackingListInfo?: {PackageAssociated: {PackageNumber: string, ProductAmount: string, ProductNote?: string, }, }, EEIInformation?: {ExportInformation?: string, License?: {Number?: string, Code?: string, LicenseLineValue?: string, ECCNNumber?: string, }, DDTCInformation?: {ITARExemptionNumber?: string, USMLCategoryCode?: string, EligiblePartyIndicator?: string, RegistrationNumber?: string, Quantity?: string, UnitOfMeasurement?: {Code: string, Description?: string, }, SignificantMilitaryEquipmentIndicator?: string, ACMNumber?: string, }, }, }, InvoiceNumber?: string, InvoiceDate?: string, PurchaseOrderNumber?: string, TermsOfShipment?: string, ReasonForExport?: string, Comments?: string, DeclarationStatement?: string, Discount?: {MonetaryValue: string, }, FreightCharges?: {MonetaryValue: string, }, InsuranceCharges?: {MonetaryValue: string, }, OtherCharges?: {MonetaryValue: string, Description: string, }, CurrencyCode?: string, BlanketPeriod?: {BeginDate: string, EndDate: string, }, ExportDate?: string, ExportingCarrier?: string, CarrierID?: string, InBondCode?: string, EntryNumber?: string, PointOfOrigin?: string, PointOfOriginType?: string, ModeOfTransport?: string, PortOfExport?: string, PortOfUnloading?: string, LoadingPier?: string, PartiesToTransaction?: string, RoutedExportTransactionIndicator?: string, ContainerizedIndicator?: string, License?: {Number?: string, Date?: string, ExceptionCode?: string, }, ECCNNumber?: string, OverridePaperlessIndicator?: string, ShipperMemo?: string, MultiCurrencyInvoiceLineTotal?: string, HazardousMaterialsIndicator?: string, }, DeliveryConfirmation?: {DCISType: string, DCISNumber?: string, }, ReturnOfDocumentIndicator?: string, ImportControlIndicator?: string, LabelMethod?: {Code: string, Description?: string, }, CommercialInvoiceRemovalIndicator?: string, UPScarbonneutralIndicator?: string, PreAlertNotification?: {EMailMessage?: {EMailAddress: string, UndeliverableEMailAddress?: string, }, VoiceMessage?: {PhoneNumber: string, }, TextMessage?: {PhoneNumber: string, }, Locale: {Language: string, Dialect: string, }, }, ExchangeForwardIndicator?: string, BMAIndicator?: string, CTFEnabeledIndicator?: string, CTFAmount?: string, HoldForPickupIndicator?: string, DropoffAtUPSFacilityIndicator?: string, LiftGateForPickUpIndicator?: string, LiftGateForDeliveryIndicator?: string, SDLShipmentIndicator?: string, SimplifiedReturnIndicator?: string, EPRAReleaseCode?: string, RestrictedArticles?: {DiagnosticSpecimensIndicator?: string, AlcoholicBeveragesIndicator?: string, PerishablesIndicator?: string, PlantsIndicator?: string, SeedsIndicator?: string, SpecialExceptionsIndicator?: string, TobaccoIndicator?: string, }, InsideDelivery?: string, ItemDisposal?: string, }, InformationSourceCode?: string, Locale?: string, ShipmentValueThresholdCode?: string, MasterCartonID?: string, MasterCartonIndicator?: string, ShipmentDate?: string, Package: {Description?: string, PalletDescription?: string, NumOfPieces?: string, UnitPrice?: string, Packaging: {Code: string, Description?: string, }, Dimensions?: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, DimWeight?: {UnitOfMeasurement?: {Code: string, Description?: string, }, Weight?: string, }, PackageWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, LargePackageIndicator?: string, ReferenceNumber?: {BarCodeIndicator?: string, Code?: string, Value: string, }, AdditionalHandlingIndicator?: string, SimpleRate?: {Code: string, Description?: string, }, UPSPremier?: {Category: string, SensorID: string, HandlingInstructions: {Instruction: string, }, }, PackageServiceOptions?: {DeliveryConfirmation?: {DCISType: string, DCISNumber?: string, }, DeclaredValue?: {Type?: {Code: string, Description?: string, }, CurrencyCode: string, MonetaryValue: string, }, COD?: {CODFundsCode: string, CODAmount: {CurrencyCode: string, MonetaryValue: string, }, }, AccessPointCOD?: {CurrencyCode: string, MonetaryValue: string, }, ShipperReleaseIndicator?: string, Notification?: {NotificationCode: string, EMail: {EMailAddress: string, UndeliverableEMailAddress?: string, FromEMailAddress?: string, FromName?: string, Memo?: string, Subject?: string, SubjectCode?: string, }, }, HazMat?: {PackagingTypeQuantity?: string, RecordIdentifier1?: string, RecordIdentifier2?: string, RecordIdentifier3?: string, SubRiskClass?: string, aDRItemNumber?: string, aDRPackingGroupLetter?: string, TechnicalName?: string, HazardLabelRequired?: string, ClassDivisionNumber?: string, ReferenceNumber?: string, Quantity?: string, UOM?: string, PackagingType?: string, IDNumber?: string, ProperShippingName: string, AdditionalDescription?: string, PackagingGroupType?: string, PackagingInstructionCode?: string, EmergencyPhone?: string, EmergencyContact?: string, ReportableQuantity?: string, RegulationSet: string, TransportationMode: string, CommodityRegulatedLevelCode: string, TransportCategory?: string, TunnelRestrictionCode?: string, ChemicalRecordIdentifier: string, LocalTechnicalName?: string, LocalProperShippingName?: string, }, DryIce?: {RegulationSet: string, DryIceWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, MedicalUseIndicator?: string, }, CTFAmount?: string, PackedByStoreIndicator?: string, NonMachineableIndicator?: string, UPSPremiumCareIndicator?: string, ProactiveIndicator?: string, PackageIdentifier?: string, ClinicalTrialsID?: string, RefrigerationIndicator?: string, }, Commodity?: {FreightClass: string, NMFC?: {PrimeCode: string, SubCode?: string, }, }, HazMatPackageInformation?: {AllPackedInOneIndicator?: string, OverPackedIndicator?: string, QValue?: string, OuterPackagingType?: string, }, IneligibleHoldIndicator?: string, CustomerEstimatedDeliveryDate?: string, ReturnSlipInformation?: string, }, BMA?: {CounterManifestSystemNumber: string, }, }, LabelSpecification?: {LabelImageFormat: {Code: string, Description?: string, }, HTTPUserAgent?: string, LabelStockSize: {Height: string, Width: string, }, Instruction?: {Code: string, Description?: string, }, CharacterSet?: string, }, ReceiptSpecification?: {ImageFormat: {Code: string, Description?: string, }, }, }, }, 
     axios: Function
 ): Promise<{data: post_ship_confirm_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/Ship`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_shipment_type = {ShipmentResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, }, }, ShipmentResults: {Disclaimer?: {Code: string, Description: string, }, InvoiceNumber?: string, ShipmentCharges?: {RateChart?: string, BaseServiceCharge?: {CurrencyCode: string, MonetaryValue: string, }, TransportationCharges: {CurrencyCode: string, MonetaryValue: string, }, AccessorialCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, SurCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ServiceOptionsCharges: {CurrencyCode: string, MonetaryValue: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalCharges: {CurrencyCode: string, MonetaryValue: string, }, TotalChargesWithTaxes?: {CurrencyCode: string, MonetaryValue: string, }, }, NegotiatedRateCharges?: {AccessorialCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, SurCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, TransportationCharges?: {CurrencyCode: string, MonetaryValue: string, }, TaxCharges?: {Type: string, MonetaryValue: string, }, TotalCharge?: {CurrencyCode: string, MonetaryValue: string, }, TotalChargesWithTaxes?: {CurrencyCode: string, MonetaryValue: string, }, }, FRSShipmentData?: {TransportationCharges: {GrossCharge: {CurrencyCode: string, MonetaryValue: string, }, DiscountAmount: {CurrencyCode: string, MonetaryValue: string, }, DiscountPercentage: string, NetCharge: {CurrencyCode: string, MonetaryValue: string, }, }, FreightDensityRate?: {Density: string, TotalCubicFeet: string, }, HandlingUnits?: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, AdjustedHeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, }, }, RatingMethod?: string, BillableWeightCalculationMethod?: string, BillingWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, ShipmentIdentificationNumber?: string, MIDualReturnShipmentKey?: string, PickupRequestNumber?: string, PackageResults?: {TrackingNumber: string, BaseServiceCharge?: {CurrencyCode: string, MonetaryValue: string, }, ServiceOptionsCharges?: {CurrencyCode: string, MonetaryValue: string, }, NonMachineableCharges?: {CurrencyCode: string, MonetaryValue: string, }, NonDDUCharges?: {CurrencyCode: string, MonetaryValue: string, }, SurePostDasCharges?: {CurrencyCode: string, MonetaryValue: string, }, ShippingLabel?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, GraphicImagePart: string, InternationalSignatureGraphicImage?: string, HTMLImage?: string, PDF417?: string, }, ShippingReturnSlip?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, ShippingReceipt?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, USPSPICNumber?: string, CN22Number?: string, Accessorial?: {Code: string, Description?: string, }, SimpleRate?: {Code: string, }, SensorID: string, Form?: {Code: string, Description: string, Image?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, FormGroupId?: string, FormGroupIdName?: string, }, ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, NegotiatedCharges?: {ItemizedCharges?: {Code: string, Description?: string, CurrencyCode: string, MonetaryValue: string, SubType?: string, }, }, }, ControlLogReceipt?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, Form?: {Code: string, Description: string, Image?: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, FormGroupId?: string, FormGroupIdName?: string, }, CODTurnInPage?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, HighValueReport?: {Image: {ImageFormat: {Code: string, Description?: string, }, GraphicImage: string, }, }, LabelURL?: string, LocalLanguageLabelURL?: string, ReceiptURL?: string, LocalLanguageReceiptURL?: string, DGPaperImage?: string, MasterCartonID?: string, }, }, }
@@ -432,16 +576,22 @@ using the Internet
 */
 export const post_shipment = async (
     base_url: string, 
-    token: string, 
-    path: {version: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {version: string}, 
+    body: {ShipmentRequest: {Request: {RequestOption: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, Shipment: {Description?: string, ShippingHistoryUserKey?: string, ReturnService?: {Code: string, Description?: string, }, DocumentsOnlyIndicator?: string, ShipmentValidation?: {Code: string, Description?: string, }, Shipper: {Name: string, AttentionName?: string, CompanyDisplayableName?: string, TaxIdentificationNumber?: string, Phone?: {Number: string, Extension?: string, }, ShipperNumber: string, TaccountIndicator?: string, FaxNumber?: string, EMailAddress?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, ShipTo: {Name: string, AttentionName?: string, CompanyDisplayableName?: string, TaxIdentificationNumber?: string, Phone?: {Number: string, Extension?: string, }, FaxNumber?: string, EMailAddress?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, POBoxIndicator?: string, }, LocationID?: string, }, AlternateDeliveryAddress?: {Name: string, AttentionName: string, UPSAccessPointID?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, ResidentialAddressIndicator?: string, POBoxIndicator?: string, }, }, ShipFrom?: {Name: string, AttentionName?: string, CompanyDisplayableName?: string, TaxIdentificationNumber?: string, TaxIDType?: {Code: string, Description?: string, }, Phone?: {Number: string, Extension?: string, }, ShipFromAccountNumber?: string, FaxNumber?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, VendorInfo?: {VendorCollectIDTypeCode: string, VendorCollectIDNumber: string, ConsigneeType?: string, }, }, CustomerAddress?: {Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, PaymentInformation?: {ShipmentCharge: {Type: string, BillShipper?: {AccountNumber?: string, CreditCard?: {Type: string, Number: string, ExpirationDate: string, SecurityCode: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, AlternatePaymentMethod?: string, PreAuthorizedPaymentInformation?: {PaymentMediaType: string, PaymentGUID: string, }, VatTaxID?: string, TaxIDType?: string, CertifiedElectronicMail?: string, InterchangeSystemCode?: string, }, BillReceiver?: {AccountNumber: string, Address?: {PostalCode?: string, }, }, BillThirdParty?: {AccountNumber?: string, Name?: string, AttentionName?: string, VatTaxID?: string, TaxIDType?: string, CertifiedElectronicMail?: string, InterchangeSystemCode?: string, SuppressPrintInvoiceIndicator?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, PostalCode?: string, CountryCode: string, }, }, ConsigneeBilledIndicator?: string, }, SplitDutyVATIndicator?: string, }, FRSPaymentInformation?: {Type: string, AccountNumber: string, Address?: {PostalCode?: string, CountryCode: string, }, }, FreightShipmentInformation?: {FreightDensityInfo?: {AdjustedHeightIndicator?: string, AdjustedHeight?: {Value: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, HandlingUnits?: {Quantity: string, Type: {Code: string, Description?: string, }, Dimensions: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, }, }, DensityEligibleIndicator?: string, }, GoodsNotInFreeCirculationIndicator?: string, PromotionalDiscountInformation?: {PromoCode: string, PromoAliasCode: string, }, DGSignatoryInfo?: {Name?: string, Title?: string, Place?: string, Date?: string, ShipperDeclaration?: string, UploadOnlyIndicator?: string, }, ShipmentRatingOptions?: {NegotiatedRatesIndicator?: string, FRSShipmentIndicator?: string, RateChartIndicator?: string, TPFCNegotiatedRatesIndicator?: string, UserLevelDiscountIndicator?: string, }, MovementReferenceNumber?: string, ReferenceNumber?: {BarCodeIndicator?: string, Code?: string, Value: string, }, Service: {Code: string, Description?: string, }, InvoiceLineTotal?: {CurrencyCode: string, MonetaryValue: string, }, NumOfPiecesInShipment?: string, USPSEndorsement?: string, MILabelCN22Indicator?: string, SubClassification?: string, CostCenter?: string, CostCenterBarcodeIndicator?: string, PackageID?: string, PackageIDBarcodeIndicator?: string, IrregularIndicator?: string, SurePostShipment?: {USPSEndorsement?: string, SubClassification?: string, }, ShipmentIndicationType?: {Code: string, Description?: string, }, ItemizedChargesRequestedIndicator?: string, MIDualReturnShipmentKey?: string, MIDualReturnShipmentIndicator?: string, RatingMethodRequestedIndicator?: string, TaxInformationIndicator?: string, SDS?: {SDSID: string, MatchLevel: string, }, ShipmentServiceOptions?: {SaturdayDeliveryIndicator?: string, SaturdayPickupIndicator?: string, SundayDeliveryIndicator?: string, OnCall?: {PickupDetails: {DistrictCode?: string, PickupDate: string, EarliestTimeReady: string, LatestTimeReady: string, SuiteRoomID?: string, FloorID?: string, Location?: string, ContactInfo?: {Name: string, Phone?: {Number: string, Extension?: string, }, }, }, }, COD?: {CODFundsCode: string, CODAmount: {CurrencyCode: string, MonetaryValue: string, }, }, AccessPointCOD?: {CurrencyCode: string, MonetaryValue: string, }, DeliverToAddresseeOnlyIndicator?: string, DirectDeliveryOnlyIndicator?: string, Notification?: {NotificationCode: string, EMail: {EMailAddress: string, UndeliverableEMailAddress?: string, FromEMailAddress?: string, FromName?: string, Memo?: string, Subject?: string, SubjectCode?: string, }, VoiceMessage?: {PhoneNumber: string, }, TextMessage?: {PhoneNumber: string, }, Locale?: {Language: string, Dialect: string, }, }, LabelDelivery?: {EMail?: {EMailAddress: string, UndeliverableEMailAddress?: string, FromEMailAddress?: string, FromName?: string, Memo?: string, Subject?: string, SubjectCode?: string, }, LabelLinksIndicator?: string, }, InternationalForms?: {FormType: string, UserCreatedForm?: {DocumentID: string, }, UPSPremiumCareForm?: {ShipmentDate: string, PageSize: string, PrintType: string, NumOfCopies: string, LanguageForUPSPremiumCare: {Language: string, }, }, CN22Form?: {LabelSize: string, PrintsPerPage: string, LabelPrintType: string, CN22Type: string, CN22OtherDescription?: string, FoldHereText?: string, CN22Content: {CN22ContentQuantity: string, CN22ContentDescription: string, CN22ContentWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, CN22ContentTotalValue: string, CN22ContentCurrencyCode: string, CN22ContentCountryOfOrigin?: string, CN22ContentTariffNumber?: string, }, }, AdditionalDocumentIndicator?: string, FormGroupIdName?: string, SEDFilingOption?: string, EEIFilingOption?: {Code: string, EMailAddress?: string, Description?: string, UPSFiled?: {POA: {Code: string, Description?: string, }, }, ShipperFiled?: {Code: string, Description?: string, PreDepartureITNNumber?: string, ExemptionLegend?: string, EEIShipmentReferenceNumber?: string, }, }, Contacts?: {ForwardAgent?: {CompanyName: string, TaxIdentificationNumber: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, }, UltimateConsignee?: {CompanyName: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, UltimateConsigneeType?: {Code: string, Description?: string, }, }, IntermediateConsignee?: {CompanyName: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, }, Producer?: {Option?: string, CompanyName?: string, TaxIdentificationNumber?: string, Address?: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, AttentionName?: string, Phone?: {Number: string, Extension?: string, }, EMailAddress?: string, }, SoldTo?: {Name: string, AttentionName: string, TaxIdentificationNumber?: string, Phone?: {Number: string, Extension?: string, }, Option?: string, Address: {AddressLine: string, City: string, StateProvinceCode?: string, Town?: string, PostalCode?: string, CountryCode: string, }, EMailAddress?: string, }, }, Product: {Description: string, Unit?: {Number: string, UnitOfMeasurement: {Code: string, Description?: string, }, Value: string, }, CommodityCode?: string, PartNumber?: string, OriginCountryCode?: string, JointProductionIndicator?: string, NetCostCode?: string, NetCostDateRange?: {BeginDate: string, EndDate: string, }, PreferenceCriteria?: string, ProducerInfo?: string, MarksAndNumbers?: string, NumberOfPackagesPerCommodity?: string, ProductWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, VehicleID?: string, ScheduleB?: {Number: string, Quantity?: string, UnitOfMeasurement: {Code: string, Description?: string, }, }, ExportType?: string, SEDTotalValue?: string, ExcludeFromForm?: {FormType: string, }, ProductCurrencyCode?: string, PackingListInfo?: {PackageAssociated: {PackageNumber: string, ProductAmount: string, ProductNote?: string, }, }, EEIInformation?: {ExportInformation?: string, License?: {Number?: string, Code?: string, LicenseLineValue?: string, ECCNNumber?: string, }, DDTCInformation?: {ITARExemptionNumber?: string, USMLCategoryCode?: string, EligiblePartyIndicator?: string, RegistrationNumber?: string, Quantity?: string, UnitOfMeasurement?: {Code: string, Description?: string, }, SignificantMilitaryEquipmentIndicator?: string, ACMNumber?: string, }, }, }, InvoiceNumber?: string, InvoiceDate?: string, PurchaseOrderNumber?: string, TermsOfShipment?: string, ReasonForExport?: string, Comments?: string, DeclarationStatement?: string, Discount?: {MonetaryValue: string, }, FreightCharges?: {MonetaryValue: string, }, InsuranceCharges?: {MonetaryValue: string, }, OtherCharges?: {MonetaryValue: string, Description: string, }, CurrencyCode?: string, BlanketPeriod?: {BeginDate: string, EndDate: string, }, ExportDate?: string, ExportingCarrier?: string, CarrierID?: string, InBondCode?: string, EntryNumber?: string, PointOfOrigin?: string, PointOfOriginType?: string, ModeOfTransport?: string, PortOfExport?: string, PortOfUnloading?: string, LoadingPier?: string, PartiesToTransaction?: string, RoutedExportTransactionIndicator?: string, ContainerizedIndicator?: string, License?: {Number?: string, Date?: string, ExceptionCode?: string, }, ECCNNumber?: string, OverridePaperlessIndicator?: string, ShipperMemo?: string, MultiCurrencyInvoiceLineTotal?: string, HazardousMaterialsIndicator?: string, }, DeliveryConfirmation?: {DCISType: string, DCISNumber?: string, }, ReturnOfDocumentIndicator?: string, ImportControlIndicator?: string, LabelMethod?: {Code: string, Description?: string, }, CommercialInvoiceRemovalIndicator?: string, UPScarbonneutralIndicator?: string, PreAlertNotification?: {EMailMessage?: {EMailAddress: string, UndeliverableEMailAddress?: string, }, VoiceMessage?: {PhoneNumber: string, }, TextMessage?: {PhoneNumber: string, }, Locale: {Language: string, Dialect: string, }, }, ExchangeForwardIndicator?: string, BMAIndicator?: string, CTFEnabeledIndicator?: string, CTFAmount?: string, HoldForPickupIndicator?: string, DropoffAtUPSFacilityIndicator?: string, LiftGateForPickUpIndicator?: string, LiftGateForDeliveryIndicator?: string, SDLShipmentIndicator?: string, SimplifiedReturnIndicator?: string, EPRAReleaseCode?: string, RestrictedArticles?: {DiagnosticSpecimensIndicator?: string, AlcoholicBeveragesIndicator?: string, PerishablesIndicator?: string, PlantsIndicator?: string, SeedsIndicator?: string, SpecialExceptionsIndicator?: string, TobaccoIndicator?: string, }, InsideDelivery?: string, ItemDisposal?: string, }, InformationSourceCode?: string, Locale?: string, ShipmentValueThresholdCode?: string, MasterCartonID?: string, MasterCartonIndicator?: string, ShipmentDate?: string, Package: {Description?: string, PalletDescription?: string, NumOfPieces?: string, UnitPrice?: string, Packaging: {Code: string, Description?: string, }, Dimensions?: {UnitOfMeasurement: {Code: string, Description?: string, }, Length: string, Width: string, Height: string, }, DimWeight?: {UnitOfMeasurement?: {Code: string, Description?: string, }, Weight?: string, }, PackageWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, LargePackageIndicator?: string, ReferenceNumber?: {BarCodeIndicator?: string, Code?: string, Value: string, }, AdditionalHandlingIndicator?: string, SimpleRate?: {Code: string, Description?: string, }, UPSPremier?: {Category: string, SensorID: string, HandlingInstructions: {Instruction: string, }, }, PackageServiceOptions?: {DeliveryConfirmation?: {DCISType: string, DCISNumber?: string, }, DeclaredValue?: {Type?: {Code: string, Description?: string, }, CurrencyCode: string, MonetaryValue: string, }, COD?: {CODFundsCode: string, CODAmount: {CurrencyCode: string, MonetaryValue: string, }, }, AccessPointCOD?: {CurrencyCode: string, MonetaryValue: string, }, ShipperReleaseIndicator?: string, Notification?: {NotificationCode: string, EMail: {EMailAddress: string, UndeliverableEMailAddress?: string, FromEMailAddress?: string, FromName?: string, Memo?: string, Subject?: string, SubjectCode?: string, }, }, HazMat?: {PackagingTypeQuantity?: string, RecordIdentifier1?: string, RecordIdentifier2?: string, RecordIdentifier3?: string, SubRiskClass?: string, aDRItemNumber?: string, aDRPackingGroupLetter?: string, TechnicalName?: string, HazardLabelRequired?: string, ClassDivisionNumber?: string, ReferenceNumber?: string, Quantity?: string, UOM?: string, PackagingType?: string, IDNumber?: string, ProperShippingName: string, AdditionalDescription?: string, PackagingGroupType?: string, PackagingInstructionCode?: string, EmergencyPhone?: string, EmergencyContact?: string, ReportableQuantity?: string, RegulationSet: string, TransportationMode: string, CommodityRegulatedLevelCode?: string, TransportCategory?: string, TunnelRestrictionCode?: string, ChemicalRecordIdentifier?: string, LocalTechnicalName?: string, LocalProperShippingName?: string, }, DryIce?: {RegulationSet: string, DryIceWeight: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, MedicalUseIndicator?: string, }, CTFAmount?: string, PackedByStoreIndicator?: string, NonMachineableIndicator?: string, UPSPremiumCareIndicator?: string, ProactiveIndicator?: string, PackageIdentifier?: string, ClinicalTrialsID?: string, RefrigerationIndicator?: string, }, Commodity?: {FreightClass: string, NMFC?: {PrimeCode: string, SubCode?: string, }, }, HazMatPackageInformation?: {AllPackedInOneIndicator?: string, OverPackedIndicator?: string, QValue?: string, OuterPackagingType?: string, }, IneligibleHoldIndicator?: string, CustomerEstimatedDeliveryDate?: string, ReturnSlipInformation?: string, }, BMA?: {CounterManifestSystemNumber: string, }, }, LabelSpecification?: {LabelImageFormat: {Code: string, Description?: string, }, HTTPUserAgent?: string, LabelStockSize: {Height: string, Width: string, }, Instruction?: {Code: string, Description?: string, }, CharacterSet?: string, }, ReceiptSpecification?: {ImageFormat: {Code: string, Description?: string, }, }, }, }, 
     query: {additionaladdressvalidation: string},
     axios: Function
 ): Promise<{data: post_shipment_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/${path.version}/shipments`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
         params: query,
+        data: body,
     })
 }
 export type post_time_in_transit_type = {TimeInTransitResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, TransitResponse?: {ShipFrom: {Address: {Town?: string, City?: string, StateProvinceCode?: string, CountryCode: string, Country: string, PostalCode?: string, }, }, ShipTo: {Address: {Town?: string, City?: string, StateProvinceCode?: string, CountryCode: string, Country: string, PostalCode?: string, ResidentialAddressIndicator?: string, }, }, PickupDate: string, ShipmentWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, InvoiceLineTotal?: {CurrencyCode: string, MonetaryValue: string, }, DocumentsOnlyIndicator?: string, BillType?: string, MaximumListSize?: string, ServiceSummary: {Service: {Code: string, Description?: string, }, GuaranteedIndicator?: string, Disclaimer?: string, EstimatedArrival: {Arrival: {Date: string, Time?: string, }, BusinessDaysInTransit: string, Pickup: {Date: string, Time?: string, }, DayOfWeek: string, CustomerCenterCutoff?: string, DelayCount?: string, HolidayCount?: string, RestDays?: string, TotalTransitDays?: string, }, SaturdayDelivery?: string, SaturdayDeliveryDisclaimer?: string, SundayDelivery?: string, SundayDeliveryDisclaimer?: string, }, AutoDutyCode?: string, Disclaimer?: string, }, CandidateResponse?: {ShipFromList?: {Candidate: {Address: {Town?: string, City?: string, StateProvinceCode?: string, CountryCode: string, PostcodePrimaryLow?: string, PostcodePrimaryHigh?: string, }, }, }, ShipToList?: {Candidate: {Address: {Town?: string, City?: string, StateProvinceCode?: string, CountryCode: string, PostcodePrimaryLow?: string, PostcodePrimaryHigh?: string, }, }, }, }, }, }
@@ -452,13 +602,19 @@ export type post_time_in_transit_type = {TimeInTransitResponse: {Response: {Resp
 */
 export const post_time_in_transit = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {TimeInTransitRequest: {Request: {RequestOption?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, ShipFrom: {Address: {Town?: string, City?: string, StateProvinceCode?: string, CountryCode: string, Country: string, PostalCode?: string, }, }, ShipTo: {Address: {Town?: string, City?: string, StateProvinceCode?: string, CountryCode: string, Country: string, PostalCode?: string, ResidentialAddressIndicator?: string, }, }, Pickup: {Date: string, Time?: string, }, ShipmentWeight?: {UnitOfMeasurement: {Code: string, Description?: string, }, Weight: string, }, TotalPackagesInShipment?: string, InvoiceLineTotal?: {CurrencyCode: string, MonetaryValue: string, }, DocumentsOnlyIndicator?: string, BillType?: string, MaximumListSize?: string, SaturdayDeliveryInfoRequestIndicator?: string, SundayDeliveryInfoRequestIndicator?: string, DropOffAtFacilityIndicator?: string, HoldForPickupIndicator?: string, IncludeAllServicesIndicator?: string, }, }, 
     axios: Function
 ): Promise<{data: post_time_in_transit_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/TimeInTransit`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_track_type = {TrackResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext: string, TransactionIdentifier?: string, }, }, Shipment: {InquiryNumber: {Code: string, Description: string, Value: string, }, ShipmentType?: {Code: string, Description: string, }, CandidateBookmark?: string, ShipperNumber?: string, ShipmentAddress: {Type: {Code: string, Description: string, }, Address: {AddressLine: string, City: string, StateProvinceCode: string, PostalCode: string, CountryCode: string, }, }, ShipmentWeight?: {UnitOfMeasurement: {Code: string, }, Weight: string, }, Service?: {Code: string, Description: string, }, ReferenceNumber?: {Code: string, Description: string, Value: string, }, CurrentStatus?: {Code: string, Description: string, }, PickupDate?: string, ServiceCenter?: {Type: {Code: string, Description: string, }, Address: {City: string, StateProvinceCode: string, }, }, DeliveryDateUnavailable?: {Type: string, Description: string, }, DeliveryDetail?: {Type: {Code: string, Description: string, }, Date: string, Time: string, }, Volume?: {UnitOfMeasurement: {Code: string, Description: string, }, Value: string, }, BillToName?: string, NumberOfPackagingUnit?: {Type: {Code: string, Description: string, }, Value: string, }, COD?: {Amount: {CurrencyCode: string, MonetaryValue: string, }, }, SignedForByName?: string, Activity?: {ActivityLocation?: {Address: {AddressLine: string, City: string, StateProvinceCode: string, PostalCode: string, CountryCode: string, }, TransportFacility?: {Type: string, Code: string, }, Code: string, Description: string, SignedForByName?: string, }, Description: string, Date: string, Time: string, Trailer: string, }, OriginPortDetail?: {OriginPort: string, EstimatedDeparture: {Date: string, Time: string, }, }, DestinationPortDetail?: {DestinationPort: string, EstimatedArrival: {Date: string, Time: string, }, }, DescriptionOfGoods?: string, CargoReady?: {Date: string, Time: string, }, Manifest?: {Date: string, Time: string, }, CarrierActivityInformation: {CarrierId: string, Description: string, Status: string, Arrival: {Date: string, Time: string, }, Departure: {Date: string, Time: string, }, OriginPort: string, DestinationPort: string, }, Document: {Type: {Code: string, Description: string, }, Content: string, Format: {Code?: string, Description: string, }, }, FileNumber: string, Appointment?: {Made: {Date: string, Time: string, }, Requested: {Date: string, Time: string, }, BeginTime: string, EndTime: string, }, Package?: {TrackingNumber: string, DeliveryIndicator: string, DeliveryDate: string, EstimatedDeliveryWindow?: {Date: string, StartTime: string, EndTime: string, }, SRSizeCode?: string, Redirect: {CompanyName: string, LocationID: string, PickupDate: string, }, DeliveryDetail: {Type: {Code: string, Description: string, }, Date: string, Time: string, }, PackageAddress?: {Type: {Code: string, Description: string, }, Address: {AddressLine: string, City: string, StateProvinceCode: string, PostalCode: string, CountryCode: string, }, }, PackageServiceOption?: {Type: {Code: string, Description: string, }, Value: string, }, COD?: {Amount: {CurrencyCode: string, MonetaryValue: string, }, Status: {Code: string, Description?: string, }, ControlNumber: string, }, Activity?: {AlternateTrackingInfo: {Type: string, Value: string, }, ActivityLocation?: {Address: {AddressLine: string, City: string, StateProvinceCode: string, PostalCode: string, CountryCode: string, }, TransportFacility?: {Type: string, Code: string, }, Code: string, Description: string, SignedForByName?: string, }, Status?: {Type: string, Description?: string, Code: string, }, Date: string, Time: string, DeliveryDateFromManifestIndicator?: string, NextScheduleActivity?: {Date: string, Time: string, }, GMTDate?: string, GMTTime?: string, GMTOffset?: string, Document?: {Type: {Code: string, Description: string, }, Content: string, Format: {Code?: string, Description: string, }, }, AdditionalAttribute?: {Code: string, Description: string, Value: string, }, }, Message?: {Code: string, Description: string, }, PackageWeight?: {UnitOfMeasurement: {Code: string, Description: string, }, Weight: string, }, ReferenceNumber?: {Code: string, Value: string, }, AlternateTrackingNumber?: string, AlternateTrackingInfo?: {Type: string, Value: string, }, DimensionalWeightScanIndicator?: string, PreauthorizedReturnInformation?: {ReturnEligibilityIndicator?: string, ReturnExpirationDate?: string, ReturnRequestURL?: string, OriginalTrackingNumber?: string, ReturnTrackingNumber?: string, }, }, QuantumViewNotification?: {Status: {Code: string, Description?: string, }, FailureDetail?: {Code: string, Description: string, TrackingNumber?: string, }, }, }, Disclaimer?: string, }, }
@@ -469,16 +625,22 @@ export type post_track_type = {TrackResponse: {Response: {ResponseStatus: {Code:
 */
 export const post_track = async (
     base_url: string, 
-    token: string, 
-    path: {inquiryNumber: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {inquiryNumber: string}, 
+    body: {TrackRequest: {Request: {RequestOption?: string, SubVersion: string, TransactionReference: {CustomerContext: string, TransactionIdentifier?: string, }, }, InquiryNumber?: string, IncludeMailInnovationIndicator?: string, TrackingOption?: string, CandidateBookmark?: string, ReferenceNumber?: {Value: string, }, PickupDateRange: {BeginDate: string, EndDate: string, }, ShipperNumber: string, ShipFrom: {Address: {PostalCode: string, CountryCode: string, }, }, ShipTo: {Address: {PostalCode: string, CountryCode: string, }, }, ShipmentType?: {Code: string, }, ShipperAccountInfo?: {PostalCode: string, CountryCode: string, }, QuantumViewNotification?: {RecipientEmailAddress: string, FailureEmailAddress: string, Language: {Code: string, Dialect: string, }, ExceptionNotificationIndicator?: string, DeliveryNotificationIndicator?: string, }, PreauthorizedReturnIndicator?: string, Locale?: string, }, }, 
     query: {locale?: string},
     axios: Function
 ): Promise<{data: post_track_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/track/v1/details/${path.inquiryNumber}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
         params: query,
+        data: body,
     })
 }
 export type post_upload_type = any
@@ -489,13 +651,19 @@ export type post_upload_type = any
 */
 export const post_upload = async (
     base_url: string, 
-    token: string,   
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    },  
+    body: {UploadRequest: {Request: {RequestOption?: string, SubVersion?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, ShipperNumber: string, UserCreatedForm: {UserCreatedFormFileName: string, UserCreatedFormFile: string, UserCreatedFormFileFormat: string, UserCreatedFormDocumentType: string, }, }, }, 
     axios: Function
 ): Promise<{data: post_upload_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/PaperlessDocumentAPI`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
+        data: body,
     })
 }
 export type post_void_shipment_type = {VoidShipmentResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, SummaryResult: {Status: {Code: string, Description: string, }, }, PackageLevelResult?: {TrackingNumber: string, Status: {Code: string, Description: string, }, }, }, }
@@ -506,16 +674,22 @@ export type post_void_shipment_type = {VoidShipmentResponse: {Response: {Respons
 */
 export const post_void_shipment = async (
     base_url: string, 
-    token: string, 
-    path: {shipmentidentificationnumber: string},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {shipmentidentificationnumber: string}, 
+    body: {VoidShipmentRequest: {Request: {RequestOption?: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, VoidShipment: {ShippingHistoryUserKey?: string, ShipmentIdentificationNumber: string, TrackingNumber?: string, }, }, }, 
     query: {trackingnumber?: string},
     axios: Function
 ): Promise<{data: post_void_shipment_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/ship/v1/shipments/cancel/${path.shipmentidentificationnumber}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
         params: query,
+        data: body,
     })
 }
 export type post_x_a_v_type = {XAVResponse: {Response: {ResponseStatus: {Code: string, Description: string, }, Alert?: {Code: string, Description: string, }, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, AddressValidationSource?: string, ValidAddressIndicator?: string, AmbiguousAddressIndicator?: string, NoCandidatesIndicator?: string, AddressClassification?: {Code: string, Description: string, }, Candidate?: {AddressClassification?: {Code: string, Description: string, }, AddressKeyFormat: {ConsigneeName?: string, AttentionName?: string, AddressLine?: string, Region?: string, PoliticalDivision2?: string, PoliticalDivision1?: string, PostcodePrimaryLow?: string, PostcodeExtendedLow?: string, Urbanization?: string, CountryCode: string, }, }, }, }
@@ -526,15 +700,21 @@ export type post_x_a_v_type = {XAVResponse: {Response: {ResponseStatus: {Code: s
 */
 export const post_x_a_v = async (
     base_url: string, 
-    token: string, 
-    path: {requestoption: undefined},  
+    auth: {
+        username: string,
+        password: string,
+        access_key: string
+    }, 
+    path: {requestoption: undefined}, 
+    body: {XAVRequest: {Request: {SubVersion?: string, RequestOption: string, TransactionReference?: {CustomerContext?: string, TransactionIdentifier?: string, }, }, AddressValidationSource?: string, RegionalRequestIndicator?: string, MaximumCandidateListSize?: string, AddressKeyFormat: {ConsigneeName?: string, AttentionName?: string, AddressLine?: string, Region?: string, PoliticalDivision2?: string, PoliticalDivision1?: string, PostcodePrimaryLow?: string, PostcodeExtendedLow?: string, Urbanization?: string, CountryCode: string, }, }, }, 
     query: {regionalrequestindicator?: string,maximumcandidatelistsize?: undefined},
     axios: Function
 ): Promise<{data: post_x_a_v_type}> => {
     return axios({
         method: 'POST', 
         url: `${base_url}/addressvalidation/v1/${path.requestoption}`,
-        headers: { Authorization: `Bearer ${ token }` },
+        headers: { AccessLicenseNumber: auth.access_key, Password: auth.password, 'Content-Type': 'application/json', Username: auth.username, Accept: 'application/json' },
         params: query,
+        data: body,
     })
 }
