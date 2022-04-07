@@ -6,25 +6,24 @@ import { to_typescript_type } from './helpers/to_typescript_type'
 
 export const generate = () => {
     const routes_directory = 'schemas'
-    const generated_client_filename = 'generated'
+    const generated_client_filename = 'src/index.ts'
 
-    const file_names = readdirSync(routes_directory).slice(24, 25)
+    const file_names = readdirSync(routes_directory)
     const files = file_names
         .map(file_name => readFileSync(`${routes_directory}/${file_name}`, 'utf8'))
         .map(el => JSON.parse(el))
 
     const typescripts = files.map((file, i) => open_api_to_typescript(file, file_names[i]))
 
-    typescripts.map((output, i) =>
-        writeFileSync(`generated/${file_names[i].slice(0, -5)}.ts`, output.join('\n'))
-    )
+    writeFileSync(generated_client_filename, typescripts.join('\n'))
 }
 
 const open_api_to_typescript = (s, file_name) => {
     const output = Object.keys(s.paths).flatMap(route_str => {
         const route = s.paths[route_str]
         return Object.keys(route).map(method => {
-            const fn_name = `${method}${route_to_fn_name(route_str)}`
+            const operation_id = route[method].operationId
+            const fn_name = `${method}${route_to_fn_name(operation_id)}`
             const meth = route[method]
             const parameters = meth.parameters || []
             const responses = meth.responses
@@ -54,7 +53,7 @@ const open_api_to_typescript = (s, file_name) => {
 /** 
  * ${s.info.description}
  * ${meth.summary}
- * @example ${JSON.stringify(body_json.examples.json.value)}
+ * @example ${JSON.stringify(body_json.examples?.json.value)}
 */
 export const ${fn_name} = async (
     base_url: string, 
