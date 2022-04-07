@@ -1,0 +1,376 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Freight Pickup",
+        "description": "API can be only used by users that plan to ship packages manifested, tendered, and delivered by TForce Freight",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Freight Pickup, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/FreightPickupStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/ship/v1/freight/pickups": {
+            "post": {
+                "summary": "API can be only used by users that plan to ship packages manifested, tendered, and delivered by TForce Freight",
+                "operationId": "Freight Cancel Pickup ",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "PickupRequestConfirmationNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "\nConfirmation number of the pickup ground freight shipment to cancel. Length 35",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "API can be only used by users that plan to ship packages manifested, tendered, and delivered by TForce Freight",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FREIGHTPICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "json": {
+                                    "summary": "A sample JSON request",
+                                    "value": {}
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FREIGHTPICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<envr:Envelope xmlns:auth\"http://www.ups.com/schema/xpci/1.0/auth\" \r\nxmlns:wsse\"http://schemas.xmlsoap.org/ws/2002/04/secext\" \r\nxmlns:envr\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:xsd\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:upsa\"http://www.ups.com/XMLSchema/XOLTWS/upssa/v1.0\" \r\nxmlns:xsi\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\" \r\nxmlns:wsf\"http://www.ups.com/schema/wsf\">\r\n<envr:Header>\r\n<wsse:Security>\r\n<wsse:UsernameToken>\r\n<wsse:Username>Username</wsse:Username>\r\n<wsse:Password>Password</wsse:Password>\r\n</wsse:UsernameToken>\r\n<upsa:UPSServiceAccessToken>\r\n<upsa:AccessLicenseNumber>AccessLicenseNumber</upsa:AccessLicenseNumber>\r\n</upsa:UPSServiceAccessToken>\r\n</wsse:Security>\r\n<wsf:LumberJack wsf:pwd\"lJkjN06\" wsf:level\"8\"/>\r\n<wsf:pNg911jan06/>\r\n</envr:Header>\r\n<envr:Body>\r\n<FreightCancelPickupRequest \r\nxmlns\"http://www.ups.com/XMLSchema/XOLTWS/FreightPickup/v1.0\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\" \r\nxmlns:xsi\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxsi:schemaLocation\"http://www.ups.com/XMLSchema/XOLTWS/FreightPickup/v1.0 \r\nD:\\Projects\\XOLT_WebServices\\schemas\\FreightPickup.xsd\">\r\n<common:Request>\r\n<common:RequestOption/>\r\n<common:TransactionReference>\r\n<common:CustomerContext/>\r\n</common:TransactionReference>\r\n</common:Request>\r\n<PickupRequestConfirmationNumber>PickupRequestConfirmationNumber</PickupReques\r\ntConfirmationNumber>\r\n</FreightCancelPickupRequest>\r\n</envr:Body>\r\n</envr:Envelope>"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FREIGHTPICKUPResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FREIGHTPICKUPResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "FREIGHTPICKUPRequestWrapper": {
+                "xml": {
+                    "name": "FreightCancelPickupRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "FreightCancelPickupRequest"
+                ],
+                "properties": {
+                    "FreightCancelPickupRequest": {
+                        "$ref": "#/components/schemas/FreightCancelPickupRequest"
+                    }
+                }
+            },
+            "FREIGHTPICKUPResponseWrapper": {
+                "xml": {
+                    "name": "FreightCancelPickupResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "FreightCancelPickupResponse"
+                ],
+                "properties": {
+                    "FreightCancelPickupResponse": {
+                        "$ref": "#/components/schemas/FreightCancelPickupResponse"
+                    }
+                }
+            },
+            "FreightCancelPickupRequest": {
+                "type": "object",
+                "required": [
+                    "PickupRequestConfirmationNumber",
+                    "Request"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/FreightCancelPickupRequest_Request"
+                    },
+                    "PickupRequestConfirmationNumber": {
+                        "description": "Confirmation number of the pickup ground freight shipment to cancel.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "FreightCancelPickupRequest"
+                },
+                "maximum": 1,
+                "description": "FreightCancelPickupRequest container."
+            },
+            "FreightCancelPickupRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "description": "Request container.",
+                "maximum": 1
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response.",
+                        "type": "string"
+                    },
+                    "TransactionIdentifier": {
+                        "description": "The Unique TransactionIdentifier Information for that transaction. This will be present only if requested in the request.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "TransactionReference identifies transactions between client and server."
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext Information which will be echoed during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "TransactionReference_TransactionIdentifier": {
+                "description": "The Unique TransactionIdentifier Information for that transaction. This will be present only if requested in the request.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 35,
+                "maxLength": 35
+            },
+            "FreightCancelPickupRequest_PickupRequestConfirmationNumber": {
+                "description": "Confirmation number of the pickup ground freight shipment to cancel.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 35,
+                "maxLength": 35
+            },
+            "FreightCancelPickupResponse": {
+                "type": "object",
+                "required": [
+                    "Response",
+                    "FreightCancelStatus"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/FreightCancelPickupResponse_Response"
+                    },
+                    "FreightCancelStatus": {
+                        "description": "Container which stores the response status",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "FreightCancelPickupResponse"
+                },
+                "maximum": 1,
+                "description": "Freight Cancel response container."
+            },
+            "FreightCancelPickupResponse_Response": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "ResponseStatus",
+                    "Alert"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "description": "Response Status Container.",
+                        "type": "string"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Response container."
+            },
+            "Response_ResponseStatus": {
+                "description": "Response Status Container.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success or failure of the transaction.1  Successful",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description"
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response.",
+                        "type": "string"
+                    },
+                    "TransactionIdentifier": {
+                        "description": "The Unique TransactionIdentifier Information for that transaction. This will be present only if requested in the request.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "FreightCancelPickupResponse_FreightCancelStatus": {
+                "description": "Container which stores the response status",
+                "maximum": 1,
+                "type": "string"
+            },
+            "FreightCancelStatus_Code": {
+                "description": "Identifies the success or failure of the transaction. 1  Successful",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "FreightCancelStatus_Description": {
+                "description": "Describes Response Status Code above.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            }
+        }
+    }
+}

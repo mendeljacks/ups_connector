@@ -1,0 +1,497 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Pickup",
+        "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Pickup, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/PickupStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/ship/v1/pickups/{pickuptype}": {
+            "post": {
+                "summary": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                "operationId": "Pickup Pending Status",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccountNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The specific account number that belongs to the \nshipper.Length 6 or 10",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "pickuptype",
+                        "schema": {
+                            "type": "string",
+                            "minimum": 1
+                        },
+                        "description": "Type of pickup. Valid values:\noncall\nsmart\nboth. Length 6",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<soapenv:Envelope xmlns:soapenv\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\" \r\nxmlns:upss\"http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0\">\r\n <soapenv:Header>\r\n <upss:UPSSecurity>\r\n <upss:UsernameToken>\r\n <upss:Username>Your User ID</upss:Username>\r\n <upss:Password>Your Password</upss:Password>\r\n </upss:UsernameToken>\r\n <upss:ServiceAccessToken>\r\n <upss:AccessLicenseNumber>Your Access License </upss:AccessLicenseNumber>\r\n </upss:ServiceAccessToken>\r\n </upss:UPSSecurity>\r\n </soapenv:Header>\r\n <soapenv:Body>\r\n <PickupPendingStatusRequest xmlns\"http://www.ups.com/XMLSchema/XOLTWS/Pickup/v1.1\">\r\n <common:Request>\r\n <common:RequestOption/>\r\n <common:TransactionReference>\r\n <common:CustomerContext>Your Customer Context</common:CustomerContext>\r\n </common:TransactionReference>\r\n </common:Request>\r\n <PickupType>01</PickupType>\r\n <AccountNumber>Your Shipper Number</AccountNumber>\r\n </PickupPendingStatusRequest>\r\n </soapenv:Body>\r\n</soapenv:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PICKUPRequestWrapper": {
+                "xml": {
+                    "name": "PickupPendingStatusRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupPendingStatusRequest"
+                ],
+                "properties": {
+                    "PickupPendingStatusRequest": {
+                        "$ref": "#/components/schemas/PickupPendingStatusRequest"
+                    }
+                }
+            },
+            "PICKUPResponseWrapper": {
+                "xml": {
+                    "name": "PickupPendingStatusResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupPendingStatusResponse"
+                ],
+                "properties": {
+                    "PickupPendingStatusResponse": {
+                        "$ref": "#/components/schemas/PickupPendingStatusResponse"
+                    }
+                }
+            },
+            "PickupPendingStatusRequest": {
+                "type": "object",
+                "required": [
+                    "Request",
+                    "PickupType",
+                    "AccountNumber"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/PickupPendingStatusRequest_Request"
+                    },
+                    "PickupType": {
+                        "description": "Specify the type of pending pickup.\n01  On-Call Pickup",
+                        "type": "string"
+                    },
+                    "AccountNumber": {
+                        "description": "The specific account number belongs to the shipper",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupPendingStatusRequest"
+                },
+                "maximum": 1,
+                "description": "This request is used to get the pending pickup status."
+            },
+            "PickupPendingStatusRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "RequestOption": {
+                        "description": "Not used by pick up",
+                        "type": "string"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "description": "Common element for all services.",
+                "maximum": 1
+            },
+            "Request_RequestOption": {
+                "description": "Not used by pick up",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 15
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext information that is echoed back during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "PickupPendingStatusRequest_PickupType": {
+                "description": "Specify the type of pending pickup.\n01  On-Call Pickup",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PickupPendingStatusRequest_AccountNumber": {
+                "description": "The specific account number belongs to the shipper",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 10
+            },
+            "PickupPendingStatusResponse": {
+                "type": "object",
+                "required": [
+                    "Response",
+                    "PendingStatus"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/PickupPendingStatusResponse_Response"
+                    },
+                    "PendingStatus": {
+                        "$ref": "#/components/schemas/PickupPendingStatusResponse_PendingStatus"
+                    }
+                },
+                "xml": {
+                    "name": "PickupPendingStatusResponse"
+                },
+                "description": "The response of the pending status for on-callpickup.",
+                "maximum": 1
+            },
+            "PickupPendingStatusResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Response Container.",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success of the transaction. 1  Success",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Describes Response Status Code.  Returns \"Success\" for a valid request.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Response Status Container."
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success of the transaction. 1  Success",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Describes Response Status Code.  Returns \"Success\" for a valid request.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description."
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "PickupPendingStatusResponse_PendingStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "ServiceDate",
+                    "PickupType",
+                    "PRN",
+                    "PickupStatusMessage"
+                ],
+                "properties": {
+                    "PickupType": {
+                        "description": "Specify the type of pending pickup.\n01  on-callPickup",
+                        "type": "string"
+                    },
+                    "ServiceDate": {
+                        "description": "Local service date\nFormat: yyyyMMdd\nyyyy  Year applicable\nMM  01 12\ndd  01 31",
+                        "type": "string"
+                    },
+                    "PRN": {
+                        "description": "Returned PRN",
+                        "type": "string"
+                    },
+                    "GWNStatusCode": {
+                        "description": "Status code for Smart Pickup.",
+                        "type": "string"
+                    },
+                    "OnCallStatusCode": {
+                        "description": "A unique string identifier to identify a success pre-notification processing. Only available if end result is success.",
+                        "type": "string"
+                    },
+                    "PickupStatusMessage": {
+                        "description": "The status for on-callpickup.\nPickupPendingStatusResponse will only display incomplete status for today and tomorrow only. \n002 and 012 are the most common responses.\n001  Received at dispatch\n002  Dispatched to driver\n003  Order successfully completed\n004  Order unsuccessfully completed\n005  Missed commit  Updated ETA supplied by driver\n007  Cancelled\n008  Order has invalid order status\n012  Your pickup request is being processed",
+                        "type": "string"
+                    },
+                    "BillingCode": {
+                        "description": "Pickup billing classification for on call\n01  Regular\n02  Return\n03  Alternate Address (Not supported for now)",
+                        "type": "string"
+                    },
+                    "ContactName": {
+                        "description": "on-callpickup contact name",
+                        "type": "string"
+                    },
+                    "ReferenceNumber": {
+                        "description": "Customer provided reference number for on-call pickup",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PendingStatus"
+                },
+                "description": "The result of retrieving pending pickups."
+            },
+            "PendingStatus_PickupType": {
+                "description": "Specify the type of pending pickup.\n01  on-callPickup",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PendingStatus_ServiceDate": {
+                "description": "Local service date\nFormat: yyyyMMdd\nyyyy  Year applicable\nMM  01 12\ndd  01 31",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "PendingStatus_PRN": {
+                "description": "Returned PRN",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 11,
+                "maxLength": 11
+            },
+            "PendingStatus_GWNStatusCode": {
+                "description": "Status code for Smart Pickup.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PendingStatus_OnCallStatusCode": {
+                "description": "A unique string identifier to identify a success pre-notification processing. Only available if end result is success.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "PendingStatus_PickupStatusMessage": {
+                "description": "The status for on-callpickup.\nPickupPendingStatusResponse will only display incomplete status for today and tomorrow only. \n002 and 012 are the most common responses.\n001  Received at dispatch\n002  Dispatched to driver\n003  Order successfully completed\n004  Order unsuccessfully completed\n005  Missed commit  Updated ETA supplied by driver\n007  Cancelled\n008  Order has invalid order status\n012  Your pickup request is being processed",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+            },
+            "PendingStatus_BillingCode": {
+                "description": "Pickup billing classification for on call\n01  Regular\n02  Return\n03  Alternate Address (Not supported for now)",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PendingStatus_ContactName": {
+                "description": "on-callpickup contact name",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 22
+            },
+            "PendingStatus_ReferenceNumber": {
+                "description": "Customer provided reference number for on-call pickup",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            }
+        }
+    }
+}

@@ -1,0 +1,659 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Denied Party Screener",
+        "description": "Denied Party Screener allows you to use to search for restricted trading parties by destination country or territory or by party.",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Denied Party Screener, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/TradeabilityStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/tradeability/v1/restrictedparties": {
+            "post": {
+                "summary": "Denied Party Screener allows you to use to search for restricted trading parties by destination country or territory or by party.",
+                "operationId": "DeniedPartyScreener",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Denied Party Screener allows you to use to search for restricted trading parties by destination country or territory or by party.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DENIEDPARTYSCREENERRequestWrapper"
+                            },
+                            "examples": {
+                                "json": {
+                                    "summary": "A sample JSON request",
+                                    "value": "{\r\n\"DeniedPartyScreenerRequest\": {\r\n\"Party\": {\r\n\"ScreenType\": \"ScreenType\",\r\n\"CompanyName\": \"CompanyName\",\r\n\"Address\": {\r\n\"AddressLine\": [\"AddressLine\", \"Suite\"]\r\n},\r\n\"MatchLevel\": \"\"\r\n}\r\n}\r\n}\r\n"
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DENIEDPARTYSCREENERRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<env:Envelope xmlns:auth\"http://www.ups.com/schema/xpci/1.0/auth\" \r\nxmlns:env\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:xsi\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:wsf\"http://www.ups.com/schema/wsf\">\r\n<env:Header>\r\n<auth:AccessRequest xmlns:auth\"http://www.ups.com/schema/xpci/1.0/auth\">\r\n<auth:UserId>UserId</auth:UserId>\r\n<auth:Password>Password</auth:Password>\r\n<auth:AccessLicenseNumber>AccessLicenseNumber</auth:AccessLicenseNumber>\r\n</auth:AccessRequest>\r\n</env:Header>\r\n<env:Body>\r\n<dps:DeniedPartyScreenerRequest xmlns:dps\"http://www.ups.com/schema/xpci/1.0/dps\">\r\n<dps:Request>\r\n<dps:RequestAction>DeniedPartyScreener</dps:RequestAction>\r\n<dps:RequestOption/>\r\n</dps:Request>\r\n<dps:BillingInformation>\r\n<dps:UPSAccount>\r\n<dps:AccountNumber>AccountNumber</dps:AccountNumber>\r\n<dps:CountryCode>CountryCode</dps:CountryCode>\r\n<dps:PostalCode>PostalCode</dps:PostalCode>\r\n</dps:UPSAccount>\r\n</dps:BillingInformation>\r\n<dps:Party>\r\n<dps:ScreenType>ScreenType</dps:ScreenType>\r\n<dps:CompanyName>CompanyName</dps:CompanyName>\r\n<dps:Address>\r\n<dps:AddressLine>AddressLine</dps:AddressLine>\r\n</dps:Address>\r\n<dps:MatchLevel/>\r\n</dps:Party>\r\n</dps:DeniedPartyScreenerRequest>\r\n</env:Body>\r\n</env:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DENIEDPARTYSCREENERResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DENIEDPARTYSCREENERResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DENIEDPARTYSCREENERRequestWrapper": {
+                "xml": {
+                    "name": "DeniedPartyScreenerRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "DeniedPartyScreenerRequest"
+                ],
+                "properties": {
+                    "DeniedPartyScreenerRequest": {
+                        "$ref": "#/components/schemas/DeniedPartyScreenerRequest"
+                    }
+                }
+            },
+            "DENIEDPARTYSCREENERResponseWrapper": {
+                "xml": {
+                    "name": "DeniedPartyScreenerResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "DeniedPartyScreenerResponse"
+                ],
+                "properties": {
+                    "DeniedPartyScreenerResponse": {
+                        "$ref": "#/components/schemas/DeniedPartyScreenerResponse"
+                    }
+                }
+            },
+            "DeniedPartyScreenerRequest": {
+                "type": "object",
+                "required": [
+                    "Party",
+                    "Request"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/DeniedPartyScreenerRequest_Request"
+                    },
+                    "Party": {
+                        "$ref": "#/components/schemas/DeniedPartyScreenerRequest_Party"
+                    },
+                    "TransactionReferenceID": {
+                        "description": "Optional user entered reference id.",
+                        "type": "string"
+                    },
+                    "ShippingHistoryUserKey": {
+                        "description": "Unique key to tag shipments in shipping history. It could be MyUPS registration Number or any unique identifier.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "DeniedPartyScreenerRequest"
+                },
+                "maximum": 1,
+                "description": "The root element/container for the Denied Party Screener Request document."
+            },
+            "DeniedPartyScreenerRequest_Request": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "RequestAction"
+                ],
+                "properties": {
+                    "RequestAction": {
+                        "description": "Indicates the action to be taken by the service.  Only valid value is: DeniedPartyScreener.",
+                        "type": "string"
+                    },
+                    "RequestOption": {
+                        "description": "",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "description": "A container element which contains the ser-vice requested."
+            },
+            "Request_RequestAction": {
+                "description": "Indicates the action to be taken by the service.  Only valid value is: DeniedPartyScreener.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 20
+            },
+            "Request_RequestOption": {
+                "description": "",
+                "type": "string"
+            },
+            "DeniedPartyScreenerRequest_Party": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "ScreenType"
+                ],
+                "properties": {
+                    "ScreenType": {
+                        "description": "Valid values:\nParty  Party Search\nCountry  Country Only Search",
+                        "type": "string"
+                    },
+                    "ContactName": {
+                        "description": "Name of person to screen. Required if ScreenType  Party and Company Name is not populated",
+                        "type": "string"
+                    },
+                    "CompanyName": {
+                        "description": "Company Name to screen. Required if ScreenType  Party and ContactName is not populated",
+                        "type": "string"
+                    },
+                    "Address": {
+                        "$ref": "#/components/schemas/Party_Address"
+                    },
+                    "MatchLevel": {
+                        "description": "Indicator to determine how precise the search logic will be. \nValid values:\nLow - 60 % word match, 40% error rate.\nMedium - 75 % word match, 25% error rate. Medium is the default value if no Match Level is given and Country Only searches default to Medium, regardless of the value entered.\nHigh - 90% word match, 10% error rate.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Party"
+                },
+                "description": "A container element referencing the party to be compared to the denied party list."
+            },
+            "Party_ScreenType": {
+                "description": "Valid values:\nParty  Party Search\nCountry  Country Only Search",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 7
+            },
+            "Party_ContactName": {
+                "description": "Name of person to screen. Required if ScreenType  Party and Company Name is not populated",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+            },
+            "Party_CompanyName": {
+                "description": "Company Name to screen. Required if ScreenType  Party and ContactName is not populated",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+            },
+            "Party_Address": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "AddressLine": {
+                        "description": "Denied Party street address",
+                        "type": "string"
+                    },
+                    "City": {
+                        "description": "City of Denied Party.",
+                        "type": "string"
+                    },
+                    "State": {
+                        "description": "State, Province, or Region of Denied Party",
+                        "type": "string"
+                    },
+                    "PostalCode": {
+                        "description": "Contains the postal code of the denied party.",
+                        "type": "string"
+                    },
+                    "County": {
+                        "description": "County of Denied Party",
+                        "type": "string"
+                    },
+                    "CountryCode": {
+                        "description": "Country or Territory Code of Denied Party",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Address"
+                },
+                "description": "Contains the address of the person or company to screen. This element is conditional and is required if ScreenType is Country."
+            },
+            "Address_AddressLine": {
+                "description": "Denied Party street address",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 125
+            },
+            "Address_City": {
+                "description": "City of Denied Party.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30
+            },
+            "Address_State": {
+                "description": "State, Province, or Region of Denied Party",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Address_PostalCode": {
+                "description": "Contains the postal code of the denied party.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "Address_County": {
+                "description": "County of Denied Party",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 30
+            },
+            "Address_CountryCode": {
+                "description": "Country or Territory Code of Denied Party",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "Party_MatchLevel": {
+                "description": "Indicator to determine how precise the search logic will be. \nValid values:\nLow - 60 % word match, 40% error rate.\nMedium - 75 % word match, 25% error rate. Medium is the default value if no Match Level is given and Country Only searches default to Medium, regardless of the value entered.\nHigh - 90% word match, 10% error rate.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 6
+            },
+            "DeniedPartyScreenerRequest_TransactionReferenceID": {
+                "description": "Optional user entered reference id.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "DeniedPartyScreenerRequest_ShippingHistoryUserKey": {
+                "description": "Unique key to tag shipments in shipping history. It could be MyUPS registration Number or any unique identifier.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "DeniedPartyScreenerResponse": {
+                "type": "object",
+                "required": [
+                    "Response",
+                    "TransactionInfo"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/DeniedPartyScreenerResponse_Response"
+                    },
+                    "TransactionInfo": {
+                        "$ref": "#/components/schemas/DeniedPartyScreenerResponse_TransactionInfo"
+                    },
+                    "GovernmentList": {
+                        "$ref": "#/components/schemas/DeniedPartyScreenerResponse_GovernmentList"
+                    }
+                },
+                "xml": {
+                    "name": "DeniedPartyScreenerResponse"
+                },
+                "description": "The root element/container for the Denied Party Screener Response document.",
+                "maximum": 1
+            },
+            "DeniedPartyScreenerResponse_Response": {
+                "type": "object",
+                "properties": {
+                    "Warning": {
+                        "description": "Warning message.  Not currently used for Denied Party Screener.",
+                        "type": "string"
+                    },
+                    "DeniedPartySearchStatus": {
+                        "description": "Indicator that gives the status of the search based on the given search criteria:  Valid Values:  Denied Parties Found, No Denied Parties Found",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "maximum": 1,
+                "required": [
+                    "DeniedPartySearchStatus"
+                ],
+                "description": "A container element which contains the ser-vice status returned."
+            },
+            "Response_Warning": {
+                "description": "Warning message.  Not currently used for Denied Party Screener.",
+                "type": "string",
+                "minLength": 100,
+                "maxLength": 100
+            },
+            "Response_DeniedPartySearchStatus": {
+                "description": "Indicator that gives the status of the search based on the given search criteria:  Valid Values:  Denied Parties Found, No Denied Parties Found",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 23
+            },
+            "DeniedPartyScreenerResponse_TransactionInfo": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "TransactionCharge",
+                    "Time",
+                    "Date"
+                ],
+                "properties": {
+                    "Date": {
+                        "description": "Date of the transaction. Format: MM/DD/YYYY",
+                        "type": "string"
+                    },
+                    "Time": {
+                        "description": "Time of the transaction. Format: HH24:MM ET",
+                        "type": "string"
+                    },
+                    "TransactionCharge": {
+                        "$ref": "#/components/schemas/TransactionInfo_TransactionCharge"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionInfo"
+                },
+                "description": "A container element which contains the cus-tomer transaction information."
+            },
+            "TransactionInfo_Date": {
+                "description": "Date of the transaction. Format: MM/DD/YYYY",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "TransactionInfo_Time": {
+                "description": "Time of the transaction. Format: HH24:MM ET",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "TransactionInfo_TransactionCharge": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "MonetaryValue": {
+                        "description": "Amount charged for the transaction.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "Currency Code of the transaction charge.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionCharge"
+                },
+                "description": "A container element which contains the transaction charged for the Denied Party Screener service."
+            },
+            "TransactionCharge_MonetaryValue": {
+                "description": "Amount charged for the transaction.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 13
+            },
+            "TransactionCharge_CurrencyCode": {
+                "description": "Currency Code of the transaction charge.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "DeniedPartyScreenerResponse_GovernmentList": {
+                "type": "object",
+                "properties": {
+                    "ListDescription": {
+                        "$ref": "#/components/schemas/GovernmentList_ListDescription"
+                    },
+                    "DeniedParty": {
+                        "$ref": "#/components/schemas/GovernmentList_DeniedParty"
+                    }
+                },
+                "xml": {
+                    "name": "GovernmentList"
+                },
+                "description": "A container element containing the govern-ments denied party list."
+            },
+            "GovernmentList_ListDescription": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "ListName": {
+                        "description": "Name of the Government List",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Contains the description of the Government List.",
+                        "type": "string"
+                    },
+                    "ControlAgency": {
+                        "description": "The acronym of the agency administering this Government List of Denied Parties.",
+                        "type": "string"
+                    },
+                    "LastRegulatoryUpdate": {
+                        "description": "The date on which this denied party Government List was updated by the administering agency.  FORMAT: MM/DD/YYYY",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ListDescription"
+                },
+                "description": "Container for the description of the Government List",
+                "minLength": 1,
+                "maxLength": 400
+            },
+            "ListDescription_ListName": {
+                "description": "Name of the Government List",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+            },
+            "ListDescription_Description": {
+                "description": "Contains the description of the Government List.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ListDescription_ControlAgency": {
+                "description": "The acronym of the agency administering this Government List of Denied Parties.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16
+            },
+            "ListDescription_LastRegulatoryUpdate": {
+                "description": "The date on which this denied party Government List was updated by the administering agency.  FORMAT: MM/DD/YYYY",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "GovernmentList_DeniedParty": {
+                "type": "object",
+                "properties": {
+                    "Names": {
+                        "$ref": "#/components/schemas/DeniedParty_Names"
+                    },
+                    "Addresses": {
+                        "$ref": "#/components/schemas/DeniedParty_Addresses"
+                    },
+                    "Remarks": {
+                        "description": "Remarks about the Denied Party",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "DeniedParty"
+                },
+                "maximum": 1,
+                "description": "A container element which contains the cus-tomer denied party information."
+            },
+            "DeniedParty_Names": {
+                "type": "object",
+                "maximum": 5,
+                "properties": {
+                    "Name": {
+                        "description": "Known names and aliases of Denied Party.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Names"
+                },
+                "description": "A container element containing the known names and aliases in the governments de-nied party list."
+            },
+            "Names_Name": {
+                "description": "Known names and aliases of Denied Party.",
+                "maximum": 5,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+            },
+            "DeniedParty_Addresses": {
+                "type": "object",
+                "properties": {
+                    "Address": {
+                        "$ref": "#/components/schemas/Addresses_Address"
+                    }
+                },
+                "xml": {
+                    "name": "Addresses"
+                },
+                "description": "A container element containing the known addresses in the governments denied party list.",
+                "maximum": 1
+            },
+            "Addresses_Address": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "AddressLine": {
+                        "description": "Denied Party street address",
+                        "type": "string"
+                    },
+                    "City": {
+                        "description": "City of Denied Party.",
+                        "type": "string"
+                    },
+                    "State": {
+                        "description": "State, Province, or Region of Denied Party",
+                        "type": "string"
+                    },
+                    "PostalCode": {
+                        "description": "Contains the postal code of the denied party.",
+                        "type": "string"
+                    },
+                    "County": {
+                        "description": "County of Denied Party",
+                        "type": "string"
+                    },
+                    "CountryCode": {
+                        "description": "Country or Territory Code of Denied Party",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Address"
+                },
+                "description": "A container element which contains the denied party address."
+            },
+            "DeniedParty_Remarks": {
+                "description": "Remarks about the Denied Party",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+            }
+        }
+    }
+}

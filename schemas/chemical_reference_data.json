@@ -1,0 +1,799 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Dangerous Goods Utility",
+        "description": "The Dangerous Goods API provides the ability to determine what Dangerous Goods (also known as Hazardous Materials) can be carried by UPS.",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Dangerous Goods Utility, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/dangerousGoodsUtility.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/dangerousgoods/{version}/chemicalreferencedata": {
+            "post": {
+                "summary": "The Dangerous Goods API provides the ability to determine what Dangerous Goods (also known as Hazardous Materials) can be carried by UPS.",
+                "operationId": "Chemical Reference Data",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "description": "Version of the API. Valid values:\nv1\nv1801. Length 5",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "The Dangerous Goods API provides the ability to determine what Dangerous Goods (also known as Hazardous Materials) can be carried by UPS.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DANGEROUSGOODSUTILITYRequestWrapper"
+                            },
+                            "examples": {
+                                "json": {
+                                    "summary": "A sample JSON request",
+                                    "value": "{\r\n \"ChemicalReferenceDataRequest\": {\r\n \"IDNumber\": \"UN1088\",\r\n \"ProperShippingName\": \"Acetal\",\r\n \"ShipperNumber\": \"Your Shipper Number\"\r\n }\r\n}\r\n"
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DANGEROUSGOODSUTILITYRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<soapenv:Envelope xmlns:soapenv\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:upss\"http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\">\r\n <soapenv:Header>\r\n <upss:UPSSecurity>\r\n <upss:UsernameToken>\r\n <upss:Username>Your User Name</upss:Username>\r\n <upss:Password>Your Password</upss:Password>\r\n </upss:UsernameToken>\r\n <upss:ServiceAccessToken>\r\n <upss:AccessLicenseNumber>Your Access License Number</upss:AccessLicenseNumber>\r\n </upss:ServiceAccessToken>\r\n </upss:UPSSecurity>\r\n </soapenv:Header>\r\n <soapenv:Body>\r\n <dg:ChemicalReferenceDataRequest \r\nxmlns:dg\"http://www.ups.com/XMLSchema/XOLTWS/DangerousGoodsUtility/v1.0\">\r\n <common:Request>\r\n <common:TransactionReference>\r\n <common:CustomerContext>Your Customer Context</common:CustomerContext>\r\n </common:TransactionReference>\r\n <common:SubVersion>1801</common:SubVersion>\r\n </common:Request>\r\n <dg:IDNumber>UN1088</dg:IDNumber>\r\n <dg:ProperShippingName>Acetal</dg:ProperShippingName>\r\n <dg:ShipperNumber>Your Shipper Number</dg:ShipperNumber>\r\n </dg:ChemicalReferenceDataRequest>\r\n </soapenv:Body>\r\n</soapenv:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DANGEROUSGOODSUTILITYResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DANGEROUSGOODSUTILITYResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DANGEROUSGOODSUTILITYRequestWrapper": {
+                "xml": {
+                    "name": "ChemicalReferenceDataRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "ChemicalReferenceDataRequest"
+                ],
+                "properties": {
+                    "ChemicalReferenceDataRequest": {
+                        "$ref": "#/components/schemas/ChemicalReferenceDataRequest"
+                    }
+                }
+            },
+            "DANGEROUSGOODSUTILITYResponseWrapper": {
+                "xml": {
+                    "name": "ChemicalReferenceDataResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "ChemicalReferenceDataResponse"
+                ],
+                "properties": {
+                    "ChemicalReferenceDataResponse": {
+                        "$ref": "#/components/schemas/ChemicalReferenceDataResponse"
+                    }
+                }
+            },
+            "ChemicalReferenceDataRequest": {
+                "type": "object",
+                "required": [
+                    "Request",
+                    "ShipperNumber"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/ChemicalReferenceDataRequest_Request"
+                    },
+                    "IDNumber": {
+                        "description": "This is the ID number (UN/NA/ID) for the specified commodity. UN/NA/ID Identification Number assigned to the specified regulated good. (Include the UN/NA/ID as part of the entry).  At least one of the information - IDNumber or ProperShippingName should be provided to retrieve Chemical Reference Data.",
+                        "type": "string"
+                    },
+                    "ProperShippingName": {
+                        "description": "The Proper Shipping Name assigned by ADR, CFR or IATA.   At least one of the information - IDNumber or ProperShippingName should be provided to retrieve Chemical Reference Data.",
+                        "type": "string"
+                    },
+                    "ShipperNumber": {
+                        "description": "Shippers six digit account number.  Your UPS Account Number must have correct Dangerous goods contract to successfully use this Webservice.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ChemicalReferenceDataRequest"
+                },
+                "maximum": 1,
+                "description": "Dangerous Goods Utility Request container for Chemical Reference Data."
+            },
+            "ChemicalReferenceDataRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "RequestOption": {
+                        "description": "Enables the user to specify optional processing. Currently, there is no optional process in Dangerous Goods Utiltiy WS.",
+                        "type": "string"
+                    },
+                    "SubVersion": {
+                        "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\nFormat: YYMM  Year and month of the release.\n\nExample: 1801  2018 January",
+                        "type": "string"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "maximum": 1,
+                "description": "Contains Chemical Reference Data request criteria components."
+            },
+            "Request_RequestOption": {
+                "description": "Enables the user to specify optional processing. Currently, there is no optional process in Dangerous Goods Utiltiy WS.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "Request_SubVersion": {
+                "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\nFormat: YYMM  Year and month of the release.\n\nExample: 1801  2018 January",
+                "maximum": 1,
+                "type": "string"
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information which will be echoed during response.",
+                        "type": "string"
+                    },
+                    "TransactionIdentifier": {
+                        "description": "Not Used.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "TransactionReference identifies transactions between client and server."
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext information which will be echoed during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "TransactionReference_TransactionIdentifier": {
+                "description": "Not Used.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ChemicalReferenceDataRequest_IDNumber": {
+                "description": "This is the ID number (UN/NA/ID) for the specified commodity. UN/NA/ID Identification Number assigned to the specified regulated good. (Include the UN/NA/ID as part of the entry).  At least one of the information - IDNumber or ProperShippingName should be provided to retrieve Chemical Reference Data.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 6
+            },
+            "ChemicalReferenceDataRequest_ProperShippingName": {
+                "description": "The Proper Shipping Name assigned by ADR, CFR or IATA.   At least one of the information - IDNumber or ProperShippingName should be provided to retrieve Chemical Reference Data.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 250
+            },
+            "ChemicalReferenceDataRequest_ShipperNumber": {
+                "description": "Shippers six digit account number.  Your UPS Account Number must have correct Dangerous goods contract to successfully use this Webservice.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6
+            },
+            "ChemicalReferenceDataResponse": {
+                "type": "object",
+                "required": [
+                    "Response"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/ChemicalReferenceDataResponse_Response"
+                    },
+                    "ChemicalData": {
+                        "$ref": "#/components/schemas/ChemicalReferenceDataResponse_ChemicalData"
+                    }
+                },
+                "xml": {
+                    "name": "ChemicalReferenceDataResponse"
+                },
+                "description": "Dangerous Goods Utility Response container for Chemical Reference Data.",
+                "maximum": 1
+            },
+            "ChemicalReferenceDataResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Contains Dangerous Goods Utility Chemical Reference Data response components.",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success or failure of the transaction.   Valid values: 0  Failed and 1  Successful.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Describes Response Status Code. Returns text of \"Success\" or \"Failure\".",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Response status container."
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success or failure of the transaction.   Valid values: 0  Failed and 1  Successful.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Describes Response Status Code. Returns text of \"Success\" or \"Failure\".",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description."
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information which will be echoed during response.",
+                        "type": "string"
+                    },
+                    "TransactionIdentifier": {
+                        "description": "Not Used.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "ChemicalReferenceDataResponse_ChemicalData": {
+                "type": "object",
+                "properties": {
+                    "ChemicalDetail": {
+                        "$ref": "#/components/schemas/ChemicalData_ChemicalDetail"
+                    },
+                    "ProperShippingNameDetail": {
+                        "$ref": "#/components/schemas/ChemicalData_ProperShippingNameDetail"
+                    },
+                    "PackageQuantityLimitDetail": {
+                        "$ref": "#/components/schemas/ChemicalData_PackageQuantityLimitDetail"
+                    }
+                },
+                "xml": {
+                    "name": "ChemicalData"
+                },
+                "description": "Container to hold Chemical Data information."
+            },
+            "ChemicalData_ChemicalDetail": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "RegulationSet": {
+                        "description": "The Regulatory set associated with every regulated shipment.   Possible values are ADR, 49CFR, IATA. It will be returned if applies for a given chemical record.\n\nADR  Europe to Europe Ground Movement\n49CFR  HazMat regulated by US Dept. of Transportation within the U.S. or ground shipments to Canada,  \nIATA Worldwide Air movement.",
+                        "type": "string"
+                    },
+                    "IDNumber": {
+                        "description": "This is the ID number (UN/NA/ID) for the specified commodity. UN/NA/ID Identification Number assigned to the specified regulated good. (Include the UN/NA/ID as part of the entry).  It will be returned if applies for a given chemical record.",
+                        "type": "string"
+                    },
+                    "HazardousMaterialsDescription": {
+                        "description": "Free form text containing the full name that are used to describe a regulated chemical record.  It will be returned if applies for a given chemical record.",
+                        "type": "string"
+                    },
+                    "ClassDivisionNumber": {
+                        "description": "This is the hazard class associated to the specified commodity.  It will be returned if applies for a given chemical record.",
+                        "type": "string"
+                    },
+                    "SubRiskClass": {
+                        "description": "Secondary hazardous characteristics of a package. (There can be more than one  separate each with a comma).  It will be returned if applies for a given chemical record.",
+                        "type": "string"
+                    },
+                    "PackagingGroupType": {
+                        "description": "This is the packing group category associated to the specified commodity. This code represents the potential degree of danger represented by a regulated commodity being transported.  It will be returned if applies for a given chemical record.",
+                        "type": "string"
+                    },
+                    "SpecialPermit": {
+                        "description": "Indicates whether or not related entity requires special permit in order to transport the chemical.   It will be returned if applies for a given chemical record.\n\nValid values: \nAIR\nGND\nBOTH",
+                        "type": "string"
+                    },
+                    "TechnicalNameRequiredIndicator": {
+                        "description": "Indicates whether TechnicalName is required or not.  It will be returned if applies for a given chemical record.\n\nY  TechnicalName is required.\nN  TechnicalName is not required.",
+                        "type": "string"
+                    },
+                    "AdditionalShippingInformationRequiredIndicator": {
+                        "description": "Indicates whether or not additional text is required for the shipping papers for the related entity.   It will be returned if applies for a given chemical record.\n\nValid values: \nN  No, additional information for the shipping papers are not required.\nY  Yes, additional information for the shipping papers are required.",
+                        "type": "string"
+                    },
+                    "TunnelRestrictionCode": {
+                        "description": "Defines what is restricted to pass through a tunnel.  EXAMPLES OF VALUES:\n(B),(D),(E),(B/D),(B/E),(C,D),(C/E),(D/E),Blank",
+                        "type": "string"
+                    },
+                    "TransportCategory": {
+                        "description": "Code representing a category of transportation, assigned by a regulation set for each regulated commodity. Each value of this category is associated with a multiplier that is used to calculate a value.This value is then used to determine the placarding to be place on the vehicle or container that holds the related regulated commodity  EXAMPLES OF VALUES:\n0  No multiplier - must use placarding\n1  Use a multiplier of 50\n2  Use a multiplier of 3\n3  Use a multiplier of 1\n4  Use a multiplier of 0 - do not apply a placard",
+                        "type": "string"
+                    },
+                    "TransportMultiplierQuantity": {
+                        "description": "The quantity that represents a multiplication factor used to calculate a value to determine the placarding to be place on the vehicle or container that holds the related regulated commodity. This factor is associated with a code value represented by Regulated Commodity Transport Category Code.   EXAMPLES OF VALUES:\n0  No multiplier - must use placarding\n1  Use a multiplier of 50\n2  Use a multiplier of 3\n3  Use a multiplier of 1\n4  Use a multiplier of 0 - do not apply a placard",
+                        "type": "string"
+                    },
+                    "ChannelTunnelAcceptedIndicator": {
+                        "description": "ChannelTunnelAcceptedIndicator indicates if the chemical is accepted through channel tunnel or not  Y Accepted through channel tunnel\nNNot accepted through channel tunnel",
+                        "type": "string"
+                    },
+                    "ChemicalType": {
+                        "description": "A set of chemical records that correspond to a sub-set of chemicals for a regulation set, or the entire set of chemicals for a regulation set  Possible values:\nFREIGHT\nTDG\nIATA US DOMESTIC AIR\n49CFR\nADR\nIATA INTERNATIONAL AIR",
+                        "type": "string"
+                    },
+                    "CAToUSShipmentAllowedIndicator": {
+                        "description": "CAToUSShipmentAllowedIndicator indicates whether this checmical is allowed from CA to US\nApplicable only for TDG shipments  Y  Permitted from CA to US\nN  Not Permitted from CA to US",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ChemicalDetail"
+                },
+                "description": "Container to hold Chemical details."
+            },
+            "ChemicalDetail_RegulationSet": {
+                "description": "The Regulatory set associated with every regulated shipment.   Possible values are ADR, 49CFR, IATA. It will be returned if applies for a given chemical record.\n\nADR  Europe to Europe Ground Movement\n49CFR  HazMat regulated by US Dept. of Transportation within the U.S. or ground shipments to Canada,  \nIATA Worldwide Air movement.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 5
+            },
+            "ChemicalDetail_IDNumber": {
+                "description": "This is the ID number (UN/NA/ID) for the specified commodity. UN/NA/ID Identification Number assigned to the specified regulated good. (Include the UN/NA/ID as part of the entry).  It will be returned if applies for a given chemical record.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 6
+            },
+            "ChemicalDetail_HazardousMaterialsDescription": {
+                "description": "Free form text containing the full name that are used to describe a regulated chemical record.  It will be returned if applies for a given chemical record.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 250
+            },
+            "ChemicalDetail_ClassDivisionNumber": {
+                "description": "This is the hazard class associated to the specified commodity.  It will be returned if applies for a given chemical record.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "ChemicalDetail_SubRiskClass": {
+                "description": "Secondary hazardous characteristics of a package. (There can be more than one  separate each with a comma).  It will be returned if applies for a given chemical record.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+            },
+            "ChemicalDetail_PackagingGroupType": {
+                "description": "This is the packing group category associated to the specified commodity. This code represents the potential degree of danger represented by a regulated commodity being transported.  It will be returned if applies for a given chemical record.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "ChemicalDetail_SpecialPermit": {
+                "description": "Indicates whether or not related entity requires special permit in order to transport the chemical.   It will be returned if applies for a given chemical record.\n\nValid values: \nAIR\nGND\nBOTH",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4
+            },
+            "ChemicalDetail_TechnicalNameRequiredIndicator": {
+                "description": "Indicates whether TechnicalName is required or not.  It will be returned if applies for a given chemical record.\n\nY  TechnicalName is required.\nN  TechnicalName is not required.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ChemicalDetail_AdditionalShippingInformationRequiredIndicator": {
+                "description": "Indicates whether or not additional text is required for the shipping papers for the related entity.   It will be returned if applies for a given chemical record.\n\nValid values: \nN  No, additional information for the shipping papers are not required.\nY  Yes, additional information for the shipping papers are required.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ChemicalDetail_TunnelRestrictionCode": {
+                "description": "Defines what is restricted to pass through a tunnel.  EXAMPLES OF VALUES:\n(B),(D),(E),(B/D),(B/E),(C,D),(C/E),(D/E),Blank",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "ChemicalDetail_TransportCategory": {
+                "description": "Code representing a category of transportation, assigned by a regulation set for each regulated commodity. Each value of this category is associated with a multiplier that is used to calculate a value.This value is then used to determine the placarding to be place on the vehicle or container that holds the related regulated commodity  EXAMPLES OF VALUES:\n0  No multiplier - must use placarding\n1  Use a multiplier of 50\n2  Use a multiplier of 3\n3  Use a multiplier of 1\n4  Use a multiplier of 0 - do not apply a placard",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ChemicalDetail_TransportMultiplierQuantity": {
+                "description": "The quantity that represents a multiplication factor used to calculate a value to determine the placarding to be place on the vehicle or container that holds the related regulated commodity. This factor is associated with a code value represented by Regulated Commodity Transport Category Code.   EXAMPLES OF VALUES:\n0  No multiplier - must use placarding\n1  Use a multiplier of 50\n2  Use a multiplier of 3\n3  Use a multiplier of 1\n4  Use a multiplier of 0 - do not apply a placard",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ChemicalDetail_ChannelTunnelAcceptedIndicator": {
+                "description": "ChannelTunnelAcceptedIndicator indicates if the chemical is accepted through channel tunnel or not  Y Accepted through channel tunnel\nNNot accepted through channel tunnel",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ChemicalDetail_ChemicalType": {
+                "description": "A set of chemical records that correspond to a sub-set of chemicals for a regulation set, or the entire set of chemicals for a regulation set  Possible values:\nFREIGHT\nTDG\nIATA US DOMESTIC AIR\n49CFR\nADR\nIATA INTERNATIONAL AIR",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 25,
+                "maxLength": 25
+            },
+            "ChemicalDetail_CAToUSShipmentAllowedIndicator": {
+                "description": "CAToUSShipmentAllowedIndicator indicates whether this checmical is allowed from CA to US\nApplicable only for TDG shipments  Y  Permitted from CA to US\nN  Not Permitted from CA to US",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ChemicalData_ProperShippingNameDetail": {
+                "type": "object",
+                "required": [
+                    "ProperShippingName"
+                ],
+                "properties": {
+                    "ProperShippingName": {
+                        "description": "The Proper Shipping Name assigned by ADR, CFR or IATA.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ProperShippingNameDetail"
+                },
+                "description": "Container to hold Proper Shipping Name Detail information.  It will be returned if applies for a given chemical record.",
+                "maximum": 1
+            },
+            "ProperShippingNameDetail_ProperShippingName": {
+                "description": "The Proper Shipping Name assigned by ADR, CFR or IATA.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 250
+            },
+            "ChemicalData_PackageQuantityLimitDetail": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "PackageQuantityLimitTypeCode": {
+                        "description": "The type of package quantity limit.   It will be returned if applies for a given chemical record.\n\nValid values:\nCAO - Cargo Aircraft Only\nLTD QTY - Limited Quantity\nGND - Ground\nPAX - Passenger Aircraft\nCOMAT CAO - Company Material CAO\nCOMAT LTD - Company Material LTD\nCOMAT PAX - Company Material PAX",
+                        "type": "string"
+                    },
+                    "Quantity": {
+                        "description": "The numerical value of the mass capacity of the regulated good.  It will be returned if applies for a given chemical record.",
+                        "type": "string"
+                    },
+                    "UOM": {
+                        "description": "The unit of measure used for the mass capacity of the regulated good.\n  It will be returned if applies for a given chemical record. Example: ml, L, g, mg, kg, cylinder, pound, pint, quart, gallon, ounce etc.",
+                        "type": "string"
+                    },
+                    "PackagingInstructionCode": {
+                        "description": "The packing instructions related to the chemical record.  It will be returned if applies for a given chemical record.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PackageQuantityLimitDetail"
+                },
+                "description": "Container to hold Package Quantity Limit Detail information.  It will be returned if applies for a given chemical record."
+            },
+            "PackageQuantityLimitDetail_PackageQuantityLimitTypeCode": {
+                "description": "The type of package quantity limit.   It will be returned if applies for a given chemical record.\n\nValid values:\nCAO - Cargo Aircraft Only\nLTD QTY - Limited Quantity\nGND - Ground\nPAX - Passenger Aircraft\nCOMAT CAO - Company Material CAO\nCOMAT LTD - Company Material LTD\nCOMAT PAX - Company Material PAX",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "PackageQuantityLimitDetail_Quantity": {
+                "description": "The numerical value of the mass capacity of the regulated good.  It will be returned if applies for a given chemical record.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 15,
+                "maxLength": 15
+            },
+            "PackageQuantityLimitDetail_UOM": {
+                "description": "The unit of measure used for the mass capacity of the regulated good.\n  It will be returned if applies for a given chemical record. Example: ml, L, g, mg, kg, cylinder, pound, pint, quart, gallon, ounce etc.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "PackageQuantityLimitDetail_PackagingInstructionCode": {
+                "description": "The packing instructions related to the chemical record.  It will be returned if applies for a given chemical record.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 353
+            },
+            "FetchAllChemicalDataRequest": {
+                "type": "object",
+                "required": [
+                    "Bookmark",
+                    "Request"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/FetchAllChemicalDataRequest_Request"
+                    },
+                    "Bookmark": {
+                        "description": "Book Mark value to get set of chemical data. Value should be 0 for getting 1st set of data.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "FetchAllChemicalDataRequest"
+                },
+                "maximum": 1,
+                "description": "Dangerous Goods Utility Request container for fetching all Chemical Reference Data."
+            },
+            "FetchAllChemicalDataRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "RequestOption": {
+                        "description": "Enables the user to specify optional processing. Currently, there is no optional process in Dangerous Goods Utiltiy WS.",
+                        "type": "string"
+                    },
+                    "SubVersion": {
+                        "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\nFormat: YYMM  Year and month of the release.\n\nExample: 1801  2018 January",
+                        "type": "string"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "maximum": 1,
+                "description": "Contains Chemical Reference Data request criteria components."
+            },
+            "FetchAllChemicalDataRequest_Bookmark": {
+                "description": "Book Mark value to get set of chemical data. Value should be 0 for getting 1st set of data.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 3
+            },
+            "FetchAllChemicalDataResponse": {
+                "type": "object",
+                "required": [
+                    "Response"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/FetchAllChemicalDataResponse_Response"
+                    },
+                    "ChemicalData": {
+                        "$ref": "#/components/schemas/FetchAllChemicalDataResponse_ChemicalData"
+                    },
+                    "NextBookmark": {
+                        "description": "Next Book Mark value to be sent in request.  It will not be present if there is no more data available",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "FetchAllChemicalDataResponse"
+                },
+                "maximum": 1,
+                "description": "Dangerous Goods Utility Response container for Chemical Reference Data."
+            },
+            "FetchAllChemicalDataResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Contains Dangerous Goods Utility Chemical Reference Data response components.",
+                "maximum": 1
+            },
+            "FetchAllChemicalDataResponse_ChemicalData": {
+                "type": "object",
+                "properties": {
+                    "ChemicalDetail": {
+                        "$ref": "#/components/schemas/ChemicalData_ChemicalDetail"
+                    },
+                    "ProperShippingNameDetail": {
+                        "$ref": "#/components/schemas/ChemicalData_ProperShippingNameDetail"
+                    },
+                    "PackageQuantityLimitDetail": {
+                        "$ref": "#/components/schemas/ChemicalData_PackageQuantityLimitDetail"
+                    }
+                },
+                "xml": {
+                    "name": "ChemicalData"
+                },
+                "description": "Container to hold Chemical Data information."
+            },
+            "FetchAllChemicalDataResponse_NextBookmark": {
+                "description": "Next Book Mark value to be sent in request.  It will not be present if there is no more data available",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            }
+        }
+    }
+}

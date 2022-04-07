@@ -1,0 +1,878 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Pickup",
+        "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Pickup, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/PickupStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/ship/{version}/pickups/rating": {
+            "post": {
+                "summary": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                "operationId": "Pickup Rate",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "description": "Version of the API. Valid values:\nv1607\nv1707.\nLength 5"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "json": {
+                                    "summary": "A sample JSON request",
+                                    "value": "{\r\n \"PickupRateRequest\": {\r\n \"PickupAddress\": {\r\n \"AddressLine\": \"315 Saddle Bridge Drive\",\r\n \"City\": \"Allendale\",\r\n \"StateProvince\": \"NJ\",\r\n \"PostalCode\": \"07401\",\r\n \"CountryCode\": \"US\",\r\n \"ResidentialIndicator\": \"Y\"\r\n },\r\n \"AlternateAddressIndicator\": \"N\",\r\n \"ServiceDateOption\": \"02\",\r\n \"PickupDateInfo\": {\r\n \"CloseTime\": \"2000\",\r\n \"ReadyTime\": \"900\",\r\n \"PickupDate\": \"20160405\"\r\n }\r\n }\r\n}\r\n"
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<?xml version\"1.0\" encoding\"UTF-8\"?>\r\n<envr:Envelope xmlns:envr\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:xsd\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\" \r\nxmlns:wsf\"http://www.ups.com/schema/wsf\" \r\nxmlns:upss\"http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0\">\r\n<envr:Header>\r\n<upss:UPSSecurity>\r\n<upss:UsernameToken>\r\n<upss:Username>Your User ID</upss:Username>\r\n<upss:Password>Your Password</upss:Password>\r\n</upss:UsernameToken>\r\n<upss:ServiceAccessToken>\r\n<upss:AccessLicenseNumber>Your Access License</upss:AccessLicenseNumber>\r\n</upss:ServiceAccessToken>\r\n</upss:UPSSecurity>\r\n</envr:Header>\r\n<envr:Body>\r\n<PickupRateRequest xmlns\"http://www.ups.com/XMLSchema/XOLTWS/Pickup/v1.1\" \r\nxmlns:ups\"http://www.ups.com/XMLSchema\" xmlns:xsi\"http://www.w3.org/2001/XMLSchema\u0002instance\">\r\n<common:Request>\r\n<common:RequestOption/>\r\n<common:TransactionReference>\r\n<common:CustomerContext>Your Customer Context</common:CustomerContext>\r\n</common:TransactionReference>\r\n</common:Request>\r\n<PickupAddress>\r\n<AddressLine>315 Saddle Bridge Drive</AddressLine>\r\n<City>Allendale</City>\r\n<StateProvince>NJ</StateProvince>\r\n<PostalCode>07401</PostalCode>\r\n<CountryCode>US</CountryCode>\r\n<ResidentialIndicator>Y</ResidentialIndicator>\r\n</PickupAddress>\r\n<AlternateAddressIndicator>N</AlternateAddressIndicator>\r\n<ServiceDateOption>02</ServiceDateOption>\r\n<PickupDateInfo>\r\n<CloseTime>2000</CloseTime>\r\n<ReadyTime>900</ReadyTime>\r\n<PickupDate>20160405</PickupDate>\r\n</PickupDateInfo>\r\n</PickupRateRequest>\r\n</envr:Body>\r\n</envr:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PICKUPRequestWrapper": {
+                "xml": {
+                    "name": "PickupRateRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupRateRequest"
+                ],
+                "properties": {
+                    "PickupRateRequest": {
+                        "$ref": "#/components/schemas/PickupRateRequest"
+                    }
+                }
+            },
+            "PICKUPResponseWrapper": {
+                "xml": {
+                    "name": "PickupRateResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupRateResponse"
+                ],
+                "properties": {
+                    "PickupRateResponse": {
+                        "$ref": "#/components/schemas/PickupRateResponse"
+                    }
+                }
+            },
+            "PickupRateRequest": {
+                "type": "object",
+                "required": [
+                    "ServiceDateOption",
+                    "PickupAddress",
+                    "Request",
+                    "AlternateAddressIndicator"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/PickupRateRequest_Request"
+                    },
+                    "ShipperAccount": {
+                        "$ref": "#/components/schemas/PickupRateRequest_ShipperAccount"
+                    },
+                    "PickupAddress": {
+                        "$ref": "#/components/schemas/PickupRateRequest_PickupAddress"
+                    },
+                    "AlternateAddressIndicator": {
+                        "description": "Indicates if the pickup address is different than the address specified in the customer's profile.  \nValid values:\nY  Alternate address\nN  Original pickup address (default)",
+                        "type": "string"
+                    },
+                    "ServiceDateOption": {
+                        "description": "Indicates the pickup timeframe.\n01  Same-Day Pickup\n02  Future-Day Pickup\n03  A Specific-Day Pickup  If 03 is selected, then PickupDate, EarliestReadyTime, and LatestClosetime must be specified.",
+                        "type": "string"
+                    },
+                    "PickupDateInfo": {
+                        "$ref": "#/components/schemas/PickupRateRequest_PickupDateInfo"
+                    },
+                    "TaxInformationIndicator": {
+                        "description": "Indicates whether to return detailed taxes for on-callpickups.\nValid values:\nY  Rate this pickup with taxes\nN  Do not rate this pickup with taxes (default)",
+                        "type": "string"
+                    },
+                    "UserLevelDiscountIndicator": {
+                        "description": "Indicates whether to return user level promo discount for the on-callpickups. \nValid values:\nY  Rate this pickup with user level promo discount\nN  Do not rate this pickup with user level promo discount(default)",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupRateRequest"
+                },
+                "maximum": 1,
+                "description": "This request is used to rate an on-callpickup."
+            },
+            "PickupRateRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "RequestOption": {
+                        "description": "Not used by pick up",
+                        "type": "string"
+                    },
+                    "SubVersion": {
+                        "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description. Supported values: 1607, 1707,2007\n\nExample: Itemized Charges are returned only when the Subversion element is present and greater than or equal to '1601'. \n\nFormat: YYMM  Year and month of the release.\nExample: 1601  2016 January",
+                        "type": "string"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "maximum": 1,
+                "description": "Common element for all services"
+            },
+            "Request_RequestOption": {
+                "description": "Not used by pick up",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 15
+            },
+            "Request_SubVersion": {
+                "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description. Supported values: 1607, 1707,2007\n\nExample: Itemized Charges are returned only when the Subversion element is present and greater than or equal to '1601'. \n\nFormat: YYMM  Year and month of the release.\nExample: 1601  2016 January",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container"
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext information that is echoed back during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "PickupRateRequest_ShipperAccount": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "AccountCountryCode",
+                    "AccountNumber"
+                ],
+                "properties": {
+                    "AccountNumber": {
+                        "description": "UPS account number.  Shipper's (requester of the pickup) UPS account number",
+                        "type": "string"
+                    },
+                    "AccountCountryCode": {
+                        "description": "Country code as defined by ISO-3166.\nRefer to Country or Territory Codes in the Appendix for valid values.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ShipperAccount"
+                },
+                "description": "Shipper account information."
+            },
+            "ShipperAccount_AccountNumber": {
+                "description": "UPS account number.  Shipper's (requester of the pickup) UPS account number",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 10
+            },
+            "ShipperAccount_AccountCountryCode": {
+                "description": "Country code as defined by ISO-3166.\nRefer to Country or Territory Codes in the Appendix for valid values.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PickupRateRequest_PickupAddress": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "AddressLine": {
+                        "description": "Detailed street address. \nFor Jan. 2010 release, only one AddressLine is allowed.",
+                        "type": "string"
+                    },
+                    "City": {
+                        "description": "City or equivalent",
+                        "type": "string"
+                    },
+                    "StateProvince": {
+                        "description": "State province code or equivalent",
+                        "type": "string"
+                    },
+                    "PostalCode": {
+                        "description": "Postal code for countries with postal codes.",
+                        "type": "string"
+                    },
+                    "CountryCode": {
+                        "description": "Upper-case two-char long country code as defined by ISO-3166. \nRefer to Country or Territory Codes in the Appendix for valid values.",
+                        "type": "string"
+                    },
+                    "ResidentialIndicator": {
+                        "description": "Indicates if the pickup address is commerical or residential.\nValid values:\nY  Residential address\nN  Non-residential (Commercial) address (default)",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupAddress"
+                },
+                "required": [
+                    "StateProvince",
+                    "ResidentialIndicator",
+                    "PostalCode",
+                    "City",
+                    "CountryCode"
+                ],
+                "description": "The address to pickup the packages"
+            },
+            "PickupAddress_AddressLine": {
+                "description": "Detailed street address. \nFor Jan. 2010 release, only one AddressLine is allowed.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 73
+            },
+            "PickupAddress_City": {
+                "description": "City or equivalent",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "PickupAddress_StateProvince": {
+                "description": "State province code or equivalent",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "PickupAddress_PostalCode": {
+                "description": "Postal code for countries with postal codes.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8
+            },
+            "PickupAddress_CountryCode": {
+                "description": "Upper-case two-char long country code as defined by ISO-3166. \nRefer to Country or Territory Codes in the Appendix for valid values.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PickupAddress_ResidentialIndicator": {
+                "description": "Indicates if the pickup address is commerical or residential.\nValid values:\nY  Residential address\nN  Non-residential (Commercial) address (default)",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "PickupRateRequest_AlternateAddressIndicator": {
+                "description": "Indicates if the pickup address is different than the address specified in the customer's profile.  \nValid values:\nY  Alternate address\nN  Original pickup address (default)",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "PickupRateRequest_ServiceDateOption": {
+                "description": "Indicates the pickup timeframe.\n01  Same-Day Pickup\n02  Future-Day Pickup\n03  A Specific-Day Pickup  If 03 is selected, then PickupDate, EarliestReadyTime, and LatestClosetime must be specified.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "PickupRateRequest_PickupDateInfo": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "ReadyTime",
+                    "CloseTime",
+                    "PickupDate"
+                ],
+                "properties": {
+                    "CloseTime": {
+                        "description": "The latest local close time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                        "type": "string"
+                    },
+                    "ReadyTime": {
+                        "description": "The earliest local ready Time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                        "type": "string"
+                    },
+                    "PickupDate": {
+                        "description": "The specific local pickup date.\nFormat: yyyyMMdd\nyyyy  Year Applicable\nMM  0112\ndd  0131",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupDateInfo"
+                },
+                "description": "Required if the ServiceDateOption is: \n03 A Specific-Day Pickup"
+            },
+            "PickupDateInfo_CloseTime": {
+                "description": "The latest local close time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+            },
+            "PickupDateInfo_ReadyTime": {
+                "description": "The earliest local ready Time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+            },
+            "PickupDateInfo_PickupDate": {
+                "description": "The specific local pickup date.\nFormat: yyyyMMdd\nyyyy  Year Applicable\nMM  0112\ndd  0131",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "PickupRateRequest_TaxInformationIndicator": {
+                "description": "Indicates whether to return detailed taxes for on-callpickups.\nValid values:\nY  Rate this pickup with taxes\nN  Do not rate this pickup with taxes (default)",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "PickupRateRequest_UserLevelDiscountIndicator": {
+                "description": "Indicates whether to return user level promo discount for the on-callpickups. \nValid values:\nY  Rate this pickup with user level promo discount\nN  Do not rate this pickup with user level promo discount(default)",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "PickupRateResponse": {
+                "type": "object",
+                "required": [
+                    "Response",
+                    "RateResult"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/PickupRateResponse_Response"
+                    },
+                    "RateResult": {
+                        "$ref": "#/components/schemas/PickupRateResponse_RateResult"
+                    },
+                    "WeekendServiceTerritoryIndicator": {
+                        "description": "Indicates if the pickup address qualifies for WST (Weekend Service Territory). Returned if the pickup date is Saturday and subversion greater or equal to 1607.                                                                                                                                                                                                                          Valid Values:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Y  WST\nN  Non-WST",
+                        "type": "string"
+                    },
+                    "WeekendServiceTerritory": {
+                        "$ref": "#/components/schemas/PickupRateResponse_WeekendServiceTerritory"
+                    }
+                },
+                "xml": {
+                    "name": "PickupRateResponse"
+                },
+                "maximum": 1,
+                "description": "The response of rating on-callpickup."
+            },
+            "PickupRateResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Response Container.",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success of the transaction.1  Success",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Describes Response Status Code.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Response Status Container."
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success of the transaction.1  Success",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Describes Response Status Code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description."
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "PickupRateResponse_RateResult": {
+                "type": "object",
+                "properties": {
+                    "Disclaimer": {
+                        "$ref": "#/components/schemas/RateResult_Disclaimer"
+                    },
+                    "RateType": {
+                        "description": "Indicates the pickup is rated as same-day or future-day pickup.\nSD  Same-day Pickup\nFD  Future-day Pickup",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "IATA currency codes for the pickup charge. Such as USD",
+                        "type": "string"
+                    },
+                    "ChargeDetail": {
+                        "$ref": "#/components/schemas/RateResult_ChargeDetail"
+                    },
+                    "TaxCharges": {
+                        "$ref": "#/components/schemas/RateResult_TaxCharges"
+                    },
+                    "TotalTax": {
+                        "description": "The sum of all taxes.",
+                        "type": "string"
+                    },
+                    "GrandTotalOfAllCharge": {
+                        "description": "The grand total of each charge and applied tax.",
+                        "type": "string"
+                    },
+                    "GrandTotalOfAllIncentedCharge": {
+                        "description": "The grand total of each incented charge and applied tax. Only present if 1. UserLevelDiscountIndicator  Y and User Level Promotion is applied to the pickup or 2 .if any incentive rate is applied to the pickup and SubVersion on the request is greater than or equal to 1707.",
+                        "type": "string"
+                    },
+                    "PreTaxTotalCharge": {
+                        "description": "Total of charges before taxes. Only present when tax details requested in input.",
+                        "type": "string"
+                    },
+                    "PreTaxTotalIncentedCharge": {
+                        "description": "Total of incented charges before taxes. Only present if 1. UserLevelDiscountIndicator  Y and User Level Promotion is applied to the pickup or 2 .if any incentive rate is applied to the pickup and SubVersion on the request is greater than or equal to 1707.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "RateResult"
+                },
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode"
+                ],
+                "description": "The result of rating an on-callpickup."
+            },
+            "RateResult_Disclaimer": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Disclaimer code. \nValid values: \n01  Taxes are included in the shipping cost and apply to the transportation charges but additional duties/taxes may apply and are not reflected in the total amount due.\n02  Additional duties/taxes may apply and are not reflected in the total amount due.\n03  Additional duties/taxes may apply and are not reflected in the total amount due.\n04  Taxes were unable to be determined and may apply to the shipment.\n05  Rate excludes VAT. Rate includes a fuel surcharge, but excludes taxes, duties and other charges that may apply to the shipment.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of Disclaimer.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Disclaimer"
+                },
+                "description": "Container to hold Disclaimer message applicable to taxes and charges. Available only when tax information is requested."
+            },
+            "Disclaimer_Code": {
+                "description": "Disclaimer code. \nValid values: \n01  Taxes are included in the shipping cost and apply to the transportation charges but additional duties/taxes may apply and are not reflected in the total amount due.\n02  Additional duties/taxes may apply and are not reflected in the total amount due.\n03  Additional duties/taxes may apply and are not reflected in the total amount due.\n04  Taxes were unable to be determined and may apply to the shipment.\n05  Rate excludes VAT. Rate includes a fuel surcharge, but excludes taxes, duties and other charges that may apply to the shipment.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "Disclaimer_Description": {
+                "description": "Description of Disclaimer.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 512,
+                "maxLength": 512
+            },
+            "RateResult_RateType": {
+                "description": "Indicates the pickup is rated as same-day or future-day pickup.\nSD  Same-day Pickup\nFD  Future-day Pickup",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "RateResult_CurrencyCode": {
+                "description": "IATA currency codes for the pickup charge. Such as USD",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "RateResult_ChargeDetail": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "ChargeCode",
+                    "ChargeAmount"
+                ],
+                "properties": {
+                    "ChargeCode": {
+                        "description": "Indicates the general charge type\nA  ACCESSORIAL TYPE\nB  BASE CHARGE TYPE\nS  SURCHARGE TYPE",
+                        "type": "string"
+                    },
+                    "ChargeDescription": {
+                        "description": "Description of each charge.The possible descriptions are:\nBASE CHARGE\nEXTENDED AREA SURCHARGE\nFUEL SURCHARGE\nREMOTE AREA SURCHARGE\nRESIDENTIAL SURCHARGE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      SATURDAY ON-CALL STOP CHARGE",
+                        "type": "string"
+                    },
+                    "ChargeAmount": {
+                        "description": "Monetary value of the charge.",
+                        "type": "string"
+                    },
+                    "IncentedAmount": {
+                        "description": "Monetary value of the incented charge. Only present if 1. UserLevelDiscountIndicator  Y and User Level Promotion is applied to the pickup or 2 .if any incentive rate is applied to the pickup and SubVersion on the request is greater than or equal to 1707.",
+                        "type": "string"
+                    },
+                    "TaxAmount": {
+                        "description": "Monetary value of the tax if apply.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ChargeDetail"
+                },
+                "description": "Detailed charges."
+            },
+            "ChargeDetail_ChargeCode": {
+                "description": "Indicates the general charge type\nA  ACCESSORIAL TYPE\nB  BASE CHARGE TYPE\nS  SURCHARGE TYPE",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ChargeDetail_ChargeDescription": {
+                "description": "Description of each charge.The possible descriptions are:\nBASE CHARGE\nEXTENDED AREA SURCHARGE\nFUEL SURCHARGE\nREMOTE AREA SURCHARGE\nRESIDENTIAL SURCHARGE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      SATURDAY ON-CALL STOP CHARGE",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+            },
+            "ChargeDetail_ChargeAmount": {
+                "description": "Monetary value of the charge.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "ChargeDetail_IncentedAmount": {
+                "description": "Monetary value of the incented charge. Only present if 1. UserLevelDiscountIndicator  Y and User Level Promotion is applied to the pickup or 2 .if any incentive rate is applied to the pickup and SubVersion on the request is greater than or equal to 1707.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "ChargeDetail_TaxAmount": {
+                "description": "Monetary value of the tax if apply.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "RateResult_TaxCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Type",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "Type": {
+                        "description": "Type of Tax code. \nValid values: ALV, BTW, DDS, DDV, DPH, FPA, GST, IVA, IVA1, IVA2, IVA3, KM, MOMS, MWST, PDV, PST, PVM, PVN, QST, TVA, VAT, VSK.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Monetary value of the tax.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TaxCharges"
+                },
+                "description": "Container to hold taxes when, detailed taxes are request via RateTaxIndicator."
+            },
+            "TaxCharges_Type": {
+                "description": "Type of Tax code. \nValid values: ALV, BTW, DDS, DDV, DPH, FPA, GST, IVA, IVA1, IVA2, IVA3, KM, MOMS, MWST, PDV, PST, PVM, PVN, QST, TVA, VAT, VSK.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "TaxCharges_MonetaryValue": {
+                "description": "Monetary value of the tax.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "RateResult_TotalTax": {
+                "description": "The sum of all taxes.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "RateResult_GrandTotalOfAllCharge": {
+                "description": "The grand total of each charge and applied tax.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "RateResult_GrandTotalOfAllIncentedCharge": {
+                "description": "The grand total of each incented charge and applied tax. Only present if 1. UserLevelDiscountIndicator  Y and User Level Promotion is applied to the pickup or 2 .if any incentive rate is applied to the pickup and SubVersion on the request is greater than or equal to 1707.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 8
+            },
+            "RateResult_PreTaxTotalCharge": {
+                "description": "Total of charges before taxes. Only present when tax details requested in input.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "RateResult_PreTaxTotalIncentedCharge": {
+                "description": "Total of incented charges before taxes. Only present if 1. UserLevelDiscountIndicator  Y and User Level Promotion is applied to the pickup or 2 .if any incentive rate is applied to the pickup and SubVersion on the request is greater than or equal to 1707.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 8
+            },
+            "PickupRateResponse_WeekendServiceTerritoryIndicator": {
+                "description": "Indicates if the pickup address qualifies for WST (Weekend Service Territory). Returned if the pickup date is Saturday and subversion greater or equal to 1607.                                                                                                                                                                                                                          Valid Values:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Y  WST\nN  Non-WST",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "PickupRateResponse_WeekendServiceTerritory": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "SunWST",
+                    "SatWST"
+                ],
+                "properties": {
+                    "SatWST": {
+                        "description": "Indicates if the pickup address qualifies for WST (Weekend Service Territory). Returned if the pickup date is Saturday and subversion greater or equal to 2007.                                                                                                                                                                                                                          Valid Values:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Y  Saturday WST\r\nN  Non-Saturday WST",
+                        "type": "string"
+                    },
+                    "SunWST": {
+                        "description": "Indicates if the pickup address qualifies for WST (Weekend Service Territory). Returned if the pickup date is Sunday and subversion greater or equal to 2007.                                                                                                                                                                                                                          Valid Values:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Y  Sunday WST\r\nN  Non-Sunday WST",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "WeekendServiceTerritory"
+                },
+                "description": "WeekendServiceTerritory Container.Returned if the  subversion greater or equal to 2007."
+            },
+            "WeekendServiceTerritory_SatWST": {
+                "description": "Indicates if the pickup address qualifies for WST (Weekend Service Territory). Returned if the pickup date is Saturday and subversion greater or equal to 2007.                                                                                                                                                                                                                          Valid Values:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Y  Saturday WST\r\nN  Non-Saturday WST",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "WeekendServiceTerritory_SunWST": {
+                "description": "Indicates if the pickup address qualifies for WST (Weekend Service Territory). Returned if the pickup date is Sunday and subversion greater or equal to 2007.                                                                                                                                                                                                                          Valid Values:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Y  Sunday WST\r\nN  Non-Sunday WST",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            }
+        }
+    }
+}

@@ -1,0 +1,356 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Pickup",
+        "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Pickup, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/PickupStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/ship/v1/pickup/countries/{countrycode}": {
+            "post": {
+                "summary": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                "operationId": "Pickup Get Political Division1 List",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "countrycode",
+                        "schema": {
+                            "type": "string",
+                            "minimum": 1
+                        },
+                        "description": "Country or terrirtory for which the list will \nrepresent.Length 2",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<?xml version\"1.0\" encoding\"UTF-8\"?>\r\n<soapenv:Envelope xmlns:soapenv\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\" \r\nxmlns:upss\"http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0\" \r\nxmlns:XOLTWS\"http://www.ups.com/XMLSchema/XOLTWS/Pickup/v1.1\">\r\n <soapenv:Header>\r\n <upss:UPSSecurity>\r\n <upss:UsernameToken>\r\n <upss:Username>Your User ID</upss:Username>\r\n <upss:Password>Your Password</upss:Password>\r\n </upss:UsernameToken>\r\n <upss:ServiceAccessToken>\r\n <upss:AccessLicenseNumber>Your Access License Number</upss:AccessLicenseNumber>\r\n </upss:ServiceAccessToken>\r\n </upss:UPSSecurity>\r\n </soapenv:Header>\r\n <soapenv:Body>\r\n <XOLTWS:PickupGetPoliticalDivision1ListRequest>\r\n <common:Request>\r\n <common:RequestOption/>\r\n <common:TransactionReference>\r\n <common:CustomerContext>Your Customer Context</common:CustomerContext>\r\n </common:TransactionReference>\r\n </common:Request> \r\n <XOLTWS:CountryCode>HK</XOLTWS:CountryCode>\r\n </XOLTWS:PickupGetPoliticalDivision1ListRequest>\r\n </soapenv:Body>\r\n</soapenv:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PICKUPRequestWrapper": {
+                "xml": {
+                    "name": "PickupGetPoliticalDivision1ListRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupGetPoliticalDivision1ListRequest"
+                ],
+                "properties": {
+                    "PickupGetPoliticalDivision1ListRequest": {
+                        "$ref": "#/components/schemas/PickupGetPoliticalDivision1ListRequest"
+                    }
+                }
+            },
+            "PICKUPResponseWrapper": {
+                "xml": {
+                    "name": "PickupGetPoliticalDivision1ListResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupGetPoliticalDivision1ListResponse"
+                ],
+                "properties": {
+                    "PickupGetPoliticalDivision1ListResponse": {
+                        "$ref": "#/components/schemas/PickupGetPoliticalDivision1ListResponse"
+                    }
+                }
+            },
+            "PickupGetPoliticalDivision1ListRequest": {
+                "type": "object",
+                "required": [
+                    "Request",
+                    "CountryCode"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/PickupGetPoliticalDivision1ListRequest_Request"
+                    },
+                    "CountryCode": {
+                        "description": "Specifies the country for which the list of Political Division 1 will be returned if available.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupGetPoliticalDivision1ListRequest"
+                },
+                "maximum": 1,
+                "description": "This request is for client to get a list of valid Political Division 1s/State field for a specific country or territory"
+            },
+            "PickupGetPoliticalDivision1ListRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "description": "Common element for all services",
+                "maximum": 1
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container"
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext information that is echoed back during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "PickupGetPoliticalDivision1ListRequest_CountryCode": {
+                "description": "Specifies the country for which the list of Political Division 1 will be returned if available.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PickupGetPoliticalDivision1ListResponse": {
+                "type": "object",
+                "required": [
+                    "Response"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/PickupGetPoliticalDivision1ListResponse_Response"
+                    },
+                    "PoliticalDivision1": {
+                        "description": "The Political Division 1/State Field.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupGetPoliticalDivision1ListResponse"
+                },
+                "description": "The response for getting a list of valid Political Division 1 or State field in the specified country or territory.",
+                "maximum": 1
+            },
+            "PickupGetPoliticalDivision1ListResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Response Container.",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success of the transaction.\n1  Success",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Describes Response Status Code.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Response Status Container."
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success of the transaction.\n1  Success",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Describes Response Status Code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description"
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "PickupGetPoliticalDivision1ListResponse_PoliticalDivision1": {
+                "description": "The Political Division 1/State Field.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            }
+        }
+    }
+}

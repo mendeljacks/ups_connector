@@ -1,0 +1,1118 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Pickup",
+        "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Pickup, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/PickupStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/ship/v1/pickup/servicecenterlocations": {
+            "post": {
+                "summary": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                "operationId": "Pickup Get Service Center Facilities",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Using the Pickup API, applications can schedule pickups, manage previously scheduled pickups, or cancel previously scheduled pickups.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "json": {
+                                    "summary": "A sample JSON request",
+                                    "value": "{\r\n\"PickupGetServiceCenterFacilitiesRequest\": {\r\n \"PickupPiece\": {\r\n \"ServiceCode\": \"012\",\r\n \"ContainerCode\": \"03\"\r\n },\r\n \"DestinationAddress\": {\r\n \"City\": \"Allendale\",\r\n \"StateProvince\": \"NJ\",\r\n \"PostalCode\": \"07401\",\r\n \"CountryCode\": \"US\"\r\n },\r\n \"ProximitySearchIndicator\": \"\",\r\n \"Locale\": \"en_HK\"\r\n }\r\n}\r\n"
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PICKUPRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<?xml version\"1.0\" encoding\"UTF-8\"?>\r\n<env:Envelope xmlns:env\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:xsd\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:upss\"http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0\" \r\nxmlns:wsf\"http://www.ups.com/schema/wsf\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common /v1.0\">\r\n<env:Header>\r\n<upss:UPSSecurity>\r\n<upss:UsernameToken>\r\n<upss:Username> Your Username</upss:Username>\r\n<upss:Password> Your Password</upss:Password>\r\n</upss:UsernameToken>\r\n<upss:ServiceAccessToken>\r\n<upss:AccessLicenseNumber>Your Access License Number</upss:AccessLicenseNumber>\r\n</upss:ServiceAccessToken>\r\n</upss:UPSSecurity>\r\n</env:Header>\r\n<env:Body>\r\n<XOLTWS:PickupGetServiceCenterFacilitiesRequest \r\nxmlns:XOLTWS\"http://www.ups.com/XMLSchema/XOLTWS/Pickup /v1.1\" \r\nxmlns:xsi\"http://www.w3.org/2001/XMLSchema-instance\">\r\n<common:Request>\r\n<common:TransactionReference>\r\n<common:TransactionIdentifier>WSCM10098639041216153622SP0001B96F355</commo\r\nn:TransactionIdentifier>\r\n</common:TransactionReference>\r\n</common:Request>\r\n<XOLTWS:PickupPiece>\r\n<XOLTWS:ServiceCode>ServiceCode</XOLTWS:ServiceCode>\r\n<XOLTWS:ContainerCode>03</XOLTWS:ContainerCode>\r\n</XOLTWS:PickupPiece>\r\n<XOLTWS:DestinationAddress>\r\n<XOLTWS:City>City</XOLTWS:City>\r\n<XOLTWS:StateProvince>StateProvince</XOLTWS:StateProvince>\r\n<XOLTWS:PostalCode>PostalCode</XOLTWS:PostalCode>\r\n<XOLTWS:CountryCode>US</XOLTWS:CountryCode>\r\n</XOLTWS:DestinationAddress>\r\n<XOLTWS:ProximitySearchIndicator/>\r\n<XOLTWS:Locale>en_HK</XOLTWS:Locale>\r\n</XOLTWS:PickupGetServiceCenterFacilitiesRequest>\r\n</env:Body>\r\n</env:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PICKUPResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PICKUPRequestWrapper": {
+                "xml": {
+                    "name": "PickupGetServiceCenterFacilitiesRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupGetServiceCenterFacilitiesRequest"
+                ],
+                "properties": {
+                    "PickupGetServiceCenterFacilitiesRequest": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesRequest"
+                    }
+                }
+            },
+            "PICKUPResponseWrapper": {
+                "xml": {
+                    "name": "PickupGetServiceCenterFacilitiesResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "PickupGetServiceCenterFacilitiesResponse"
+                ],
+                "properties": {
+                    "PickupGetServiceCenterFacilitiesResponse": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesResponse"
+                    }
+                }
+            },
+            "PickupGetServiceCenterFacilitiesRequest": {
+                "type": "object",
+                "required": [
+                    "Locale",
+                    "Request",
+                    "PickupPiece"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesRequest_Request"
+                    },
+                    "PickupPiece": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesRequest_PickupPiece"
+                    },
+                    "OriginAddress": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesRequest_OriginAddress"
+                    },
+                    "DestinationAddress": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesRequest_DestinationAddress"
+                    },
+                    "Locale": {
+                        "description": "Origin Country or Territory Locale.  Locale should be Origin Country. Example: en_US. \nThe Last 50 instruction will be send based on this locale. Locale is required if PoximityIndicator is present for Drop Off facilities.",
+                        "type": "string"
+                    },
+                    "ProximitySearchIndicator": {
+                        "description": "Proximity Indicator.  Indicates the user requested the proximity search for UPS Worldwide Express Freight and UPS Worldwide Express Freight Midday locations for the origin address and/or the airport code, and the sort code for destination address.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupGetServiceCenterFacilitiesRequest"
+                },
+                "maximum": 1,
+                "description": "This request is to retrieve UPS Facility location information including location address, phone number, SLIC, and hours of operation for pick-up and drop-off requests"
+            },
+            "PickupGetServiceCenterFacilitiesRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "description": "Container for the Request.",
+                "maximum": 1
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction reference container."
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext information that is echoed back during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "PickupGetServiceCenterFacilitiesRequest_PickupPiece": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "ServiceCode",
+                    "ContainerCode"
+                ],
+                "properties": {
+                    "ServiceCode": {
+                        "description": "The service code.\n96  WWEF  Required for WWEF shipments.",
+                        "type": "string"
+                    },
+                    "ContainerCode": {
+                        "description": "The container type\n03  PALLET  Required for WWEF shipments.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupPiece"
+                },
+                "description": "Pickup Piece Container."
+            },
+            "PickupPiece_ServiceCode": {
+                "description": "The service code.\n96  WWEF  Required for WWEF shipments.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "PickupPiece_ContainerCode": {
+                "description": "The container type\n03  PALLET  Required for WWEF shipments.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PickupGetServiceCenterFacilitiesRequest_OriginAddress": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "StreetAddress": {
+                        "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search.  Conditionally required if proximitySearchIndicator is present.",
+                        "type": "string"
+                    },
+                    "City": {
+                        "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search  Conditionally required if proximitySearchIndicator is present.",
+                        "type": "string"
+                    },
+                    "StateProvince": {
+                        "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search.  Conditionally required if proximitySearchIndicator is present and if country or territory is US/CA/IE/HK.",
+                        "type": "string"
+                    },
+                    "PostalCode": {
+                        "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search  Conditionally required if proximitySearchIndicator is present and if country or territory has postal code.It does not apply to non-postal countries such as IE and HK.",
+                        "type": "string"
+                    },
+                    "CountryCode": {
+                        "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search",
+                        "type": "string"
+                    },
+                    "OriginSearchCriteria": {
+                        "$ref": "#/components/schemas/OriginAddress_OriginSearchCriteria"
+                    }
+                },
+                "xml": {
+                    "name": "OriginAddress"
+                },
+                "required": [
+                    "CountryCode"
+                ],
+                "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search.  Conditionally required for drop off location search."
+            },
+            "OriginAddress_StreetAddress": {
+                "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search.  Conditionally required if proximitySearchIndicator is present.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 73
+            },
+            "OriginAddress_City": {
+                "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search  Conditionally required if proximitySearchIndicator is present.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "OriginAddress_StateProvince": {
+                "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search.  Conditionally required if proximitySearchIndicator is present and if country or territory is US/CA/IE/HK.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "OriginAddress_PostalCode": {
+                "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search  Conditionally required if proximitySearchIndicator is present and if country or territory has postal code.It does not apply to non-postal countries such as IE and HK.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8
+            },
+            "OriginAddress_CountryCode": {
+                "description": "Indicates the address of the shipper to allow for the nearest Drop off facility Search",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "OriginAddress_OriginSearchCriteria": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "SearchRadius": {
+                        "description": "Search Request range.\nValied values: 1 to 200\nDefault: 200",
+                        "type": "string"
+                    },
+                    "DistanceUnitOfMeasure": {
+                        "description": "Unit of Measure  Required if ProximitySearchIndicator is present. Example: MI or KM",
+                        "type": "string"
+                    },
+                    "MaximumLocation": {
+                        "description": "Maximum Number of locations.\nValied values: 1 to 100\nDefault: 100",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "OriginSearchCriteria"
+                },
+                "required": [
+                    "DistanceUnitOfMeasure"
+                ],
+                "description": "Origin Search Criteria Container  Required if Proximity SearchIndicator is present."
+            },
+            "OriginSearchCriteria_SearchRadius": {
+                "description": "Search Request range.\nValied values: 1 to 200\nDefault: 200",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "OriginSearchCriteria_DistanceUnitOfMeasure": {
+                "description": "Unit of Measure  Required if ProximitySearchIndicator is present. Example: MI or KM",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "OriginSearchCriteria_MaximumLocation": {
+                "description": "Maximum Number of locations.\nValied values: 1 to 100\nDefault: 100",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "PickupGetServiceCenterFacilitiesRequest_DestinationAddress": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "City": {
+                        "description": "Indicates the address of the consignee to allow for the nearest Pickup facility Search.  Required for non-postal country Ireland (IE).",
+                        "type": "string"
+                    },
+                    "StateProvince": {
+                        "description": "Indicates the address of the consignee to allow for the nearest Pickup facility Search.\n1  District code for Hong Kong (HK)\n2  County for Ireland (IE)\n3  State or province for all the postal countries  Required for non-postal countries including HK and IE.",
+                        "type": "string"
+                    },
+                    "PostalCode": {
+                        "description": "Indicates the address of the consignee to allow for the nearest Pickup facility Search  It does not apply to non-postal countries. Example: IE and HK.",
+                        "type": "string"
+                    },
+                    "CountryCode": {
+                        "description": "The pickup country or territory code as defined by ISO-3166. Please check check separate pickup country or territory list to find out all the pickup eligible countries.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "DestinationAddress"
+                },
+                "required": [
+                    "CountryCode"
+                ],
+                "description": "DestinationAddress container.  Conditionally required for pickup location search."
+            },
+            "DestinationAddress_City": {
+                "description": "Indicates the address of the consignee to allow for the nearest Pickup facility Search.  Required for non-postal country Ireland (IE).",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "DestinationAddress_StateProvince": {
+                "description": "Indicates the address of the consignee to allow for the nearest Pickup facility Search.\n1  District code for Hong Kong (HK)\n2  County for Ireland (IE)\n3  State or province for all the postal countries  Required for non-postal countries including HK and IE.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "DestinationAddress_PostalCode": {
+                "description": "Indicates the address of the consignee to allow for the nearest Pickup facility Search  It does not apply to non-postal countries. Example: IE and HK.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 8
+            },
+            "DestinationAddress_CountryCode": {
+                "description": "The pickup country or territory code as defined by ISO-3166. Please check check separate pickup country or territory list to find out all the pickup eligible countries.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PickupGetServiceCenterFacilitiesRequest_Locale": {
+                "description": "Origin Country or Territory Locale.  Locale should be Origin Country. Example: en_US. \nThe Last 50 instruction will be send based on this locale. Locale is required if PoximityIndicator is present for Drop Off facilities.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 5
+            },
+            "PickupGetServiceCenterFacilitiesRequest_ProximitySearchIndicator": {
+                "description": "Proximity Indicator.  Indicates the user requested the proximity search for UPS Worldwide Express Freight and UPS Worldwide Express Freight Midday locations for the origin address and/or the airport code, and the sort code for destination address.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PickupGetServiceCenterFacilitiesResponse": {
+                "type": "object",
+                "required": [
+                    "Response",
+                    "ServiceCenterLocation"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesResponse_Response"
+                    },
+                    "ServiceCenterLocation": {
+                        "$ref": "#/components/schemas/PickupGetServiceCenterFacilitiesResponse_ServiceCenterLocation"
+                    }
+                },
+                "xml": {
+                    "name": "PickupGetServiceCenterFacilitiesResponse"
+                },
+                "description": "Returns service center location information for Origin UPS Facilities and Destination Facilities",
+                "maximum": 1
+            },
+            "PickupGetServiceCenterFacilitiesResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Container for response.",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success of the transaction. \n1Success\n0failed",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Container for response status"
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success of the transaction. \n1Success\n0failed",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Description.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Alert code",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Alert description.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Container for Alerts."
+            },
+            "Alert_Code": {
+                "description": "Alert code",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Alert description.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext information that is echoed back during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "PickupGetServiceCenterFacilitiesResponse_ServiceCenterLocation": {
+                "type": "object",
+                "properties": {
+                    "DropOffFacilities": {
+                        "$ref": "#/components/schemas/ServiceCenterLocation_DropOffFacilities"
+                    },
+                    "PickupFacilities": {
+                        "$ref": "#/components/schemas/ServiceCenterLocation_PickupFacilities"
+                    }
+                },
+                "xml": {
+                    "name": "ServiceCenterLocation"
+                },
+                "description": "Locations of the nearest Service Center for Dropoff and Pickup",
+                "maximum": 1
+            },
+            "ServiceCenterLocation_DropOffFacilities": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Timezone",
+                    "Type",
+                    "Address",
+                    "SLIC",
+                    "Phone",
+                    "OriginOrDestination",
+                    "Fax",
+                    "Name"
+                ],
+                "properties": {
+                    "Name": {
+                        "description": "Name of the Facility.",
+                        "type": "string"
+                    },
+                    "Address": {
+                        "$ref": "#/components/schemas/DropOffFacilities_Address"
+                    },
+                    "SLIC": {
+                        "description": "SLIC code for the UPS Drop off facility.",
+                        "type": "string"
+                    },
+                    "Type": {
+                        "description": "FRT for Freight or PKG for Package",
+                        "type": "string"
+                    },
+                    "Timezone": {
+                        "description": "Facilitys Timezone\nFormat:\nAmerica/New_York\nAsia/Hong_Kong\nEurope/London",
+                        "type": "string"
+                    },
+                    "Phone": {
+                        "description": "Phone Number of the Drop off Facility",
+                        "type": "string"
+                    },
+                    "Fax": {
+                        "description": "Drop off Facilities Fax Number",
+                        "type": "string"
+                    },
+                    "FacilityTime": {
+                        "$ref": "#/components/schemas/DropOffFacilities_FacilityTime"
+                    },
+                    "OriginOrDestination": {
+                        "description": "Type of Facility.",
+                        "type": "string"
+                    },
+                    "LocalizedInstruction": {
+                        "$ref": "#/components/schemas/DropOffFacilities_LocalizedInstruction"
+                    },
+                    "Distance": {
+                        "$ref": "#/components/schemas/DropOffFacilities_Distance"
+                    }
+                },
+                "xml": {
+                    "name": "DropOffFacilities"
+                },
+                "description": "Returns information for DropOff Facilities. This includes name of facility, address, business hours, and SLIC."
+            },
+            "DropOffFacilities_Name": {
+                "description": "Name of the Facility.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "DropOffFacilities_Address": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "AddressLine",
+                    "StateProvince",
+                    "ResidentialIndicator",
+                    "PostalCode",
+                    "City",
+                    "CountryCode"
+                ],
+                "properties": {
+                    "AddressLine": {
+                        "description": "Address Line of the Facility.",
+                        "type": "string"
+                    },
+                    "City": {
+                        "description": "Facilities City.",
+                        "type": "string"
+                    },
+                    "StateProvince": {
+                        "description": "Facility state or province code.",
+                        "type": "string"
+                    },
+                    "PostalCode": {
+                        "description": "Facility Postal Code.",
+                        "type": "string"
+                    },
+                    "CountryCode": {
+                        "description": "UPS Pickup facility country or territory code.",
+                        "type": "string"
+                    },
+                    "ResidentialIndicator": {
+                        "description": "Indicates if the pickup address is a residential place or not. \nValid Values:\nY  Residential address\nN  Non-residential (Commercial) address (default)",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Address"
+                },
+                "description": "Address of the facility."
+            },
+            "Address_AddressLine": {
+                "description": "Address Line of the Facility.",
+                "maximum": 3,
+                "type": "string"
+            },
+            "Address_City": {
+                "description": "Facilities City.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "Address_StateProvince": {
+                "description": "Facility state or province code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "Address_PostalCode": {
+                "description": "Facility Postal Code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "Address_CountryCode": {
+                "description": "UPS Pickup facility country or territory code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 3
+            },
+            "Address_ResidentialIndicator": {
+                "description": "Indicates if the pickup address is a residential place or not. \nValid Values:\nY  Residential address\nN  Non-residential (Commercial) address (default)",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "DropOffFacilities_SLIC": {
+                "description": "SLIC code for the UPS Drop off facility.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 5
+            },
+            "DropOffFacilities_Type": {
+                "description": "FRT for Freight or PKG for Package",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "DropOffFacilities_Timezone": {
+                "description": "Facilitys Timezone\nFormat:\nAmerica/New_York\nAsia/Hong_Kong\nEurope/London",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "DropOffFacilities_Phone": {
+                "description": "Phone Number of the Drop off Facility",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "DropOffFacilities_Fax": {
+                "description": "Drop off Facilities Fax Number",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "DropOffFacilities_FacilityTime": {
+                "type": "object",
+                "required": [
+                    "DayOfWeek"
+                ],
+                "properties": {
+                    "DayOfWeek": {
+                        "$ref": "#/components/schemas/FacilityTime_DayOfWeek"
+                    }
+                },
+                "xml": {
+                    "name": "FacilityTime"
+                },
+                "description": "Facility Time Container",
+                "maximum": 1
+            },
+            "FacilityTime_DayOfWeek": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "OpenHours",
+                    "Day",
+                    "CloseHours"
+                ],
+                "properties": {
+                    "Day": {
+                        "description": "Day of the week. Mon-Sun",
+                        "type": "string"
+                    },
+                    "EarliestDropOfforPickup": {
+                        "description": "Earliest time that a customer can pick up a package.",
+                        "type": "string"
+                    },
+                    "LatestDropOfforPickup": {
+                        "description": "Latest time that a customer can pick up a package.",
+                        "type": "string"
+                    },
+                    "OpenHours": {
+                        "description": "Facility Open Hours. The latest local open time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                        "type": "string"
+                    },
+                    "CloseHours": {
+                        "description": "Facility Close Hours. The latest local close time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                        "type": "string"
+                    },
+                    "PrepTime": {
+                        "description": "Preparation time for hold for pickup  Conditionally required if request is for hold for pickup.",
+                        "type": "string"
+                    },
+                    "LastDrop": {
+                        "description": "Latest time a package, requiring preparation can be dropped off (Close time - Prep time).",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "DayOfWeek"
+                },
+                "description": "Facility Hours of Operation Container"
+            },
+            "DayOfWeek_Day": {
+                "description": "Day of the week. Mon-Sun",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "DayOfWeek_EarliestDropOfforPickup": {
+                "description": "Earliest time that a customer can pick up a package.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "DayOfWeek_LatestDropOfforPickup": {
+                "description": "Latest time that a customer can pick up a package.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "DayOfWeek_OpenHours": {
+                "description": "Facility Open Hours. The latest local open time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 20
+            },
+            "DayOfWeek_CloseHours": {
+                "description": "Facility Close Hours. The latest local close time.\nFormat: HHmm\nHour: 0-23\nMinute: 0-59",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 20
+            },
+            "DayOfWeek_PrepTime": {
+                "description": "Preparation time for hold for pickup  Conditionally required if request is for hold for pickup.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 20
+            },
+            "DayOfWeek_LastDrop": {
+                "description": "Latest time a package, requiring preparation can be dropped off (Close time - Prep time).",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 20
+            },
+            "DropOffFacilities_OriginOrDestination": {
+                "description": "Type of Facility.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "DropOffFacilities_LocalizedInstruction": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "Locale": {
+                        "description": "Locale. Example: en_US",
+                        "type": "string"
+                    },
+                    "Last50ftInstruction": {
+                        "description": "Last 50ft instructions that relates to an available facility and depend on the locale passing in request.\nLast 50 feet instruction in the language asked in request or the English for that country.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LocalizedInstruction"
+                },
+                "description": "Localized Instruction Container.  Localized Instructions will be returned for drop off location search by proximity order."
+            },
+            "LocalizedInstruction_Locale": {
+                "description": "Locale. Example: en_US",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 5
+            },
+            "LocalizedInstruction_Last50ftInstruction": {
+                "description": "Last 50ft instructions that relates to an available facility and depend on the locale passing in request.\nLast 50 feet instruction in the language asked in request or the English for that country.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 750
+            },
+            "DropOffFacilities_Distance": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "Value": {
+                        "description": "Distance from origin address. Distance based on distance UOM in request.\nNumeric value up to 200 and .2 decimal positions  Distance will be retuned fordrop off location search by proximity order.",
+                        "type": "string"
+                    },
+                    "UnitOfMeasurement": {
+                        "description": "Unit Of Measure.\nExample: MI or KM",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Distance"
+                },
+                "description": "Distance from origin  Distance will be retuned fordrop off location search by proximity order."
+            },
+            "Distance_Value": {
+                "description": "Distance from origin address. Distance based on distance UOM in request.\nNumeric value up to 200 and .2 decimal positions  Distance will be retuned fordrop off location search by proximity order.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6
+            },
+            "Distance_UnitOfMeasurement": {
+                "description": "Unit Of Measure.\nExample: MI or KM",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "ServiceCenterLocation_PickupFacilities": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Timezone",
+                    "Type",
+                    "Address",
+                    "SLIC",
+                    "Phone",
+                    "Fax",
+                    "Name"
+                ],
+                "properties": {
+                    "Name": {
+                        "description": "Name of the facility",
+                        "type": "string"
+                    },
+                    "Address": {
+                        "$ref": "#/components/schemas/PickupFacilities_Address"
+                    },
+                    "SLIC": {
+                        "description": "SLIC code for the UPS Pickup facility",
+                        "type": "string"
+                    },
+                    "Type": {
+                        "description": "Freight or Package.",
+                        "type": "string"
+                    },
+                    "Timezone": {
+                        "description": "Facilitys Timezone.\nFormat:\nAmerica/New_York\nAsia/Hong_Kong\nEurope/London",
+                        "type": "string"
+                    },
+                    "Phone": {
+                        "description": "Phone Number of the Pickup Facility",
+                        "type": "string"
+                    },
+                    "Fax": {
+                        "description": "Pickup Facilities Fax Number",
+                        "type": "string"
+                    },
+                    "FacilityTime": {
+                        "$ref": "#/components/schemas/PickupFacilities_FacilityTime"
+                    },
+                    "AirportCode": {
+                        "description": "AirPort Code for destination/pickup facility. \nExample: ATL (Atlanta)\nIf Airport code is not present \"---\" will be returned.",
+                        "type": "string"
+                    },
+                    "SortCode": {
+                        "description": "Sort Code for destination/pickup facility. \nExample: V1",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupFacilities"
+                },
+                "description": "Returns information for Pickup Facilities. This includes name of facility, address, and business hours."
+            },
+            "PickupFacilities_Name": {
+                "description": "Name of the facility",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PickupFacilities_Address": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "AddressLine",
+                    "StateProvince",
+                    "ResidentialIndicator",
+                    "PostalCode",
+                    "City",
+                    "CountryCode"
+                ],
+                "properties": {
+                    "AddressLine": {
+                        "description": "Address Line of the Facility.",
+                        "type": "string"
+                    },
+                    "City": {
+                        "description": "Facilities City.",
+                        "type": "string"
+                    },
+                    "StateProvince": {
+                        "description": "Facility state or province code.",
+                        "type": "string"
+                    },
+                    "PostalCode": {
+                        "description": "Facility Postal Code.",
+                        "type": "string"
+                    },
+                    "CountryCode": {
+                        "description": "UPS Pickup facility country or territory code.",
+                        "type": "string"
+                    },
+                    "ResidentialIndicator": {
+                        "description": "Indicates if the pickup address is a residential place or not. \nValid Values:\nY  Residential address\nN  Non-residential (Commercial) address (default)",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Address"
+                },
+                "description": "Address of the facility"
+            },
+            "PickupFacilities_SLIC": {
+                "description": "SLIC code for the UPS Pickup facility",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 5
+            },
+            "PickupFacilities_Type": {
+                "description": "Freight or Package.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "PickupFacilities_Timezone": {
+                "description": "Facilitys Timezone.\nFormat:\nAmerica/New_York\nAsia/Hong_Kong\nEurope/London",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "PickupFacilities_Phone": {
+                "description": "Phone Number of the Pickup Facility",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "PickupFacilities_Fax": {
+                "description": "Pickup Facilities Fax Number",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "PickupFacilities_FacilityTime": {
+                "type": "object",
+                "required": [
+                    "DayOfWeek"
+                ],
+                "properties": {
+                    "DayOfWeek": {
+                        "$ref": "#/components/schemas/FacilityTime_DayOfWeek"
+                    }
+                },
+                "xml": {
+                    "name": "FacilityTime"
+                },
+                "description": "Facility Time Container",
+                "maximum": 1
+            },
+            "PickupFacilities_AirportCode": {
+                "description": "AirPort Code for destination/pickup facility. \nExample: ATL (Atlanta)\nIf Airport code is not present \"---\" will be returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "PickupFacilities_SortCode": {
+                "description": "Sort Code for destination/pickup facility. \nExample: V1",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            }
+        }
+    }
+}

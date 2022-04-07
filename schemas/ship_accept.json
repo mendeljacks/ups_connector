@@ -1,0 +1,2864 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "ShipAccept",
+        "description": "The Shipping Package API gives the application many ways to manage the shipment of packages to their \ndestination",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Ship, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/ShipStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/Ship": {
+            "post": {
+                "summary": "The Shipping API makes UPS shipping services available to client applications that communicate with UPS \nusing the Internet",
+                "operationId": "ShipAccept",
+                "requestBody": {
+                    "description": "The Shipping API makes UPS shipping services available to client applications that communicate with UPS \nusing the Internet",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SHIPRequestWrapper"
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SHIPRequestWrapper"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SHIPResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SHIPResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "SHIPRequestWrapper": {
+                "xml": {
+                    "name": "ShipAcceptRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "ShipAcceptRequest"
+                ],
+                "properties": {
+                    "ShipAcceptRequest": {
+                        "$ref": "#/components/schemas/ShipAcceptRequest"
+                    }
+                }
+            },
+            "SHIPResponseWrapper": {
+                "xml": {
+                    "name": "ShipAcceptResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "ShipAcceptResponse"
+                ],
+                "properties": {
+                    "ShipAcceptResponse": {
+                        "$ref": "#/components/schemas/ShipAcceptResponse"
+                    }
+                }
+            },
+            "ShipAcceptRequest": {
+                "type": "object",
+                "required": [
+                    "ShipmentDigest",
+                    "Request",
+                    "PaymentGUID"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/ShipAcceptRequest_Request"
+                    },
+                    "PickupInformation": {
+                        "$ref": "#/components/schemas/ShipAcceptRequest_PickupInformation"
+                    },
+                    "PaymentGUID": {
+                        "description": "Payment globally unique identifier",
+                        "type": "string"
+                    },
+                    "LabelInstructionSet": {
+                        "$ref": "#/components/schemas/ShipAcceptRequest_LabelInstructionSet"
+                    },
+                    "ShipmentDigest": {
+                        "description": "Encoded shipment parameters required to be passed in the accept phase.  Base 64 Encoded.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ShipAcceptRequest"
+                },
+                "maximum": 1,
+                "description": "Ship Accept Request."
+            },
+            "ShipAcceptRequest_Request": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "RequestOption"
+                ],
+                "properties": {
+                    "RequestOption": {
+                        "description": "Optional Processing. \nnonvalidate  No street level address validation would be performed, but Postal Code/State combination validation would still be performed. \nvalidate  No street level address validation would be performed, but City/State/Postal Code/ combination validation would still be performed. \nNote: Full address validation is not performed. Therefore, it is the responsibility of the Shipping Tool User to ensure the address entered is correct to avoid an address correction fee.  Valid values are validate and nonvalidate.",
+                        "type": "string"
+                    },
+                    "SubVersion": {
+                        "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\nExample: Itemized Charges are returned only when the Subversion element is present and greater than or equal to 1601. \n\nFormat: YYMM  Year and month of the release.\n\nExample: 1607  2016 July  Supported values: 1601, 1607, 1701, 1707, 1801, 1807",
+                        "type": "string"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "description": "Request Container."
+            },
+            "Request_RequestOption": {
+                "description": "Optional Processing. \nnonvalidate  No street level address validation would be performed, but Postal Code/State combination validation would still be performed. \nvalidate  No street level address validation would be performed, but City/State/Postal Code/ combination validation would still be performed. \nNote: Full address validation is not performed. Therefore, it is the responsibility of the Shipping Tool User to ensure the address entered is correct to avoid an address correction fee.  Valid values are validate and nonvalidate.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 15
+            },
+            "Request_SubVersion": {
+                "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\nExample: Itemized Charges are returned only when the Subversion element is present and greater than or equal to 1601. \n\nFormat: YYMM  Year and month of the release.\n\nExample: 1607  2016 July  Supported values: 1601, 1607, 1701, 1707, 1801, 1807",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "TransactionReference identifies transactions between client and server."
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext Information which will be echoed during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "ShipAcceptRequest_PickupInformation": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "PickupCharge",
+                    "PickupRequestNumber",
+                    "PickupWindow",
+                    "PickupDate"
+                ],
+                "properties": {
+                    "PickupRequestNumber": {
+                        "description": "Pickup request number",
+                        "type": "string"
+                    },
+                    "PickupCharge": {
+                        "description": "Pickup Charge\nFormat - double",
+                        "type": "string"
+                    },
+                    "PickupTaxAmount": {
+                        "description": "Pickup Tax\nFormat - double",
+                        "type": "string"
+                    },
+                    "PickupDate": {
+                        "description": "Date of the Pickup. Format is YYYYMMDD",
+                        "type": "string"
+                    },
+                    "PickupWindow": {
+                        "$ref": "#/components/schemas/PickupInformation_PickupWindow"
+                    }
+                },
+                "xml": {
+                    "name": "PickupInformation"
+                },
+                "description": "Pickup Information Container"
+            },
+            "PickupInformation_PickupRequestNumber": {
+                "description": "Pickup request number",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 11,
+                "maxLength": 11
+            },
+            "PickupInformation_PickupCharge": {
+                "description": "Pickup Charge\nFormat - double",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 15
+            },
+            "PickupInformation_PickupTaxAmount": {
+                "description": "Pickup Tax\nFormat - double",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 15
+            },
+            "PickupInformation_PickupDate": {
+                "description": "Date of the Pickup. Format is YYYYMMDD",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "PickupInformation_PickupWindow": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "LatestTimeReady",
+                    "EarliestTimeReady"
+                ],
+                "properties": {
+                    "EarliestTimeReady": {
+                        "description": "Pickup Window start time\nformat  hhmm",
+                        "type": "string"
+                    },
+                    "LatestTimeReady": {
+                        "description": "Pickup Window end time\nformat  hhmm",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupWindow"
+                },
+                "description": "Pickup window conatainer"
+            },
+            "PickupWindow_EarliestTimeReady": {
+                "description": "Pickup Window start time\nformat  hhmm",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+            },
+            "PickupWindow_LatestTimeReady": {
+                "description": "Pickup Window end time\nformat  hhmm",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 4
+            },
+            "ShipAcceptRequest_PaymentGUID": {
+                "description": "Payment globally unique identifier",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 35,
+                "maxLength": 35
+            },
+            "ShipAcceptRequest_LabelInstructionSet": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "Title": {
+                        "description": "Heading for the label. Eaxmple \"UPS  Return Label: View/Print Label\"",
+                        "type": "string"
+                    },
+                    "Print": {
+                        "description": "Generally the Subheading for the first instruction in label. Example \"Print the Label\". In HTML labels this is generally followed by Label_PRINTSENTENCE to provide more detailed instructions.",
+                        "type": "string"
+                    },
+                    "InvoiceTitle": {
+                        "description": "Item indicating customs invoice instructions will follow. This is static content. Example \"Customs Invoice\"",
+                        "type": "string"
+                    },
+                    "InvoiceText": {
+                        "description": "Instruction for customs invoice. Example \"- 3 copies of a completed customs invoice are required for shipments with a commercial value.\"",
+                        "type": "string"
+                    },
+                    "Fold": {
+                        "description": "Item indicating label is to be folded. Example \"Fold the printed label at the dotted line\"",
+                        "type": "string"
+                    },
+                    "FoldSentence": {
+                        "description": "Instruction indicating how the label is to be attached. Example \"Place the label in a UPS Shipping Pouch. If you do not have a pouch, affix the folded label using clear plastic shipping tape over the entire label\"",
+                        "type": "string"
+                    },
+                    "CustomersWithNoDailyPickup": {
+                        "description": "Item Indicating instructions for customers without daily pickup will follow. Example \"Customers without a Daily Pickup\"",
+                        "type": "string"
+                    },
+                    "CollectionDropOff": {
+                        "description": "Item Indicating instructions collection or drop off will follow. Example \"Collection and drop-off\". For PDF labels use Label_COLLECTIONDROPOFF or Label_GETTINGSHIPMENTS",
+                        "type": "string"
+                    },
+                    "GettingShipments": {
+                        "description": "Item indicating instruction to get shipment to UPS will follow. Example \"GETTING YOUR SHIPMENT TO UPS\". For PDF labels use Label_COLLECTIONDROPOFF or Label_GETTINGSHIPMENTS",
+                        "type": "string"
+                    },
+                    "DropOff": {
+                        "description": "Instruction for drop-off . Example \"Take the package to a UPS location or arrage for collection\"",
+                        "type": "string"
+                    },
+                    "Collection": {
+                        "description": "Instruction for oncall pickup or collection customers. Example \"-You must schedule a separate pickup or drop-off for your shipment.\"",
+                        "type": "string"
+                    },
+                    "Ground3DaySelect": {
+                        "description": "Instruction for collection or drop-off for ground 3 day select shipments. Example \"-Ground, 3 Day Select, and Standard to Canada shipments must be dropped off at an authorized UPS location, or handed to a UPS driver. Pickup service is not available for these services.\"",
+                        "type": "string"
+                    },
+                    "ToSchedule": {
+                        "description": "Instruction  to schedule a collection or drop off.Example \"-Please visit www.ups.com if you have not already scheduled a collection or drop-off for your shipment.\"",
+                        "type": "string"
+                    },
+                    "DailyCollectionCustomers": {
+                        "description": "Instruction  for daily pickup or collection customers. Example \"-Daily Collection customers: Have your shipment(s) ready for the driver as usual.\"",
+                        "type": "string"
+                    },
+                    "AirShipments": {
+                        "description": "Instruction for collection or drop-off for air shipments. Example \"Air shipments (including Worldwide Express and Expedited) can be picked up or dropped off. To schedule a pickup, or to find a drop-off location, select the Pickup or Drop-off icon from the UPS tool bar.\"",
+                        "type": "string"
+                    },
+                    "Signature": {
+                        "description": "Item indicating signature location in the label \"Shippers Signature\"",
+                        "type": "string"
+                    },
+                    "DateOfShipment": {
+                        "description": "Item indicating date location in the label \"Date of Shipmenr\"",
+                        "type": "string"
+                    },
+                    "FoldHere": {
+                        "description": "Item indicating where label is to be folded. Example \"FOLD HERE\"",
+                        "type": "string"
+                    },
+                    "CustomerswithDailyPickup": {
+                        "description": "HTML Labels Only. Ignored for pdf instructions. Instructions for daily pickup customers",
+                        "type": "string"
+                    },
+                    "DailyPickupCustomers": {
+                        "description": "HTML Labels Only. Ignored for pdf instructions .",
+                        "type": "string"
+                    },
+                    "Acceptance": {
+                        "description": "UPS ageement acceptance. Example \"Acknowledge your acceptance of the original language of the agreement with UPS as stated on the confirm payment page, and to authorize UPS to act as forwarding agent for export control and custom purposes\". HTML Labels Only. Ignored for pdf instructions.",
+                        "type": "string"
+                    },
+                    "PrintSentence": {
+                        "description": "Information indicating not to put multiple labels in the shipment. Example \"-Ensure that there are no other tracking labels attached to your package.\" HTML Labels Only. Ignored for pdf instructions .",
+                        "type": "string"
+                    },
+                    "IncludeAccessPointsIndicator": {
+                        "description": "Presence/Absence indicator. Presence of this indicator means that if the Ship From country or territory supports Access Points, a maximum of 3 Access Point addresses will be included on the label instructions (depending on availablility of the Access Point locations).",
+                        "type": "string"
+                    },
+                    "AccessPointDropOff": {
+                        "description": "Text that will be displayed in the event that no Access Point addresses are found. Example: \"Take this package to any UPS Access Point location. Visit www.ups.com to find a location\"",
+                        "type": "string"
+                    },
+                    "RequestLabelInstruction": {
+                        "description": "This field will determine what packages will have Label Instructions included in the HTML wrapper. Valid values:\n2 - All packages will have label instructions.\n1 - The first package will have label instructions, all other packages will have a blank HTML wrapper.\n0 - No packages will have label instructions, all packages will have a blank HTML wrapper.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LabelInstructionSet"
+                },
+                "description": "Container to hold custom label instructions"
+            },
+            "LabelInstructionSet_Title": {
+                "description": "Heading for the label. Eaxmple \"UPS  Return Label: View/Print Label\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Print": {
+                "description": "Generally the Subheading for the first instruction in label. Example \"Print the Label\". In HTML labels this is generally followed by Label_PRINTSENTENCE to provide more detailed instructions.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_InvoiceTitle": {
+                "description": "Item indicating customs invoice instructions will follow. This is static content. Example \"Customs Invoice\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_InvoiceText": {
+                "description": "Instruction for customs invoice. Example \"- 3 copies of a completed customs invoice are required for shipments with a commercial value.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Fold": {
+                "description": "Item indicating label is to be folded. Example \"Fold the printed label at the dotted line\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_FoldSentence": {
+                "description": "Instruction indicating how the label is to be attached. Example \"Place the label in a UPS Shipping Pouch. If you do not have a pouch, affix the folded label using clear plastic shipping tape over the entire label\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_CustomersWithNoDailyPickup": {
+                "description": "Item Indicating instructions for customers without daily pickup will follow. Example \"Customers without a Daily Pickup\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_CollectionDropOff": {
+                "description": "Item Indicating instructions collection or drop off will follow. Example \"Collection and drop-off\". For PDF labels use Label_COLLECTIONDROPOFF or Label_GETTINGSHIPMENTS",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_GettingShipments": {
+                "description": "Item indicating instruction to get shipment to UPS will follow. Example \"GETTING YOUR SHIPMENT TO UPS\". For PDF labels use Label_COLLECTIONDROPOFF or Label_GETTINGSHIPMENTS",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DropOff": {
+                "description": "Instruction for drop-off . Example \"Take the package to a UPS location or arrage for collection\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Collection": {
+                "description": "Instruction for oncall pickup or collection customers. Example \"-You must schedule a separate pickup or drop-off for your shipment.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Ground3DaySelect": {
+                "description": "Instruction for collection or drop-off for ground 3 day select shipments. Example \"-Ground, 3 Day Select, and Standard to Canada shipments must be dropped off at an authorized UPS location, or handed to a UPS driver. Pickup service is not available for these services.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_ToSchedule": {
+                "description": "Instruction  to schedule a collection or drop off.Example \"-Please visit www.ups.com if you have not already scheduled a collection or drop-off for your shipment.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DailyCollectionCustomers": {
+                "description": "Instruction  for daily pickup or collection customers. Example \"-Daily Collection customers: Have your shipment(s) ready for the driver as usual.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_AirShipments": {
+                "description": "Instruction for collection or drop-off for air shipments. Example \"Air shipments (including Worldwide Express and Expedited) can be picked up or dropped off. To schedule a pickup, or to find a drop-off location, select the Pickup or Drop-off icon from the UPS tool bar.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Signature": {
+                "description": "Item indicating signature location in the label \"Shippers Signature\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DateOfShipment": {
+                "description": "Item indicating date location in the label \"Date of Shipmenr\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_FoldHere": {
+                "description": "Item indicating where label is to be folded. Example \"FOLD HERE\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_CustomerswithDailyPickup": {
+                "description": "HTML Labels Only. Ignored for pdf instructions. Instructions for daily pickup customers",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DailyPickupCustomers": {
+                "description": "HTML Labels Only. Ignored for pdf instructions .",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Acceptance": {
+                "description": "UPS ageement acceptance. Example \"Acknowledge your acceptance of the original language of the agreement with UPS as stated on the confirm payment page, and to authorize UPS to act as forwarding agent for export control and custom purposes\". HTML Labels Only. Ignored for pdf instructions.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_PrintSentence": {
+                "description": "Information indicating not to put multiple labels in the shipment. Example \"-Ensure that there are no other tracking labels attached to your package.\" HTML Labels Only. Ignored for pdf instructions .",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_IncludeAccessPointsIndicator": {
+                "description": "Presence/Absence indicator. Presence of this indicator means that if the Ship From country or territory supports Access Points, a maximum of 3 Access Point addresses will be included on the label instructions (depending on availablility of the Access Point locations).",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_AccessPointDropOff": {
+                "description": "Text that will be displayed in the event that no Access Point addresses are found. Example: \"Take this package to any UPS Access Point location. Visit www.ups.com to find a location\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_RequestLabelInstruction": {
+                "description": "This field will determine what packages will have Label Instructions included in the HTML wrapper. Valid values:\n2 - All packages will have label instructions.\n1 - The first package will have label instructions, all other packages will have a blank HTML wrapper.\n0 - No packages will have label instructions, all packages will have a blank HTML wrapper.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipAcceptRequest_ShipmentDigest": {
+                "description": "Encoded shipment parameters required to be passed in the accept phase.  Base 64 Encoded.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipAcceptResponse": {
+                "type": "object",
+                "required": [
+                    "Response",
+                    "ShipmentResults"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/ShipAcceptResponse_Response"
+                    },
+                    "ShipmentResults": {
+                        "$ref": "#/components/schemas/ShipAcceptResponse_ShipmentResults"
+                    }
+                },
+                "xml": {
+                    "name": "ShipAcceptResponse"
+                },
+                "description": "Ship Accept Response.",
+                "maximum": 1
+            },
+            "ShipAcceptResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Response container for Ship Accept Response.",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success or failure of the transaction. 1  Successful",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Describes Response Status Code. Returns text of Success.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Response status container."
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success or failure of the transaction. 1  Successful",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Describes Response Status Code. Returns text of Success.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description."
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container."
+            },
+            "ShipAcceptResponse_ShipmentResults": {
+                "type": "object",
+                "properties": {
+                    "Disclaimer": {
+                        "$ref": "#/components/schemas/ShipmentResults_Disclaimer"
+                    },
+                    "InvoiceNumber": {
+                        "description": "Invoice number for the shipment based on the temporary payment account country or territory.",
+                        "type": "string"
+                    },
+                    "ShipmentCharges": {
+                        "$ref": "#/components/schemas/ShipmentResults_ShipmentCharges"
+                    },
+                    "NegotiatedRateCharges": {
+                        "$ref": "#/components/schemas/ShipmentResults_NegotiatedRateCharges"
+                    },
+                    "FRSShipmentData": {
+                        "$ref": "#/components/schemas/ShipmentResults_FRSShipmentData"
+                    },
+                    "RatingMethod": {
+                        "description": "RatingMethod is to indicate whether the Shipment was rated as shipment level or package level. This information will be returned only if RatingMethodRequestedIndicator is present in the request.  Valid values:\n01  Shipment level\n02  Package level",
+                        "type": "string"
+                    },
+                    "BillableWeightCalculationMethod": {
+                        "description": "BillableWeightCalculationMethod is to indicate whether the billable weight calculation method utilized was - the package or shipment level. This information will be returned only if RatingMethodRequestedIndicator is present in the request.  Valid values:\n01  Shipment Billable Weight\n02  Package Billable Weight",
+                        "type": "string"
+                    },
+                    "BillingWeight": {
+                        "$ref": "#/components/schemas/ShipmentResults_BillingWeight"
+                    },
+                    "ShipmentIdentificationNumber": {
+                        "description": "Returned UPS shipment ID number.1Z Number of the first package in the shipment.",
+                        "type": "string"
+                    },
+                    "MIDualReturnShipmentKey": {
+                        "description": "MIDualReturnShipmentKey is unique key required to process Mail Innovations Dual Return Shipment. \n\nThe unique identifier (key) would be returned in response of first phase of Mail Innovations Dual Return Shipments. \n\nThis unique identifier (key) would be part of request for second phase of Mail Innovations Dual Return Shipments and would be played back in response for second phase of Mail Innovations Dual Return Shipment.  If the shipment is a Package return shipment, the package tracking number will be concatenated with the system time (YYYY-MM-DDHH.MM.SS.NNN), followed by service code. \n\nIf the shipment is a MI Returns shipment, the Mail Manifest ID (MMI) will be concatenated with the system time.",
+                        "type": "string"
+                    },
+                    "PickupRequestNumber": {
+                        "description": "Pickup request number",
+                        "type": "string"
+                    },
+                    "PackageResults": {
+                        "$ref": "#/components/schemas/ShipmentResults_PackageResults"
+                    },
+                    "ControlLogReceipt": {
+                        "$ref": "#/components/schemas/ShipmentResults_ControlLogReceipt"
+                    },
+                    "Form": {
+                        "$ref": "#/components/schemas/ShipmentResults_Form"
+                    },
+                    "CODTurnInPage": {
+                        "$ref": "#/components/schemas/ShipmentResults_CODTurnInPage"
+                    },
+                    "HighValueReport": {
+                        "$ref": "#/components/schemas/ShipmentResults_HighValueReport"
+                    },
+                    "LabelURL": {
+                        "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LabelURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment. \nForward shipment except for Mail Innovations Forward.",
+                        "type": "string"
+                    },
+                    "LocalLanguageLabelURL": {
+                        "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LocalLanguageLabelURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment. \nForward shipment except for Mail Innovations Forward.  Not returned if LabelLinksIndicator is requested with Locale element.",
+                        "type": "string"
+                    },
+                    "ReceiptURL": {
+                        "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. ReceiptURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment.",
+                        "type": "string"
+                    },
+                    "LocalLanguageReceiptURL": {
+                        "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LocalLanguageReceiptURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment.   Not returned if LabelLinksIndicator is requested with Locale element.",
+                        "type": "string"
+                    },
+                    "DGPaperImage": {
+                        "description": "Dangrous Good Paper Image in pdf format. One multipage PDF document will be returned that will contain all required Dangrous Goods shipping paper copies for all Dangerous Goods packages.  Only returned when DGSignatoryInfo is present.",
+                        "type": "string"
+                    },
+                    "MasterCartonID": {
+                        "description": "Master Carton ID. MasterCartonID will be return if MasterCartonIndicator is present in request.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ShipmentResults"
+                },
+                "maximum": 1,
+                "required": [
+                    "BillingWeight",
+                    "PickupRequestNumber",
+                    "ShipmentIdentificationNumber"
+                ],
+                "description": "Shipment Results container."
+            },
+            "ShipmentResults_Disclaimer": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code representing type of Disclaimer.   Refer to Disclaimer Codes and Messages in the Appendix for various disclaimers that would be possible for a given shipment.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Disclaimer description.   Refer to Disclaimer Codes and Messages in the Appendix for various disclaimers that would be possible for a given shipment.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Disclaimer"
+                },
+                "description": "Disclaimer would be used to provide more information to shipper regarding the processed shipment. This would be used to notify shipper about possible taxes and duties that might have been added or might apply to the shipment. \n\nThis field would be returned only if TaxInformationIndicator is present in a Ship Confirm request.  Refer to Disclaimer Codes and Messages in the Appendix for various disclaimers that would be possible for a given shipment."
+            },
+            "Disclaimer_Code": {
+                "description": "Code representing type of Disclaimer.   Refer to Disclaimer Codes and Messages in the Appendix for various disclaimers that would be possible for a given shipment.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "Disclaimer_Description": {
+                "description": "Disclaimer description.   Refer to Disclaimer Codes and Messages in the Appendix for various disclaimers that would be possible for a given shipment.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipmentResults_InvoiceNumber": {
+                "description": "Invoice number for the shipment based on the temporary payment account country or territory.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 15,
+                "maxLength": 15
+            },
+            "ShipmentResults_ShipmentCharges": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "RateChart": {
+                        "description": "Rate Type with which Shipment is rated. Possible RateChart values for different regions will be: \nUS 48 origin: \n1  Daily Rates\n3  Standard List Rates\n4  Retail Rates. \n\nAlaska/Hawaii origin: \n1  Daily Rates\n3  Standard List Rates\n4  Retail Rates \n\nAll Other origins: \n1  Rates\n5 - Regional Rates \n6 - General List Rates\n3 and 4 do not apply.",
+                        "type": "string"
+                    },
+                    "BaseServiceCharge": {
+                        "$ref": "#/components/schemas/ShipmentCharges_BaseServiceCharge"
+                    },
+                    "TransportationCharges": {
+                        "$ref": "#/components/schemas/ShipmentCharges_TransportationCharges"
+                    },
+                    "AccessorialCharges": {
+                        "$ref": "#/components/schemas/ShipmentCharges_AccessorialCharges"
+                    },
+                    "SurCharges": {
+                        "$ref": "#/components/schemas/ShipmentCharges_SurCharges"
+                    },
+                    "ItemizedCharges": {
+                        "$ref": "#/components/schemas/ShipmentCharges_ItemizedCharges"
+                    },
+                    "ServiceOptionsCharges": {
+                        "$ref": "#/components/schemas/ShipmentCharges_ServiceOptionsCharges"
+                    },
+                    "TaxCharges": {
+                        "$ref": "#/components/schemas/ShipmentCharges_TaxCharges"
+                    },
+                    "TotalCharges": {
+                        "$ref": "#/components/schemas/ShipmentCharges_TotalCharges"
+                    },
+                    "TotalChargesWithTaxes": {
+                        "$ref": "#/components/schemas/ShipmentCharges_TotalChargesWithTaxes"
+                    }
+                },
+                "xml": {
+                    "name": "ShipmentCharges"
+                },
+                "required": [
+                    "TotalCharges",
+                    "ServiceOptionsCharges",
+                    "TransportationCharges"
+                ],
+                "description": "Shipment charges Container. Shipment charges info."
+            },
+            "ShipmentCharges_RateChart": {
+                "description": "Rate Type with which Shipment is rated. Possible RateChart values for different regions will be: \nUS 48 origin: \n1  Daily Rates\n3  Standard List Rates\n4  Retail Rates. \n\nAlaska/Hawaii origin: \n1  Daily Rates\n3  Standard List Rates\n4  Retail Rates \n\nAll Other origins: \n1  Rates\n5 - Regional Rates \n6 - General List Rates\n3 and 4 do not apply.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ShipmentCharges_BaseServiceCharge": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "BaseServiceCharge currency code type. The currency code used in the Shipment request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Base Service Charge value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "BaseServiceCharge"
+                },
+                "description": "Base Service Charge container.\nTransportation charge  BaseServiceCharge + Fuel charge  Returned only if Subversion >1701."
+            },
+            "BaseServiceCharge_CurrencyCode": {
+                "description": "BaseServiceCharge currency code type. The currency code used in the Shipment request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "BaseServiceCharge_MonetaryValue": {
+                "description": "Base Service Charge value amount.  Valid values are from 0 to 99999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "ShipmentCharges_TransportationCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Transportation charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Transportation and surcharges value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransportationCharges"
+                },
+                "description": "Transportation Charges container."
+            },
+            "TransportationCharges_CurrencyCode": {
+                "description": "Transportation charges currency code type. The currency code used in the Ship confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "TransportationCharges_MonetaryValue": {
+                "description": "Transportation and surcharges value amount.  Valid values are from 0 to 99999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "ShipmentCharges_AccessorialCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code of Accessorial that had been charged.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of Accessorial that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Accessorial Charges value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of Accessorial type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "AccessorialCharges"
+                },
+                "description": "Accessorial Charges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "AccessorialCharges_Code": {
+                "description": "Code of Accessorial that had been charged.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "AccessorialCharges_Description": {
+                "description": "Description of Accessorial that had been charged.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "AccessorialCharges_CurrencyCode": {
+                "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "AccessorialCharges_MonetaryValue": {
+                "description": "Accessorial Charges value amount.  Valid values are from 0 to 99999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "AccessorialCharges_SubType": {
+                "description": "The sub-type of Accessorial type.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "ShipmentCharges_SurCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code of SurCharge that had been charged.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of SurCharge that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "SurCharges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "SurCharges value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of SurCharge type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "SurCharges"
+                },
+                "description": "SurCharges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "SurCharges_Code": {
+                "description": "Code of SurCharge that had been charged.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "SurCharges_Description": {
+                "description": "Description of SurCharge that had been charged.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "SurCharges_CurrencyCode": {
+                "description": "SurCharges currency code type. The currency code used in the Ship confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "SurCharges_MonetaryValue": {
+                "description": "SurCharges value amount.  Valid values are from 0 to 99999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "SurCharges_SubType": {
+                "description": "The sub-type of SurCharge type.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "ShipmentCharges_ItemizedCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identification code for itemized charge.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of Itemized Charge that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Itemized Charges value amount.",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of ItemizedCharges type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ItemizedCharges"
+                },
+                "description": "Itemized Charges are returned only when the subversion element is present and greater than or equal to 1601."
+            },
+            "ItemizedCharges_Code": {
+                "description": "Identification code for itemized charge.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "ItemizedCharges_Description": {
+                "description": "Description of Itemized Charge that had been charged.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "ItemizedCharges_CurrencyCode": {
+                "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "ItemizedCharges_MonetaryValue": {
+                "description": "Itemized Charges value amount.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 16,
+                "maxLength": 16
+            },
+            "ItemizedCharges_SubType": {
+                "description": "The sub-type of ItemizedCharges type.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "ShipmentCharges_ServiceOptionsCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Package accessorial charges currency code type. The currency code used in the Ship confirm request is returned.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Package accessorial charges value amount.   Applicable only for ShipmentResponse and ShipAcceptResponse.\n\nValid values are from 0 to 99999999999999.99.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ServiceOptionsCharges"
+                },
+                "description": "Service Option Charges container."
+            },
+            "ServiceOptionsCharges_CurrencyCode": {
+                "description": "Package accessorial charges currency code type. The currency code used in the Ship confirm request is returned.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "ServiceOptionsCharges_MonetaryValue": {
+                "description": "Package accessorial charges value amount.   Applicable only for ShipmentResponse and ShipAcceptResponse.\n\nValid values are from 0 to 99999999999999.99.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "ShipmentCharges_TaxCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Type",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "Type": {
+                        "description": "Tax Type code. The code represents the type of Tax applied to a shipment.   Refer to Tax Type Values/Abbreviations in the Appendix for valid values.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Tax Monetary Value represent the Tax amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TaxCharges"
+                },
+                "description": "TaxCharges container are returned only when TaxInformationIndicator is present in Ship Confirm request and when Negotiated Rates are not applicable. TaxCharges container contains Tax information for a given shipment."
+            },
+            "TaxCharges_Type": {
+                "description": "Tax Type code. The code represents the type of Tax applied to a shipment.   Refer to Tax Type Values/Abbreviations in the Appendix for valid values.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 9
+            },
+            "TaxCharges_MonetaryValue": {
+                "description": "Tax Monetary Value represent the Tax amount.  Valid values are from 0 to 99999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "ShipmentCharges_TotalCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Total charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Total charges value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TotalCharges"
+                },
+                "description": "Total charges container."
+            },
+            "TotalCharges_CurrencyCode": {
+                "description": "Total charges currency code type. The currency code used in the Ship confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "TotalCharges_MonetaryValue": {
+                "description": "Total charges value amount.  Valid values are from 0 to 99999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "ShipmentCharges_TotalChargesWithTaxes": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "TotalChargesWithTaxes currency code type. The currency code used in the Ship Confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "TotalChargesWithTaxes monetary value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TotalChargesWithTaxes"
+                },
+                "description": "TotalChargesWithTaxes container would be returned only if TaxInformationIndicator is present in Ship Confirm request and when Negotiated Rates are not applicable. TotalChargesWithTaxes contains total charges including total taxes applied to a shipment."
+            },
+            "TotalChargesWithTaxes_CurrencyCode": {
+                "description": "TotalChargesWithTaxes currency code type. The currency code used in the Ship Confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "TotalChargesWithTaxes_MonetaryValue": {
+                "description": "TotalChargesWithTaxes monetary value amount.  Valid values are from 0 to 99999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "ShipmentResults_NegotiatedRateCharges": {
+                "type": "object",
+                "properties": {
+                    "AccessorialCharges": {
+                        "$ref": "#/components/schemas/NegotiatedRateCharges_AccessorialCharges"
+                    },
+                    "SurCharges": {
+                        "$ref": "#/components/schemas/NegotiatedRateCharges_SurCharges"
+                    },
+                    "ItemizedCharges": {
+                        "$ref": "#/components/schemas/NegotiatedRateCharges_ItemizedCharges"
+                    },
+                    "TransportationCharges": {
+                        "$ref": "#/components/schemas/NegotiatedRateCharges_TransportationCharges"
+                    },
+                    "TaxCharges": {
+                        "$ref": "#/components/schemas/NegotiatedRateCharges_TaxCharges"
+                    },
+                    "TotalCharge": {
+                        "$ref": "#/components/schemas/NegotiatedRateCharges_TotalCharge"
+                    },
+                    "TotalChargesWithTaxes": {
+                        "$ref": "#/components/schemas/NegotiatedRateCharges_TotalChargesWithTaxes"
+                    }
+                },
+                "xml": {
+                    "name": "NegotiatedRateCharges"
+                },
+                "description": "Negotiated Rates Charge Container.  For tiered rates and promotional discounts, if a particular shipment based on zone, origin, destination or even shipment size doesn't qualify for the existing discount then no negotiated rates container will be returned. Published rates will be the applicable rate.",
+                "maximum": 1
+            },
+            "NegotiatedRateCharges_AccessorialCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code of Accessorial that had been charged.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of Accessorial that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Accessorial Charges value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of Accessorial type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "AccessorialCharges"
+                },
+                "description": "Accessorial Charges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "NegotiatedRateCharges_SurCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code of SurCharge that had been charged.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of SurCharge that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "SurCharges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "SurCharges value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of SurCharge type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "SurCharges"
+                },
+                "description": "SurCharges are returned only when ItemizedChargesRequestedIndicator is present in request for UPS Worldwide Express Freight Shipment.  These charges would be returned only for UPS Worldwide Express Freight Shipment."
+            },
+            "NegotiatedRateCharges_ItemizedCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identification code for itemized charge.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of Itemized Charge that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Itemized Charges value amount.",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of ItemizedCharges type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ItemizedCharges"
+                },
+                "description": "Itemized Charges are returned only when the subversion element is present and greater than or equal to 1601.\n\nNegotiated itemized charges are only returned for certain contract-only shipments as well as Worldwide Express Freight, Ground Freight Pricing, and Hazmat movements."
+            },
+            "NegotiatedRateCharges_TransportationCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Transportation charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Transportation and surcharges value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransportationCharges"
+                },
+                "description": "Transport Charges container for negotiated rates would be returned only when ItemizedChargesRequestedIndicator is present.  Valid only for UPS Worldwide Express Freight service."
+            },
+            "NegotiatedRateCharges_TaxCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Type",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "Type": {
+                        "description": "Tax Type code. The code represents the type of Tax applied to a shipment.   Refer to Tax Type Values/Abbreviations in the Appendix for valid values.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Tax Monetary Value represent the Tax amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TaxCharges"
+                },
+                "description": "TaxCharges container are returned only when TaxInformationIndicator is present in Ship Confirm request. TaxCharges container contains Tax information for a given shipment."
+            },
+            "NegotiatedRateCharges_TotalCharge": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Total charges currency code.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Total charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TotalCharge"
+                },
+                "description": "Total charges container. Account Based Rates info. Total charges are only returned for ABR eligible shipper account/UserId combinations when the user includes the NegotiatedRatesIndicator in the request."
+            },
+            "TotalCharge_CurrencyCode": {
+                "description": "Total charges currency code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "TotalCharge_MonetaryValue": {
+                "description": "Total charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "NegotiatedRateCharges_TotalChargesWithTaxes": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "TotalChargesWithTaxes currency code type. The currency code used in the Ship Confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "TotalChargesWithTaxes monetary value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TotalChargesWithTaxes"
+                },
+                "description": "TotalChargesWithTaxes container would be returned only if TaxInformationIndicator is present in Ship Confirm request. TotalChargesWithTaxes contains total charges including total taxes applied to a shipment."
+            },
+            "ShipmentResults_FRSShipmentData": {
+                "type": "object",
+                "required": [
+                    "TransportationCharges"
+                ],
+                "properties": {
+                    "TransportationCharges": {
+                        "$ref": "#/components/schemas/FRSShipmentData_TransportationCharges"
+                    },
+                    "FreightDensityRate": {
+                        "$ref": "#/components/schemas/FRSShipmentData_FreightDensityRate"
+                    },
+                    "HandlingUnits": {
+                        "$ref": "#/components/schemas/FRSShipmentData_HandlingUnits"
+                    }
+                },
+                "xml": {
+                    "name": "FRSShipmentData"
+                },
+                "description": "Ground Freight Pricing Shipment data container. Ground Freight Pricing shipment data is only guaranteed to be returned for Ground Freight Pricing shipments only.",
+                "maximum": 1
+            },
+            "FRSShipmentData_TransportationCharges": {
+                "type": "object",
+                "required": [
+                    "DiscountPercentage",
+                    "GrossCharge",
+                    "DiscountAmount",
+                    "NetCharge"
+                ],
+                "properties": {
+                    "GrossCharge": {
+                        "$ref": "#/components/schemas/TransportationCharges_GrossCharge"
+                    },
+                    "DiscountAmount": {
+                        "$ref": "#/components/schemas/TransportationCharges_DiscountAmount"
+                    },
+                    "DiscountPercentage": {
+                        "description": "It indicates the shipment level discount percentage for transportation charges.",
+                        "type": "string"
+                    },
+                    "NetCharge": {
+                        "$ref": "#/components/schemas/TransportationCharges_NetCharge"
+                    }
+                },
+                "xml": {
+                    "name": "TransportationCharges"
+                },
+                "maximum": 1,
+                "description": "Transportation charges container. Ground Freight Pricing transportation charges. These are only returned for Ground Freight Pricing enabled shipper account number when the user includes the FRSShipmentIndicator in the request."
+            },
+            "TransportationCharges_GrossCharge": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Gross charges currency code.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Gross charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "GrossCharge"
+                },
+                "description": "Gross Charges container. It indicates the shipment level gross Ground Freight Pricing transportation charges."
+            },
+            "GrossCharge_CurrencyCode": {
+                "description": "Gross charges currency code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "GrossCharge_MonetaryValue": {
+                "description": "Gross charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "TransportationCharges_DiscountAmount": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Discount Amount currency code.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Discount amount monetary value.  Valid values are from 0 to 9999999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "DiscountAmount"
+                },
+                "description": "Discount Amount container. It indicates the shipment level Ground Freight Pricing discount amount for transportation charges"
+            },
+            "DiscountAmount_CurrencyCode": {
+                "description": "Discount Amount currency code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "DiscountAmount_MonetaryValue": {
+                "description": "Discount amount monetary value.  Valid values are from 0 to 9999999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "TransportationCharges_DiscountPercentage": {
+                "description": "It indicates the shipment level discount percentage for transportation charges.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 5
+            },
+            "TransportationCharges_NetCharge": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Net Charge currency code.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Net charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "NetCharge"
+                },
+                "description": "Net Charges container. It indicates the shipment level net Ground Freight Pricing transportation charges."
+            },
+            "NetCharge_CurrencyCode": {
+                "description": "Net Charge currency code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "NetCharge_MonetaryValue": {
+                "description": "Net charges monetary value.  Valid values are from 0 to 9999999999999999.99",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "FRSShipmentData_FreightDensityRate": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "TotalCubicFeet",
+                    "Density"
+                ],
+                "properties": {
+                    "Density": {
+                        "description": "Density is returned if the Shipper is eligible for Density based rate.",
+                        "type": "string"
+                    },
+                    "TotalCubicFeet": {
+                        "description": "Total Cubic feet is returned if the Shipper is eligible for Density based rate.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "FreightDensityRate"
+                },
+                "description": "FreightDensityRate container for Density based rating."
+            },
+            "FreightDensityRate_Density": {
+                "description": "Density is returned if the Shipper is eligible for Density based rate.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 5
+            },
+            "FreightDensityRate_TotalCubicFeet": {
+                "description": "Total Cubic feet is returned if the Shipper is eligible for Density based rate.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 9
+            },
+            "FRSShipmentData_HandlingUnits": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Type",
+                    "Quantity",
+                    "Dimensions"
+                ],
+                "properties": {
+                    "Quantity": {
+                        "description": "Handling Unit Quantity for Density based rating.",
+                        "type": "string"
+                    },
+                    "Type": {
+                        "$ref": "#/components/schemas/HandlingUnits_Type"
+                    },
+                    "Dimensions": {
+                        "$ref": "#/components/schemas/HandlingUnits_Dimensions"
+                    },
+                    "AdjustedHeight": {
+                        "$ref": "#/components/schemas/HandlingUnits_AdjustedHeight"
+                    }
+                },
+                "xml": {
+                    "name": "HandlingUnits"
+                },
+                "description": "Handling Unit for Density based rating container."
+            },
+            "HandlingUnits_Quantity": {
+                "description": "Handling Unit Quantity for Density based rating.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "HandlingUnits_Type": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "The code associated with Handling Unit Type.  Valid values:\nSKD  Skid\nCBY  Carboy \nPLT  Pallet\nTOT  Totes \nLOO  Loose\nOTH  Other",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "A description of the code for the Handling Unit type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Type"
+                },
+                "description": "Handling Unit Type for Density based rating."
+            },
+            "Type_Code": {
+                "description": "The code associated with Handling Unit Type.  Valid values:\nSKD  Skid\nCBY  Carboy \nPLT  Pallet\nTOT  Totes \nLOO  Loose\nOTH  Other",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "Type_Description": {
+                "description": "A description of the code for the Handling Unit type.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "HandlingUnits_Dimensions": {
+                "type": "object",
+                "required": [
+                    "UnitOfMeasurement",
+                    "Length",
+                    "Height",
+                    "Width"
+                ],
+                "properties": {
+                    "UnitOfMeasurement": {
+                        "$ref": "#/components/schemas/Dimensions_UnitOfMeasurement"
+                    },
+                    "Length": {
+                        "description": "The length of the line item used to determine dimensional weight.",
+                        "type": "string"
+                    },
+                    "Width": {
+                        "description": "The width of the line item used to determine dimensional weight.",
+                        "type": "string"
+                    },
+                    "Height": {
+                        "description": "The height of the line item used to determine dimensional weight.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Dimensions"
+                },
+                "maximum": 1,
+                "description": "Dimension of the HandlingUnit container for density based pricing."
+            },
+            "Dimensions_UnitOfMeasurement": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the billing weight measurement units.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "UnitOfMeasurement"
+                },
+                "description": "UnitOfMeasurement container."
+            },
+            "UnitOfMeasurement_Code": {
+                "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "UnitOfMeasurement_Description": {
+                "description": "Description of the billing weight measurement units.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Dimensions_Length": {
+                "description": "The length of the line item used to determine dimensional weight.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "Dimensions_Width": {
+                "description": "The width of the line item used to determine dimensional weight.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "Dimensions_Height": {
+                "description": "The height of the line item used to determine dimensional weight.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "HandlingUnits_AdjustedHeight": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "UnitOfMeasurement",
+                    "Value"
+                ],
+                "properties": {
+                    "Value": {
+                        "description": "Adjusted Height value for the handling unit.  Height Adjustment is done only when Handling unit type is SKD  Skid or PLT  Pallet.",
+                        "type": "string"
+                    },
+                    "UnitOfMeasurement": {
+                        "$ref": "#/components/schemas/AdjustedHeight_UnitOfMeasurement"
+                    }
+                },
+                "xml": {
+                    "name": "AdjustedHeight"
+                },
+                "description": "Container to hold Adjusted Height information."
+            },
+            "AdjustedHeight_Value": {
+                "description": "Adjusted Height value for the handling unit.  Height Adjustment is done only when Handling unit type is SKD  Skid or PLT  Pallet.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "AdjustedHeight_UnitOfMeasurement": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the billing weight measurement units.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "UnitOfMeasurement"
+                },
+                "description": "Unit of Measurement container for the Adjusted height."
+            },
+            "ShipmentResults_RatingMethod": {
+                "description": "RatingMethod is to indicate whether the Shipment was rated as shipment level or package level. This information will be returned only if RatingMethodRequestedIndicator is present in the request.  Valid values:\n01  Shipment level\n02  Package level",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "ShipmentResults_BillableWeightCalculationMethod": {
+                "description": "BillableWeightCalculationMethod is to indicate whether the billable weight calculation method utilized was - the package or shipment level. This information will be returned only if RatingMethodRequestedIndicator is present in the request.  Valid values:\n01  Shipment Billable Weight\n02  Package Billable Weight",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "ShipmentResults_BillingWeight": {
+                "type": "object",
+                "required": [
+                    "UnitOfMeasurement",
+                    "Weight"
+                ],
+                "properties": {
+                    "UnitOfMeasurement": {
+                        "$ref": "#/components/schemas/BillingWeight_UnitOfMeasurement"
+                    },
+                    "Weight": {
+                        "description": "Billing weight. Higher of the actual shipment weight versus the shipment dimensional weight.  When using a negotiated divisor different from the published UPS divisor (139 for inches and 5,000 for cm), the weight returned is based on the published divisor. Rates, however, are based on the negotiated divisor.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "BillingWeight"
+                },
+                "maximum": 1,
+                "description": "Billing Weight container."
+            },
+            "BillingWeight_UnitOfMeasurement": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code of the billing weight measurement units. Values are: KGS or LBS.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the billing weight measurement units.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "UnitOfMeasurement"
+                },
+                "description": "Billing weight unit of measurement code. The unit of measurement used in Ship Confirm request is returned."
+            },
+            "BillingWeight_Weight": {
+                "description": "Billing weight. Higher of the actual shipment weight versus the shipment dimensional weight.  When using a negotiated divisor different from the published UPS divisor (139 for inches and 5,000 for cm), the weight returned is based on the published divisor. Rates, however, are based on the negotiated divisor.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "ShipmentResults_ShipmentIdentificationNumber": {
+                "description": "Returned UPS shipment ID number.1Z Number of the first package in the shipment.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 18,
+                "maxLength": 18
+            },
+            "ShipmentResults_MIDualReturnShipmentKey": {
+                "description": "MIDualReturnShipmentKey is unique key required to process Mail Innovations Dual Return Shipment. \n\nThe unique identifier (key) would be returned in response of first phase of Mail Innovations Dual Return Shipments. \n\nThis unique identifier (key) would be part of request for second phase of Mail Innovations Dual Return Shipments and would be played back in response for second phase of Mail Innovations Dual Return Shipment.  If the shipment is a Package return shipment, the package tracking number will be concatenated with the system time (YYYY-MM-DDHH.MM.SS.NNN), followed by service code. \n\nIf the shipment is a MI Returns shipment, the Mail Manifest ID (MMI) will be concatenated with the system time.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 4,
+                "maxLength": 50
+            },
+            "ShipmentResults_PickupRequestNumber": {
+                "description": "Pickup request number",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 11,
+                "maxLength": 11
+            },
+            "ShipmentResults_PackageResults": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "SensorID",
+                    "TrackingNumber"
+                ],
+                "properties": {
+                    "TrackingNumber": {
+                        "description": "Package 1Z number.  For Mail Innovations shipments, please use the USPSPICNumber when tracking packages (a non-1Z number Mail Manifest Id is returned).  Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "BaseServiceCharge": {
+                        "$ref": "#/components/schemas/PackageResults_BaseServiceCharge"
+                    },
+                    "ServiceOptionsCharges": {
+                        "$ref": "#/components/schemas/PackageResults_ServiceOptionsCharges"
+                    },
+                    "NonMachineableCharges": {
+                        "$ref": "#/components/schemas/PackageResults_NonMachineableCharges"
+                    },
+                    "NonDDUCharges": {
+                        "$ref": "#/components/schemas/PackageResults_NonDDUCharges"
+                    },
+                    "SurePostDasCharges": {
+                        "$ref": "#/components/schemas/PackageResults_SurePostDasCharges"
+                    },
+                    "ShippingLabel": {
+                        "$ref": "#/components/schemas/PackageResults_ShippingLabel"
+                    },
+                    "ShippingReturnSlip": {
+                        "$ref": "#/components/schemas/PackageResults_ShippingReturnSlip"
+                    },
+                    "ShippingReceipt": {
+                        "$ref": "#/components/schemas/PackageResults_ShippingReceipt"
+                    },
+                    "USPSPICNumber": {
+                        "description": "USPSPICNumber is USPS Package Identification; it should be used for tracking Mail Innovations shipments.",
+                        "type": "string"
+                    },
+                    "CN22Number": {
+                        "description": "USPS defined CN22 ID number format varies based on destination country or territory. Not applicable as of Jan 2015. \n\nMail Innovations shipments US to VI, PR, and GU are not considered international.",
+                        "type": "string"
+                    },
+                    "Accessorial": {
+                        "$ref": "#/components/schemas/PackageResults_Accessorial"
+                    },
+                    "SimpleRate": {
+                        "$ref": "#/components/schemas/PackageResults_SimpleRate"
+                    },
+                    "SensorID": {
+                        "description": "Sensor ID will be return for UPS Premier Silver",
+                        "type": "string"
+                    },
+                    "Form": {
+                        "$ref": "#/components/schemas/PackageResults_Form"
+                    },
+                    "ItemizedCharges": {
+                        "$ref": "#/components/schemas/PackageResults_ItemizedCharges"
+                    },
+                    "NegotiatedCharges": {
+                        "$ref": "#/components/schemas/PackageResults_NegotiatedCharges"
+                    }
+                },
+                "xml": {
+                    "name": "PackageResults"
+                },
+                "description": "Returned Package Information.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "PackageResults_TrackingNumber": {
+                "description": "Package 1Z number.  For Mail Innovations shipments, please use the USPSPICNumber when tracking packages (a non-1Z number Mail Manifest Id is returned).  Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 18,
+                "maxLength": 18
+            },
+            "PackageResults_BaseServiceCharge": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "BaseServiceCharge currency code type. The currency code used in the Shipment request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Base Service Charge value amount.  Valid values are from 0 to 99999999999999.99",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "BaseServiceCharge"
+                },
+                "description": "Base Service Charge container.\nTransportation charge  BaseServiceCharge + Fuel charge  Returned only if Subversion >1701."
+            },
+            "PackageResults_ServiceOptionsCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Package accessorial charges currency code type. The currency code used in the Ship confirm request is returned.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Package accessorial charges value amount.   Applicable only for ShipmentResponse and ShipAcceptResponse.\n\nValid values are from 0 to 99999999999999.99.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ServiceOptionsCharges"
+                },
+                "description": "Shipment charges info. Shipment charges are only guaranteed to be returned for shipments whose origin country or territory is US or Puerto Rico.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "PackageResults_NonMachineableCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Accessorial charges value amount.  Valid values are from 0 to 99999999999999.99.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "NonMachineableCharges"
+                },
+                "description": "Non-Machineable Charges container."
+            },
+            "NonMachineableCharges_CurrencyCode": {
+                "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "NonMachineableCharges_MonetaryValue": {
+                "description": "Accessorial charges value amount.  Valid values are from 0 to 99999999999999.99.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "PackageResults_NonDDUCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Accessorial charges value amount.   Valid values are from 0 to 99999999999999.99.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "NonDDUCharges"
+                },
+                "description": "Non DDU Charges container."
+            },
+            "NonDDUCharges_CurrencyCode": {
+                "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "NonDDUCharges_MonetaryValue": {
+                "description": "Accessorial charges value amount.   Valid values are from 0 to 99999999999999.99.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "PackageResults_SurePostDasCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue"
+                ],
+                "properties": {
+                    "CurrencyCode": {
+                        "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Accessorial charges value amount.  Valid values are from 0 to 99999999999999.99.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "SurePostDasCharges"
+                },
+                "description": "UPS SurePost DAS Charges container."
+            },
+            "SurePostDasCharges_CurrencyCode": {
+                "description": "Accessorial charges currency code type. The currency code used in the Ship confirm request is returned.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "SurePostDasCharges_MonetaryValue": {
+                "description": "Accessorial charges value amount.  Valid values are from 0 to 99999999999999.99.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 19
+            },
+            "PackageResults_ShippingLabel": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "GraphicImagePart",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/ShippingLabel_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded graphic image.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "GraphicImagePart": {
+                        "description": "Base 64 encoded graphic image.  Applicable only for ShipmentResponse and ShipAcceptResponse for Mail Innovations CN22 Combination Forward Label with more than 3 commodities.",
+                        "type": "string"
+                    },
+                    "InternationalSignatureGraphicImage": {
+                        "description": "Base 64 encoded graphic image of the Warsaw text and signature box for EPL2, ZPL and SPL labels. The image will be returned for non-US based shipments. One image will be given per shipment and it will be in the first PackageResults container.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "HTMLImage": {
+                        "description": "Base 64 encoded html browser image rendering software. This is only returned for gif and png image formats.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "PDF417": {
+                        "description": "PDF-417 is a two-dimensional barcode, which can store up to about 1,800 printable ASCII characters or 1,100 binary characters per symbol. The symbol is rectangular. The image is Base 64 encoded and returned if the LabelImageFormat code is GIF. Shipment with PRL return service only.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ShippingLabel"
+                },
+                "maximum": 1,
+                "description": "The container for UPS shipping label. Returned for following shipments -\nForward shipments,\nShipments with PRL returns service, \nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707.    Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ShippingLabel_ImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code representing the format in which the High Value Report is generated. Valid values: PDF  pdf",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the image format.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ImageFormat"
+                },
+                "description": "The container image format.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ImageFormat_Code": {
+                "description": "Code representing the format in which the High Value Report is generated. Valid values: PDF  pdf",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "ImageFormat_Description": {
+                "description": "Description of the image format.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "ShippingLabel_GraphicImage": {
+                "description": "Base 64 encoded graphic image.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShippingLabel_GraphicImagePart": {
+                "description": "Base 64 encoded graphic image.  Applicable only for ShipmentResponse and ShipAcceptResponse for Mail Innovations CN22 Combination Forward Label with more than 3 commodities.",
+                "type": "string"
+            },
+            "ShippingLabel_InternationalSignatureGraphicImage": {
+                "description": "Base 64 encoded graphic image of the Warsaw text and signature box for EPL2, ZPL and SPL labels. The image will be returned for non-US based shipments. One image will be given per shipment and it will be in the first PackageResults container.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShippingLabel_HTMLImage": {
+                "description": "Base 64 encoded html browser image rendering software. This is only returned for gif and png image formats.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShippingLabel_PDF417": {
+                "description": "PDF-417 is a two-dimensional barcode, which can store up to about 1,800 printable ASCII characters or 1,100 binary characters per symbol. The symbol is rectangular. The image is Base 64 encoded and returned if the LabelImageFormat code is GIF. Shipment with PRL return service only.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PackageResults_ShippingReturnSlip": {
+                "type": "object",
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/ShippingReturnSlip_Image"
+                    }
+                },
+                "xml": {
+                    "name": "ShippingReturnSlip"
+                },
+                "description": "Container for the Return Slip of a shipment. Returned only when Return Slip is requested.\n  Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1
+            },
+            "ShippingReturnSlip_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 Encoded PDF Image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container for Return Slip Image.  Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "Image_ImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code representing the format in which the High Value Report is generated. Valid values: PDF  pdf",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the image format.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ImageFormat"
+                },
+                "description": "Container for the High Value Report image format information for Import Control Shipments."
+            },
+            "Image_GraphicImage": {
+                "description": "Base 64 Encoded PDF Image.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PackageResults_ShippingReceipt": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/ShippingReceipt_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded receipt in HTML format.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ShippingReceipt"
+                },
+                "maximum": 1,
+                "description": "Supported for following shipments -\nPRL shipments,\nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707.  Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ShippingReceipt_ImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code representing the format in which the High Value Report is generated. Valid values: PDF  pdf",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the image format.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ImageFormat"
+                },
+                "description": "Container for a Image Format.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ShippingReceipt_GraphicImage": {
+                "description": "Base 64 encoded receipt in HTML format.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PackageResults_USPSPICNumber": {
+                "description": "USPSPICNumber is USPS Package Identification; it should be used for tracking Mail Innovations shipments.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PackageResults_CN22Number": {
+                "description": "USPS defined CN22 ID number format varies based on destination country or territory. Not applicable as of Jan 2015. \n\nMail Innovations shipments US to VI, PR, and GU are not considered international.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "PackageResults_Accessorial": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code for Accessorial Indicator.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description for Accessorial Indicator.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Accessorial"
+                },
+                "description": "The container for Accessorial indicators. This information would be returned only for UPS Worldwide Express Freight and UPS Worldwide Express Freight Mid-day service request with Dry Ice or Oversize Pallet and SubVersion greater than or equal to 1707.  This is valid only for UPS Worldwide Express Freight and UPS Worldwide Express Freight Mid-day service."
+            },
+            "Accessorial_Code": {
+                "description": "Code for Accessorial Indicator.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "Accessorial_Description": {
+                "description": "Description for Accessorial Indicator.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "PackageResults_SimpleRate": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Simple Rate Code\nXS   Extra Small\nS   Small\nM  Medium\nL Large\nXL  Extra Large",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "SimpleRate"
+                },
+                "description": "SimpleRate will be returned if Simple Rate  present in request"
+            },
+            "SimpleRate_Code": {
+                "description": "Simple Rate Code\nXS   Extra Small\nS   Small\nM  Medium\nL Large\nXL  Extra Large",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "PackageResults_SensorID": {
+                "description": "Sensor ID will be return for UPS Premier Silver",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "PackageResults_Form": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code that indicates the type of form. \n\nValid value: 01 - All Requested International Forms  Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description that indicates the type of form. Possible Values. - All Requested International Forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "Image": {
+                        "$ref": "#/components/schemas/Form_Image"
+                    },
+                    "FormGroupId": {
+                        "description": "Unique Id for later retrieval of saved version of the completed international forms. Always returned when code  01. 01 represents international forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "FormGroupIdName": {
+                        "description": "Contains description text which identifies the group of International forms. This element is part of both request and response. This element does not appear on the forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Form"
+                },
+                "description": "Container tag for the International forms image.  Currently this container would be returned for UPS Premium Care shipments. Form is returned for following shipments -\nForward shipments,\nShipments with PRL ReturnService,\nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707. CN22 data for Worlwide economy services will be returned within the PDF417 barcode of the label."
+            },
+            "Form_Code": {
+                "description": "Code that indicates the type of form. \n\nValid value: 01 - All Requested International Forms  Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "Form_Description": {
+                "description": "Description that indicates the type of form. Possible Values. - All Requested International Forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Form_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 Encoded PDF Image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container tag for the International forms image.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "Form_FormGroupId": {
+                "description": "Unique Id for later retrieval of saved version of the completed international forms. Always returned when code  01. 01 represents international forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 26
+            },
+            "Form_FormGroupIdName": {
+                "description": "Contains description text which identifies the group of International forms. This element is part of both request and response. This element does not appear on the forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 50
+            },
+            "PackageResults_ItemizedCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identification code for itemized charge.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of Itemized Charge that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Itemized Charges value amount.",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of ItemizedCharges type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ItemizedCharges"
+                },
+                "description": "Itemized Charges are returned only when the subversion element is present and greater than or equal to 1607.  Package level itemized charges are only returned for US domestic movements"
+            },
+            "PackageResults_NegotiatedCharges": {
+                "type": "object",
+                "properties": {
+                    "ItemizedCharges": {
+                        "$ref": "#/components/schemas/NegotiatedCharges_ItemizedCharges"
+                    }
+                },
+                "xml": {
+                    "name": "NegotiatedCharges"
+                },
+                "description": "Negotiated Rates Charge Container.  These charges would be returned only when -\n1) subversion is greater than or equal to 1607\n2) if negotiated rates were requested for GFP shipments and account number is eligible to receive negotiated rates.",
+                "maximum": 1
+            },
+            "NegotiatedCharges_ItemizedCharges": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "CurrencyCode",
+                    "MonetaryValue",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identification code for itemized charge.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of Itemized Charge that had been charged.",
+                        "type": "string"
+                    },
+                    "CurrencyCode": {
+                        "description": "The IATA currency code associated with the Itemized Charge costs for the shipment.",
+                        "type": "string"
+                    },
+                    "MonetaryValue": {
+                        "description": "Itemized Charges value amount.",
+                        "type": "string"
+                    },
+                    "SubType": {
+                        "description": "The sub-type of ItemizedCharges type.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ItemizedCharges"
+                },
+                "description": "Negotiated Itemized Accessorial and Sur Charges are returned only when the subversion element is present and greater than or equal to 1607. \n\nNegotiated itemized charges are only returned for certain contract-only shipments as well as Worldwide Express Freight, Ground Freight Pricing, and Hazmat movements.  Package level itemized charges are only returned for US domestic movements"
+            },
+            "ShipmentResults_ControlLogReceipt": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/ControlLogReceipt_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded html, EPL2, ZPL or SPL image.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ControlLogReceipt"
+                },
+                "maximum": 1,
+                "description": "Container for the High Value reports when forward shipments have declared value between $999 and $50,000 USD. Two copies of high value report needs to be pointed out.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ControlLogReceipt_ImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code representing the format in which the High Value Report is generated. Valid values: PDF  pdf",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the image format.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ImageFormat"
+                },
+                "description": "Container for the High Value report format required if parent exist.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ControlLogReceipt_GraphicImage": {
+                "description": "Base 64 encoded html, EPL2, ZPL or SPL image.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipmentResults_Form": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code that indicates the type of form. \n\nValid value: 01 - All Requested International Forms  Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description that indicates the type of form. Possible Values. - All Requested International Forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "Image": {
+                        "$ref": "#/components/schemas/Form_Image"
+                    },
+                    "FormGroupId": {
+                        "description": "Unique Id for later retrieval of saved version of the completed international forms. Always returned when code  01. 01 represents international forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    },
+                    "FormGroupIdName": {
+                        "description": "Contains description text which identifies the group of International forms. This element is part of both request and response. This element does not appear on the forms.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Form"
+                },
+                "description": "Container tag for the International forms image.   Form is returned for following shipments -\nForward shipments,\nShipments with PRL ReturnService,\nElectronic Return Label or Electronic Import Control Label shipments with SubVersion greater than or equal to 1707."
+            },
+            "ShipmentResults_CODTurnInPage": {
+                "type": "object",
+                "required": [
+                    "Image"
+                ],
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/CODTurnInPage_Image"
+                    }
+                },
+                "xml": {
+                    "name": "CODTurnInPage"
+                },
+                "description": "The container of the COD Turn In Page.   Applicable only for ShipmentResponse and ShipAcceptResponse.",
+                "maximum": 1
+            },
+            "CODTurnInPage_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 Encoded PDF Image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "The container of the image for COD Turn In Page.   Applicable only for ShipmentResponse and ShipAcceptResponse."
+            },
+            "ShipmentResults_HighValueReport": {
+                "type": "object",
+                "required": [
+                    "Image"
+                ],
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/HighValueReport_Image"
+                    }
+                },
+                "xml": {
+                    "name": "HighValueReport"
+                },
+                "description": "Container for the High Value Report generated for ImportControl or Return shipments with high package declared value.  Applicable for one pass ShipmentResponse and two-pass ShipAcceptResponse",
+                "maximum": 1
+            },
+            "HighValueReport_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 Encoded PDF Image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container for the High Value Report image for Import Control Shipments."
+            },
+            "ShipmentResults_LabelURL": {
+                "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LabelURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment. \nForward shipment except for Mail Innovations Forward.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipmentResults_LocalLanguageLabelURL": {
+                "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LocalLanguageLabelURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment. \nForward shipment except for Mail Innovations Forward.  Not returned if LabelLinksIndicator is requested with Locale element.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipmentResults_ReceiptURL": {
+                "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. ReceiptURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipmentResults_LocalLanguageReceiptURL": {
+                "description": "URL will point to a page wherein label, receipt and other documents, if applicable, such as HighValueReport, CustomsInvoice and ImportControl instructions can be requested. LocalLanguageReceiptURL is returned only if the LabelLinksIndicator is requested for following shipments:\nPrint/Electronic ImportControl shipment\nPrint/Electronic Return shipment.   Not returned if LabelLinksIndicator is requested with Locale element.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "ShipmentResults_DGPaperImage": {
+                "description": "Dangrous Good Paper Image in pdf format. One multipage PDF document will be returned that will contain all required Dangrous Goods shipping paper copies for all Dangerous Goods packages.  Only returned when DGSignatoryInfo is present.",
+                "type": "string"
+            },
+            "ShipmentResults_MasterCartonID": {
+                "description": "Master Carton ID. MasterCartonID will be return if MasterCartonIndicator is present in request.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 24
+            }
+        }
+    }
+}

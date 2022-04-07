@@ -1,0 +1,1492 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Label Recovery",
+        "description": "The Label Shipping API allows us to retrieve forward and return labels.",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Ship, Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/ShipStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/LBRecovery": {
+            "post": {
+                "summary": "The Label Shipping API allows us to retrieve forward and return labels.",
+                "operationId": "LabelRecovery",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS username.Maximum length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "Password",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The customers MyUPS password.Maximum length:26",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "AccessLicenseNumber",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Authorization: Access Key obtained \nthrough on-boarding process. \nContact your UPS representative for \nadditional information. Maximum Length:16",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier unique to the request. Length 32",
+                        "required": true
+                    },
+                    {
+                        "in": "header",
+                        "name": "transactionSrc",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "An identifier of the client/source application that is making the request.Length 512",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "version",
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "description": "When UPS introduces new elements in the \nresponse that are not associated with new \nrequest elements, Subversion is used. This \nensures backward compatibility. \nv1  original features of the application. No \nsupport for CODTurn-inPage, HighValueReport \nor InternationalForms features returned in the \nresponse\nv1701  includes support for CODTurn-inPage \nfeatures returned in the response.\nV1903\n Length 5",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "The Label Shipping API allows us to retrieve forward and return labels.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LABELRECOVERYRequestWrapper"
+                            },
+                            "examples": {
+                                "json": {
+                                    "summary": "A sample JSON request",
+                                    "value": "{\r\n \"LabelRecoveryRequest\": { \r\n \"LabelSpecification\": {\r\n \"HTTPUserAgent\": \"\",\r\n \"LabelImageFormat\": {\r\n \"Code\": \"ZPL\"\r\n },\r\n \"LabelStockSize\": {\r\n \"Height\": \"6\",\r\n \"Width\": \"4\"\r\n }\r\n },\r\n \"Translate\": {\r\n \"LanguageCode\": \"eng\",\r\n \"DialectCode\": \"US\",\r\n \"Code\": \"01\"\r\n },\r\n \"LabelDelivery\": {\r\n \"LabelLinkIndicator\": \"\",\r\n \"ResendEMailIndicator\": \"\",\r\n \"EMailMessage\": {\r\n \"EMailAddress\": \"\"\r\n }\r\n },\r\n \"TrackingNumber\": \"1Z12345E8791315413\"\r\n }\r\n}\r\n"
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LABELRECOVERYRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<soapenv:Envelope xmlns:soapenv\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:v1\"http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0\" \r\nxmlns:v11\"http://www.ups.com/XMLSchema/XOLTWS/LBRecovery/v1.0\" \r\nxmlns:v12\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\">\r\n<soapenv:Header>\r\n<v1:UPSSecurity>\r\n<v1:UsernameToken>\r\n<v1:Username>Your User Id</v1:Username>\r\n<v1:Password>Your Password</v1:Password>\r\n</v1:UsernameToken>\r\n<v1:ServiceAccessToken>\r\n<v1:AccessLicenseNumber>Your Access License \r\nNumber</v1:AccessLicenseNumber>\r\n</v1:ServiceAccessToken>\r\n</v1:UPSSecurity>\r\n</soapenv:Header>\r\n<soapenv:Body>\r\n<v11:LabelRecoveryRequest>\r\n<v11:LabelSpecification>\r\n<v11:LabelImageFormat>\r\n<v11:Code>GIF</v11:Code>\r\n</v11:LabelImageFormat>\r\n<v11:HTTPUserAgent>Mozilla/4.5</v11:HTTPUserAgent>\r\n</v11:LabelSpecification>\r\n<v11:Translate>\r\n<v11:LanguageCode>eng</v11:LanguageCode>\r\n<v11:DialectCode>GB</v11:DialectCode>\r\n<v11:Code>01</v11:Code>\r\n</v11:Translate>\r\n<v11:TrackingNumber>Your Tracking Number</v11:TrackingNumber>\r\n</v11:LabelRecoveryRequest>\r\n</soapenv:Body>\r\n</soapenv:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LABELRECOVERYResponseWrapper"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LABELRECOVERYResponseWrapper"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LABELRECOVERYRequestWrapper": {
+                "xml": {
+                    "name": "LabelRecoveryRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "LabelRecoveryRequest"
+                ],
+                "properties": {
+                    "LabelRecoveryRequest": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest"
+                    }
+                }
+            },
+            "LABELRECOVERYResponseWrapper": {
+                "xml": {
+                    "name": "LabelRecoveryResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "LabelRecoveryResponse"
+                ],
+                "properties": {
+                    "LabelRecoveryResponse": {
+                        "$ref": "#/components/schemas/LabelRecoveryResponse"
+                    }
+                }
+            },
+            "LabelRecoveryRequest": {
+                "type": "object",
+                "required": [
+                    "Request"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest_Request"
+                    },
+                    "LabelSpecification": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest_LabelSpecification"
+                    },
+                    "Translate": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest_Translate"
+                    },
+                    "LabelDelivery": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest_LabelDelivery"
+                    },
+                    "TrackingNumber": {
+                        "description": "Small Package Tracking Number. Required if Mail Innovations Tracking Number or ReferenceNumber/Value and ShipperNumber is not provided.  If only TrackingNumber is provided, the request will be treated as Small Package Shipment. Label Recovery will return label for Small Package Tracking Number.\nIf both, TrackingNumber and MailInnovationsTrackingNumber are provided, the request will be treated as Dual Mail Innovations Return Shipment. Label Recovery will return two labels one each for - Small Package Tracking Number and Mail Innovations Return Tracking Number.",
+                        "type": "string"
+                    },
+                    "MailInnovationsTrackingNumber": {
+                        "description": "Mail Innovations Tracking Number.  Required if Tracking Number or ReferenceNumber/Value is not populated. \nIf only MailInnovationsTrackingNumber is provided, the request will be treated as Single Mail Innovations Return Shipment. Label Recovery will return label for Mail Innovations Return Tracking Number.\nIf both, TrackingNumber and MailInnovationsTrackingNumber are provided, the request will be treated as Dual Mail Innovations Return Shipment. Label Recovery will return two labels one each for - Small Package Tracking Number and Mail Innovations Return Tracking Number.",
+                        "type": "string"
+                    },
+                    "ReferenceValues": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest_ReferenceValues"
+                    },
+                    "ShippingHistoryUserKey": {
+                        "description": "Required if anonymous request. If not provided it is derived from user authentication ID.",
+                        "type": "string"
+                    },
+                    "LabelInstructionSet": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest_LabelInstructionSet"
+                    },
+                    "Locale": {
+                        "description": "Represents 5 character ISO Locale that allows the user to request Reference Number Code on Label, Label instructions, Receipt instructions (if available for given tracking number) and High Value Report (if available for given tracking number) in desired language. \nLocale is specified by the combination of language code and country or territory code - 2 character language code and 2 character country code seperated by an underscore ('_') character. Example - de_DE. Please refer to Appendix for supported values for Locale.  Either Translate container or Locale element can be present in a given request. Both can't be requested together in same request.",
+                        "type": "string"
+                    },
+                    "UPSPremiumCareForm": {
+                        "$ref": "#/components/schemas/LabelRecoveryRequest_UPSPremiumCareForm"
+                    }
+                },
+                "xml": {
+                    "name": "LabelRecoveryRequest"
+                },
+                "maximum": 1,
+                "description": "Request for obtaining the Label for the return shipment."
+            },
+            "LabelRecoveryRequest_Request": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "SubVersion": {
+                        "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\nFormat: YYMM  Year and month of the release.\nExample: 1701  2017 January  Supported values: 1701, 1707, 1903",
+                        "type": "string"
+                    },
+                    "RequestOption": {
+                        "description": "Request option is no longer used.",
+                        "type": "string"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "description": "Request Container.  N/A"
+            },
+            "Request_SubVersion": {
+                "description": "When UPS introduces new elements in the response that are not associated with new request elements, Subversion is used. This ensures backward compatibility.\n\nTo get such elements you need to have the right Subversion. The value of the subversion is explained in the Response element Description.\n\nFormat: YYMM  Year and month of the release.\nExample: 1701  2017 January  Supported values: 1701, 1707, 1903",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4
+            },
+            "Request_RequestOption": {
+                "description": "Request option is no longer used.",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 15
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Container that identifies transactions between client and server."
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext Information which will be echoed during response",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "LabelRecoveryRequest_LabelSpecification": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "HTTPUserAgent": {
+                        "description": "Browser HTTPUserAgent String. This is the preferred way of identifying GIF image type to be generated.  Required if <Root node>/ LabelSpecification/LabelImageFormat/Code  Gif. Default to Mozilla/4.5 if this field is missing or has invalid value.",
+                        "type": "string"
+                    },
+                    "LabelImageFormat": {
+                        "$ref": "#/components/schemas/LabelSpecification_LabelImageFormat"
+                    },
+                    "LabelStockSize": {
+                        "$ref": "#/components/schemas/LabelSpecification_LabelStockSize"
+                    }
+                },
+                "xml": {
+                    "name": "LabelSpecification"
+                },
+                "description": "Container that is used to define the properties required by the user to print and/ or display the UPS shipping label.  Required for the shipment without return service, or shipment with PRL return service."
+            },
+            "LabelSpecification_HTTPUserAgent": {
+                "description": "Browser HTTPUserAgent String. This is the preferred way of identifying GIF image type to be generated.  Required if <Root node>/ LabelSpecification/LabelImageFormat/Code  Gif. Default to Mozilla/4.5 if this field is missing or has invalid value.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+            },
+            "LabelSpecification_LabelImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code type that the label image is to be generated in. Valid value returned is gif, pdf, zpl. Spl, epl2",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LabelImageFormat"
+                },
+                "description": "The file format of the label and receipt. Defaults to HTML format if this node does not exist."
+            },
+            "LabelImageFormat_Code": {
+                "description": "Code type that the label image is to be generated in. Valid value returned is gif, pdf, zpl. Spl, epl2",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "LabelSpecification_LabelStockSize": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Height",
+                    "Width"
+                ],
+                "properties": {
+                    "Height": {
+                        "description": "Height of the Label.  Only valid values are 6 or 8. Note: Label Image will only scale up to 4 X 6, even when requesting 4 X 8.",
+                        "type": "string"
+                    },
+                    "Width": {
+                        "description": "Width of the Label.  Valid value is 4. Note: Label Image will only scale up to 4 X 6, even when requesting 4 X 8.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LabelStockSize"
+                },
+                "description": "Container to hold Label Height and Width information.  Applicable if Label Image Code is ZPL, EPL and SPL. Ignored for other Label Image Code types."
+            },
+            "LabelStockSize_Height": {
+                "description": "Height of the Label.  Only valid values are 6 or 8. Note: Label Image will only scale up to 4 X 6, even when requesting 4 X 8.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "LabelStockSize_Width": {
+                "description": "Width of the Label.  Valid value is 4. Note: Label Image will only scale up to 4 X 6, even when requesting 4 X 8.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "LabelRecoveryRequest_Translate": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "DialectCode",
+                    "LanguageCode",
+                    "Code"
+                ],
+                "properties": {
+                    "LanguageCode": {
+                        "description": "The Language code. The language codes are three letter language codes. \nSupported languages are: \neng - English \nspa - Spanish \nita - Italian\nfra - French \ndeu - German \npor -Portuguese \nnld  Dutch\ndan - Danish \nfin - Finnish \nswe  Swedish \nnor  Norwegian",
+                        "type": "string"
+                    },
+                    "DialectCode": {
+                        "description": "Valid dialect codes are: \nCA - Canada\nGB - Great Britain\nUS - United States\n97  Not Applicable",
+                        "type": "string"
+                    },
+                    "Code": {
+                        "description": "Used to specify what will be translated. \nValid code: \n01  label direction instructions and receipt",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Translate"
+                },
+                "description": "Translate container allows the user to specify the language he/she would like a specific portion of response to return. \nThe language is specified by the combination of language code and dialect code. \nValid combinations are: LanguageCode + DialectCode.  Either Translate container or Locale element can be present in a given request. Both can't be requested together in same request.\nCombinations: \neng GB  Queen's English \nSpa 97  Castilian Spanish \nita 97  Italian \nfra 97  France French \nfra CA  Canadian French \ndeu 97  German \npor 97  Portugal Portuguese \nnld 97  Dutch \ndan 97  Danish \nfin 97  Finnish \nswe 97  Swedish \neng CA  Canadian English \nEng US  US English \nDefault language is Queen's English \n\nIf the Ship from country or territory is Canada, the Language defaults to Canadian English. \n\nIf the ship from country or territory is US, the language defaults to US English.\n\nIf shipping from some other country or territory, the language defaults to Queens English."
+            },
+            "Translate_LanguageCode": {
+                "description": "The Language code. The language codes are three letter language codes. \nSupported languages are: \neng - English \nspa - Spanish \nita - Italian\nfra - French \ndeu - German \npor -Portuguese \nnld  Dutch\ndan - Danish \nfin - Finnish \nswe  Swedish \nnor  Norwegian",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 3
+            },
+            "Translate_DialectCode": {
+                "description": "Valid dialect codes are: \nCA - Canada\nGB - Great Britain\nUS - United States\n97  Not Applicable",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "Translate_Code": {
+                "description": "Used to specify what will be translated. \nValid code: \n01  label direction instructions and receipt",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "LabelRecoveryRequest_LabelDelivery": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "LabelLinkIndicator": {
+                        "description": "Indicates the Label Recovery and Receipt Recovery URL links are to be returned in the XML Response. Valid for following shipment -\nPrint/Electronic Return Label\nPrint/Electronic Import Control Label\nForward shipment except for Mail Innovations Forward",
+                        "type": "string"
+                    },
+                    "ResendEMailIndicator": {
+                        "description": "Not Used. If this tag is present, resend the Label Delivery notification email.",
+                        "type": "string"
+                    },
+                    "EMailMessage": {
+                        "$ref": "#/components/schemas/LabelDelivery_EMailMessage"
+                    }
+                },
+                "xml": {
+                    "name": "LabelDelivery"
+                },
+                "description": "Container for the Label Delivery accessorial. One Label Delivery per shipment."
+            },
+            "LabelDelivery_LabelLinkIndicator": {
+                "description": "Indicates the Label Recovery and Receipt Recovery URL links are to be returned in the XML Response. Valid for following shipment -\nPrint/Electronic Return Label\nPrint/Electronic Import Control Label\nForward shipment except for Mail Innovations Forward",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelDelivery_ResendEMailIndicator": {
+                "description": "Not Used. If this tag is present, resend the Label Delivery notification email.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelDelivery_EMailMessage": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "EMailAddress"
+                ],
+                "properties": {
+                    "EMailAddress": {
+                        "description": "Not Used. Email Address for the Label Delivery Email.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "EMailMessage"
+                },
+                "description": "Not Used. Email Message container for ResendEmailIndicator."
+            },
+            "EMailMessage_EMailAddress": {
+                "description": "Not Used. Email Address for the Label Delivery Email.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 35,
+                "maxLength": 35
+            },
+            "LabelRecoveryRequest_TrackingNumber": {
+                "description": "Small Package Tracking Number. Required if Mail Innovations Tracking Number or ReferenceNumber/Value and ShipperNumber is not provided.  If only TrackingNumber is provided, the request will be treated as Small Package Shipment. Label Recovery will return label for Small Package Tracking Number.\nIf both, TrackingNumber and MailInnovationsTrackingNumber are provided, the request will be treated as Dual Mail Innovations Return Shipment. Label Recovery will return two labels one each for - Small Package Tracking Number and Mail Innovations Return Tracking Number.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 18
+            },
+            "LabelRecoveryRequest_MailInnovationsTrackingNumber": {
+                "description": "Mail Innovations Tracking Number.  Required if Tracking Number or ReferenceNumber/Value is not populated. \nIf only MailInnovationsTrackingNumber is provided, the request will be treated as Single Mail Innovations Return Shipment. Label Recovery will return label for Mail Innovations Return Tracking Number.\nIf both, TrackingNumber and MailInnovationsTrackingNumber are provided, the request will be treated as Dual Mail Innovations Return Shipment. Label Recovery will return two labels one each for - Small Package Tracking Number and Mail Innovations Return Tracking Number.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 34
+            },
+            "LabelRecoveryRequest_ReferenceValues": {
+                "type": "object",
+                "required": [
+                    "ReferenceNumber",
+                    "ShipperNumber"
+                ],
+                "properties": {
+                    "ReferenceNumber": {
+                        "$ref": "#/components/schemas/ReferenceValues_ReferenceNumber"
+                    },
+                    "ShipperNumber": {
+                        "description": "Required if ReferenceNumber/Value is populated. Shippers six digit account number. Must be six alphanumeric characters. Must be associated with the Internet account used to login.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ReferenceValues"
+                },
+                "maximum": 1,
+                "description": "Container that holds reference number and shipper number  If tracking number is not present use reference Number"
+            },
+            "ReferenceValues_ReferenceNumber": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Value"
+                ],
+                "properties": {
+                    "Value": {
+                        "description": "Required if TrackingNumber or Mail Innovations Tracking Number is not populated. Customer supplied reference number. Supports up to 2 customer supplied combinations of Reference code- value combinations.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ReferenceNumber"
+                },
+                "description": "Container for reference number"
+            },
+            "ReferenceNumber_Value": {
+                "description": "Required if TrackingNumber or Mail Innovations Tracking Number is not populated. Customer supplied reference number. Supports up to 2 customer supplied combinations of Reference code- value combinations.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "ReferenceValues_ShipperNumber": {
+                "description": "Required if ReferenceNumber/Value is populated. Shippers six digit account number. Must be six alphanumeric characters. Must be associated with the Internet account used to login.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6
+            },
+            "LabelRecoveryRequest_ShippingHistoryUserKey": {
+                "description": "Required if anonymous request. If not provided it is derived from user authentication ID.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 10
+            },
+            "LabelRecoveryRequest_LabelInstructionSet": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "Title": {
+                        "description": "Heading for the label. Eaxmple : UPS  Return Label: View/Print Label.",
+                        "type": "string"
+                    },
+                    "Print": {
+                        "description": "Generally the Subheading for the first instruction in label. Example : Print the Label. In HTML labels this is generally followed by Label_PrintSentence to provide more detailed instructions.",
+                        "type": "string"
+                    },
+                    "InvoiceTitle": {
+                        "description": "Item indicating customs invoice instructions will follow. This is static content. Example :Customs Invoice.",
+                        "type": "string"
+                    },
+                    "InvoiceText": {
+                        "description": "Instruction for customs invoice. Example :- 3 copies of a completed customs invoice are required for shipments with a commercial value.",
+                        "type": "string"
+                    },
+                    "Fold": {
+                        "description": "Item indicating label is to be folded. Example :Fold the printed label at the dotted line.",
+                        "type": "string"
+                    },
+                    "FoldSentence": {
+                        "description": "Instruction indicating how the label is to be attached. Example :Place the label in a UPS Shipping Pouch. If you do not have a pouch, affix the folded label using clear plastic shipping tape over the entire label.",
+                        "type": "string"
+                    },
+                    "CustomersWithNoDailyPickup": {
+                        "description": "Item Indicating instructions for customers without daily pickup will follow. Example : Customers without a Daily Pickup.",
+                        "type": "string"
+                    },
+                    "CollectionDropOff": {
+                        "description": "Item Indicating instructions collection or drop off will follow. Example : Collection and drop-off. For PDF labels use Label_CollectionDropoff or Label_GettingShipments.",
+                        "type": "string"
+                    },
+                    "GettingShipments": {
+                        "description": "Item indicating instruction to get shipment to UPS will follow. Example : GETTING YOUR SHIPMENT TO UPS. For PDF labels use Label_COLLECTIONDROPOFF or Label_GETTINGSHIPMENTS.",
+                        "type": "string"
+                    },
+                    "DropOff": {
+                        "description": "Instruction for drop-off . Example : Take the package to a UPS location or arrange for collection.",
+                        "type": "string"
+                    },
+                    "Collection": {
+                        "description": "Instruction for oncall pickup or collection customers. Example :-You must schedule a separate pickup or drop-off for your shipment.",
+                        "type": "string"
+                    },
+                    "Ground3DaySelect": {
+                        "description": "Instruction for collection or drop-off for ground 3 day select shipments. Example \"-Ground, 3 Day Select, and Standard to Canada shipments must be dropped off at an authorized UPS location, or handed to a UPS driver. Pickup service is not available for these services.\"",
+                        "type": "string"
+                    },
+                    "ToSchedule": {
+                        "description": "Instruction  to schedule a collection or drop off. Example : -Please visit www.ups.com if you have not already scheduled a collection or drop-off for your shipment.\"",
+                        "type": "string"
+                    },
+                    "DailyCollectionCustomers": {
+                        "description": "Instruction  for daily pickup or collection customers. Example : -Daily Collection customers: Have your shipment(s) ready for the driver as usual.",
+                        "type": "string"
+                    },
+                    "AirShipments": {
+                        "description": "Instruction for collection or drop-off for air shipments. Example \"Air shipments (including Worldwide Express and Expedited) can be picked up or dropped off. To schedule a pickup, or to find a drop-off location, select the Pickup or Drop-off icon from the UPS tool bar.\"",
+                        "type": "string"
+                    },
+                    "Signature": {
+                        "description": "Item indicating the signature location in the label. Example: Shipper's Signature.",
+                        "type": "string"
+                    },
+                    "DateOfShipment": {
+                        "description": "Item indicating the date location in the label. Example: Date of Shipment.",
+                        "type": "string"
+                    },
+                    "FoldHere": {
+                        "description": "Item indicating where the label is to be folded. Example: FOLD HERE.",
+                        "type": "string"
+                    },
+                    "CustomersWithDailyPickup": {
+                        "description": "HTML Labels Only. Ignored for pdf instructions. Instructions for daily pickup customers.",
+                        "type": "string"
+                    },
+                    "DailyPickupCustomers": {
+                        "description": "HTML Labels Only. Ignored for pdf instructions .",
+                        "type": "string"
+                    },
+                    "Acceptance": {
+                        "description": "UPS agreement acceptance. Example \"Acknowledge your acceptance of the original language of the agreement with UPS as stated on the confirm payment page, and to authorize UPS to act as forwarding agent for export control and custom purposes\". HTML Labels Only. Ignored for pdf instructions.",
+                        "type": "string"
+                    },
+                    "PrintSentence": {
+                        "description": "Information indicating not to put multiple labels in the shipment. Example \"-Ensure that there are no other tracking labels attached to your package.\" HTML Labels Only. Ignored for pdf instructions .",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LabelInstructionSet"
+                },
+                "description": "Container to hold custom label instructions."
+            },
+            "LabelInstructionSet_Title": {
+                "description": "Heading for the label. Eaxmple : UPS  Return Label: View/Print Label.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Print": {
+                "description": "Generally the Subheading for the first instruction in label. Example : Print the Label. In HTML labels this is generally followed by Label_PrintSentence to provide more detailed instructions.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_InvoiceTitle": {
+                "description": "Item indicating customs invoice instructions will follow. This is static content. Example :Customs Invoice.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_InvoiceText": {
+                "description": "Instruction for customs invoice. Example :- 3 copies of a completed customs invoice are required for shipments with a commercial value.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Fold": {
+                "description": "Item indicating label is to be folded. Example :Fold the printed label at the dotted line.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_FoldSentence": {
+                "description": "Instruction indicating how the label is to be attached. Example :Place the label in a UPS Shipping Pouch. If you do not have a pouch, affix the folded label using clear plastic shipping tape over the entire label.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_CustomersWithNoDailyPickup": {
+                "description": "Item Indicating instructions for customers without daily pickup will follow. Example : Customers without a Daily Pickup.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_CollectionDropOff": {
+                "description": "Item Indicating instructions collection or drop off will follow. Example : Collection and drop-off. For PDF labels use Label_CollectionDropoff or Label_GettingShipments.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_GettingShipments": {
+                "description": "Item indicating instruction to get shipment to UPS will follow. Example : GETTING YOUR SHIPMENT TO UPS. For PDF labels use Label_COLLECTIONDROPOFF or Label_GETTINGSHIPMENTS.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DropOff": {
+                "description": "Instruction for drop-off . Example : Take the package to a UPS location or arrange for collection.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Collection": {
+                "description": "Instruction for oncall pickup or collection customers. Example :-You must schedule a separate pickup or drop-off for your shipment.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Ground3DaySelect": {
+                "description": "Instruction for collection or drop-off for ground 3 day select shipments. Example \"-Ground, 3 Day Select, and Standard to Canada shipments must be dropped off at an authorized UPS location, or handed to a UPS driver. Pickup service is not available for these services.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_ToSchedule": {
+                "description": "Instruction  to schedule a collection or drop off. Example : -Please visit www.ups.com if you have not already scheduled a collection or drop-off for your shipment.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DailyCollectionCustomers": {
+                "description": "Instruction  for daily pickup or collection customers. Example : -Daily Collection customers: Have your shipment(s) ready for the driver as usual.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_AirShipments": {
+                "description": "Instruction for collection or drop-off for air shipments. Example \"Air shipments (including Worldwide Express and Expedited) can be picked up or dropped off. To schedule a pickup, or to find a drop-off location, select the Pickup or Drop-off icon from the UPS tool bar.\"",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Signature": {
+                "description": "Item indicating the signature location in the label. Example: Shipper's Signature.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DateOfShipment": {
+                "description": "Item indicating the date location in the label. Example: Date of Shipment.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_FoldHere": {
+                "description": "Item indicating where the label is to be folded. Example: FOLD HERE.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_CustomersWithDailyPickup": {
+                "description": "HTML Labels Only. Ignored for pdf instructions. Instructions for daily pickup customers.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_DailyPickupCustomers": {
+                "description": "HTML Labels Only. Ignored for pdf instructions .",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_Acceptance": {
+                "description": "UPS agreement acceptance. Example \"Acknowledge your acceptance of the original language of the agreement with UPS as stated on the confirm payment page, and to authorize UPS to act as forwarding agent for export control and custom purposes\". HTML Labels Only. Ignored for pdf instructions.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelInstructionSet_PrintSentence": {
+                "description": "Information indicating not to put multiple labels in the shipment. Example \"-Ensure that there are no other tracking labels attached to your package.\" HTML Labels Only. Ignored for pdf instructions .",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelRecoveryRequest_Locale": {
+                "description": "Represents 5 character ISO Locale that allows the user to request Reference Number Code on Label, Label instructions, Receipt instructions (if available for given tracking number) and High Value Report (if available for given tracking number) in desired language. \nLocale is specified by the combination of language code and country or territory code - 2 character language code and 2 character country code seperated by an underscore ('_') character. Example - de_DE. Please refer to Appendix for supported values for Locale.  Either Translate container or Locale element can be present in a given request. Both can't be requested together in same request.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 5
+            },
+            "LabelRecoveryRequest_UPSPremiumCareForm": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "PrintType",
+                    "PageSize"
+                ],
+                "properties": {
+                    "PageSize": {
+                        "description": "Size of UPS Premium Care Form.  Valid values: \n01  A4 Size\n02  Letter Size",
+                        "type": "string"
+                    },
+                    "PrintType": {
+                        "description": "Format of UPS Premium Care Form.  Valid values: \n01  PNG\n02  PDF",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "UPSPremiumCareForm"
+                },
+                "description": "UPS Premium Care Form container.  Default is PDF when container is not provided. \n  Valid only for Canada to Canada movements. UPS Premium Care Form will be returned in  both US English and Canadian French language."
+            },
+            "UPSPremiumCareForm_PageSize": {
+                "description": "Size of UPS Premium Care Form.  Valid values: \n01  A4 Size\n02  Letter Size",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "UPSPremiumCareForm_PrintType": {
+                "description": "Format of UPS Premium Care Form.  Valid values: \n01  PNG\n02  PDF",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "LabelRecoveryResponse": {
+                "type": "object",
+                "required": [
+                    "Response",
+                    "LabelResults"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/LabelRecoveryResponse_Response"
+                    },
+                    "ShipmentIdentificationNumber": {
+                        "description": "Tracking number of the leading package in the shipment",
+                        "type": "string"
+                    },
+                    "LegacyLabelDeliveryLabelURL": {
+                        "description": "URL to Legacy Label Delivery Web-page. Returned in response if following conditions are met -\n- If /LabelRecoveryRequest/LabelDelivery/LabelLinkIndicator was present in request\n- If requesting Access License Key belongs to Label Landing Page Application\n- If requested tracking number is Electronic Returns/Import Control Label shipment",
+                        "type": "string"
+                    },
+                    "LabelResults": {
+                        "$ref": "#/components/schemas/LabelRecoveryResponse_LabelResults"
+                    },
+                    "CODTurnInPage": {
+                        "$ref": "#/components/schemas/LabelRecoveryResponse_CODTurnInPage"
+                    },
+                    "Form": {
+                        "$ref": "#/components/schemas/LabelRecoveryResponse_Form"
+                    },
+                    "HighValueReport": {
+                        "$ref": "#/components/schemas/LabelRecoveryResponse_HighValueReport"
+                    },
+                    "TrackingCandidate": {
+                        "$ref": "#/components/schemas/LabelRecoveryResponse_TrackingCandidate"
+                    }
+                },
+                "xml": {
+                    "name": "LabelRecoveryResponse"
+                },
+                "maximum": 1,
+                "description": "Response for the Label recovery request  Validates the date range and label being present. Also if the shipment is return or not"
+            },
+            "LabelRecoveryResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Response Container",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success status of the transaction. 1Success",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Describes Response Status Code. Returns the text \"Success\"",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Response Status container"
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success status of the transaction. 1Success",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Describes Response Status Code. Returns the text \"Success\"",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description"
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container"
+            },
+            "LabelRecoveryResponse_ShipmentIdentificationNumber": {
+                "description": "Tracking number of the leading package in the shipment",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 18,
+                "maxLength": 18
+            },
+            "LabelRecoveryResponse_LegacyLabelDeliveryLabelURL": {
+                "description": "URL to Legacy Label Delivery Web-page. Returned in response if following conditions are met -\n- If /LabelRecoveryRequest/LabelDelivery/LabelLinkIndicator was present in request\n- If requesting Access License Key belongs to Label Landing Page Application\n- If requested tracking number is Electronic Returns/Import Control Label shipment",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelRecoveryResponse_LabelResults": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "TrackingNumber": {
+                        "description": "Package Tracking number.  Package 1Z number. Returned only if TrackingNumber or Combination of Reference Number and Shipper Number present in request.",
+                        "type": "string"
+                    },
+                    "LabelImage": {
+                        "$ref": "#/components/schemas/LabelResults_LabelImage"
+                    },
+                    "MailInnovationsTrackingNumber": {
+                        "description": "Mail Innovations Tracking Number.  Applicable for Single Mail Innovations Returns and Dual Mail Innovations Returns shipment. Returned only if MailInnovationsTrackingNumber is provided in request.",
+                        "type": "string"
+                    },
+                    "MailInnovationsLabelImage": {
+                        "$ref": "#/components/schemas/LabelResults_MailInnovationsLabelImage"
+                    },
+                    "Receipt": {
+                        "$ref": "#/components/schemas/LabelResults_Receipt"
+                    },
+                    "ReturnSlip": {
+                        "$ref": "#/components/schemas/LabelResults_ReturnSlip"
+                    },
+                    "Form": {
+                        "$ref": "#/components/schemas/LabelResults_Form"
+                    }
+                },
+                "xml": {
+                    "name": "LabelResults"
+                },
+                "description": "Container that stores the label results. Information containing the results of the user's Label Recovery Request."
+            },
+            "LabelResults_TrackingNumber": {
+                "description": "Package Tracking number.  Package 1Z number. Returned only if TrackingNumber or Combination of Reference Number and Shipper Number present in request.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 18,
+                "maxLength": 18
+            },
+            "LabelResults_LabelImage": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "LabelImageFormat"
+                ],
+                "properties": {
+                    "LabelImageFormat": {
+                        "$ref": "#/components/schemas/LabelImage_LabelImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded graphic image.",
+                        "type": "string"
+                    },
+                    "HTMLImage": {
+                        "description": "Base 64 encoded html browser image rendering software. This is only returned for GIF image formats.",
+                        "type": "string"
+                    },
+                    "PDF417": {
+                        "description": "PDF-417 is a two-dimensional barcode, which can store up to about 1,800 printable ASCII characters or 1,100 binary characters per symbol. The symbol is rectangular. \n\nThe PDF417 image will be returned when the shipment is trans-border and the service option is one of the following: Standard Express, Saver Express Plus. The image is Base 64 encoded and only returned for GIF image format.",
+                        "type": "string"
+                    },
+                    "InternationalSignatureGraphicImage": {
+                        "description": "Base 64 encoded graphic image of the Warsaw text and signature box.",
+                        "type": "string"
+                    },
+                    "URL": {
+                        "description": "This is only returned if the label link is requested to be returned and only at the first package result  Applicable for following types of shipments:\nPrint/Electronic Return Label\nPrint/Electronic Import Control Label\nForward shipment except for Mail Innovations Forward",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LabelImage"
+                },
+                "maximum": 1,
+                "description": "The elements needed to render a label on a printer or in a browser. Specifies the format in which GraphicImage is represented. If LabelImageFormat is GIF, LabelImage contains GraphicImage and HTMLImage. Otherwise, it contains only GraphicImage. If LabelImageFormat is PDF, LabelImage is only returned at the first package result. If entered in the request, the response mirrors, else the default values are returned.  Returned only if TrackingNumber or Combination of Reference Number and Shipper Number present in request."
+            },
+            "LabelImage_LabelImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code type that the label image is to be generated in. Valid value returned is gif, pdf, zpl. Spl, epl2",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LabelImageFormat"
+                },
+                "description": "The format of a label image byte stream."
+            },
+            "LabelImage_GraphicImage": {
+                "description": "Base 64 encoded graphic image.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelImage_HTMLImage": {
+                "description": "Base 64 encoded html browser image rendering software. This is only returned for GIF image formats.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelImage_PDF417": {
+                "description": "PDF-417 is a two-dimensional barcode, which can store up to about 1,800 printable ASCII characters or 1,100 binary characters per symbol. The symbol is rectangular. \n\nThe PDF417 image will be returned when the shipment is trans-border and the service option is one of the following: Standard Express, Saver Express Plus. The image is Base 64 encoded and only returned for GIF image format.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelImage_InternationalSignatureGraphicImage": {
+                "description": "Base 64 encoded graphic image of the Warsaw text and signature box.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelImage_URL": {
+                "description": "This is only returned if the label link is requested to be returned and only at the first package result  Applicable for following types of shipments:\nPrint/Electronic Return Label\nPrint/Electronic Import Control Label\nForward shipment except for Mail Innovations Forward",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelResults_MailInnovationsTrackingNumber": {
+                "description": "Mail Innovations Tracking Number.  Applicable for Single Mail Innovations Returns and Dual Mail Innovations Returns shipment. Returned only if MailInnovationsTrackingNumber is provided in request.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 34
+            },
+            "LabelResults_MailInnovationsLabelImage": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "LabelImageFormat"
+                ],
+                "properties": {
+                    "LabelImageFormat": {
+                        "$ref": "#/components/schemas/MailInnovationsLabelImage_LabelImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded graphic image.",
+                        "type": "string"
+                    },
+                    "HTMLImage": {
+                        "description": "Base 64 encoded html browser image rendering software. This is only returned for GIF image formats.",
+                        "type": "string"
+                    },
+                    "PDF417": {
+                        "description": "PDF-417 is a two-dimensional barcode, which can store up to about 1,800 printable ASCII characters or 1,100 binary characters per symbol. The symbol is rectangular. The PDF417 image will be returned when the shipment is trans-border and the service option is one of the following: Standard, Express Saver or Express Plus.  The image is Base 64 encoded and only returned for GIF image format",
+                        "type": "string"
+                    },
+                    "InternationalSignatureGraphicImage": {
+                        "description": "Base 64 encoded graphic image of the Warsaw text and signature box.  EPL2, ZPL and SPL labels. The image will be returned for non-US based shipments. One image will be given per shipment and it will be in the first PackageResults container.",
+                        "type": "string"
+                    },
+                    "URL": {
+                        "description": "This is only returned if the label link is requested to be returned and only at the first package result  Applicable for following types of shipments:\nPrint/Electronic Return Label",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "MailInnovationsLabelImage"
+                },
+                "maximum": 1,
+                "description": "Container to hold Mail Innovations shipments label. The elements needed to render a label on a printer or in a browser. Specifies the format in which GraphicImage is represented. If LabelImageFormat is GIF, LabelImage contains GraphicImage and HTMLImage. Otherwise, it contains only GraphicImage.   Applicable for Single Mail Innovations Returns and Dual Mail Innovations Returns shipment. Returned only if MailInnovationsTrackingNumber is provided in request.\nIf LabelImageFormat requested was PDF and TrackingNumber was present along with MailInnovationsTrackingNumber in the request, only LabelImage container is returned. MailInnovationsLabelImage will not be returned. In that case, the labels for Small Package Tracking Number and Mail Innovations Tracking Number will be stitched in single PDF file."
+            },
+            "MailInnovationsLabelImage_LabelImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code type that the label image is to be generated in. Valid value returned is gif, pdf, zpl. Spl, epl2",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "LabelImageFormat"
+                },
+                "description": "The format of a label image byte stream."
+            },
+            "MailInnovationsLabelImage_GraphicImage": {
+                "description": "Base 64 encoded graphic image.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "MailInnovationsLabelImage_HTMLImage": {
+                "description": "Base 64 encoded html browser image rendering software. This is only returned for GIF image formats.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "MailInnovationsLabelImage_PDF417": {
+                "description": "PDF-417 is a two-dimensional barcode, which can store up to about 1,800 printable ASCII characters or 1,100 binary characters per symbol. The symbol is rectangular. The PDF417 image will be returned when the shipment is trans-border and the service option is one of the following: Standard, Express Saver or Express Plus.  The image is Base 64 encoded and only returned for GIF image format",
+                "maximum": 1,
+                "type": "string"
+            },
+            "MailInnovationsLabelImage_InternationalSignatureGraphicImage": {
+                "description": "Base 64 encoded graphic image of the Warsaw text and signature box.  EPL2, ZPL and SPL labels. The image will be returned for non-US based shipments. One image will be given per shipment and it will be in the first PackageResults container.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "MailInnovationsLabelImage_URL": {
+                "description": "This is only returned if the label link is requested to be returned and only at the first package result  Applicable for following types of shipments:\nPrint/Electronic Return Label",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelResults_Receipt": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "HTMLImage": {
+                        "description": "Base 64 encoded html browser image.",
+                        "type": "string"
+                    },
+                    "Image": {
+                        "$ref": "#/components/schemas/Receipt_Image"
+                    },
+                    "URL": {
+                        "description": "Receipt's url  Applicable for following types of shipments:\nPrint/Electronic Return Label\nPrint/Electronic Import Control Label",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Receipt"
+                },
+                "description": "Container for the HTML receipt and the receipt link."
+            },
+            "Receipt_HTMLImage": {
+                "description": "Base 64 encoded html browser image.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "Receipt_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded High Value Report image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container for the receipt in the format other than HTML."
+            },
+            "Image_ImageFormat": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Code representing the format in which the High Value Reports are generated. \n  Valid values: PDF  pdf",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Description of the High Value Report image format code.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ImageFormat"
+                },
+                "description": "Container tag for the High Value Report image format information."
+            },
+            "ImageFormat_Code": {
+                "description": "Code representing the format in which the High Value Reports are generated. \n  Valid values: PDF  pdf",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "Image_GraphicImage": {
+                "description": "Base 64 encoded High Value Report image.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "Receipt_URL": {
+                "description": "Receipt's url  Applicable for following types of shipments:\nPrint/Electronic Return Label\nPrint/Electronic Import Control Label",
+                "maximum": 1,
+                "type": "string"
+            },
+            "LabelResults_ReturnSlip": {
+                "type": "object",
+                "required": [
+                    "Image"
+                ],
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/ReturnSlip_Image"
+                    }
+                },
+                "xml": {
+                    "name": "ReturnSlip"
+                },
+                "description": "Container tag for the Return Slip.  Applicable for Electronic Return Label shipments only.",
+                "maximum": 1
+            },
+            "ReturnSlip_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded High Value Report image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container tag for the Return Slip image."
+            },
+            "ImageFormat_Description": {
+                "description": "Description of the High Value Report image format code.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "LabelResults_Form": {
+                "type": "object",
+                "required": [
+                    "Image"
+                ],
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/Form_Image"
+                    }
+                },
+                "xml": {
+                    "name": "Form"
+                },
+                "description": "Container tag for the International Forms. Currently, represents UPS Premium Care Form for Electronic Returns Label and Electronic Import Control Label. UPS  Premium Care Form for Forward shipment if Subverion is 1903 or greater  Applicable for Electronic Return Label and Electronic Import Control Label shipments only. Applies only for Canada domestic shipments. Returned for request with SubVersion greater than or equal to 1707.  UPS  Premium Care Form for Forward shipment if Subverion is 1903 or greater",
+                "maximum": 1
+            },
+            "Form_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded High Value Report image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container tag for the International Forms image."
+            },
+            "LabelRecoveryResponse_CODTurnInPage": {
+                "type": "object",
+                "required": [
+                    "Image"
+                ],
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/CODTurnInPage_Image"
+                    }
+                },
+                "xml": {
+                    "name": "CODTurnInPage"
+                },
+                "description": "Container for COD Turnin Page.",
+                "maximum": 1
+            },
+            "CODTurnInPage_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded High Value Report image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container for COD Turnin Page Image."
+            },
+            "LabelRecoveryResponse_Form": {
+                "type": "object",
+                "required": [
+                    "Image"
+                ],
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/Form_Image"
+                    }
+                },
+                "xml": {
+                    "name": "Form"
+                },
+                "description": "Container tag for the International Forms. Currently, represents Commercial Invoice for Electronic Returns Label and Electronic Import Control Label.  Applicable for Electronic Return Label and Electronic Import Control Label shipments only. Returned for request with SubVersion greater than or equal to 1707.",
+                "maximum": 1
+            },
+            "LabelRecoveryResponse_HighValueReport": {
+                "type": "object",
+                "required": [
+                    "Image"
+                ],
+                "properties": {
+                    "Image": {
+                        "$ref": "#/components/schemas/HighValueReport_Image"
+                    }
+                },
+                "xml": {
+                    "name": "HighValueReport"
+                },
+                "description": "Container tag for the High Value Report for Electronic Returns Label and Electronic Import Control Label.  Applicable for Electronic Return Label and Electronic Import Control Label shipments only. Returned for request with SubVersion greater than or equal to 1707.",
+                "maximum": 1
+            },
+            "HighValueReport_Image": {
+                "type": "object",
+                "required": [
+                    "GraphicImage",
+                    "ImageFormat"
+                ],
+                "properties": {
+                    "ImageFormat": {
+                        "$ref": "#/components/schemas/Image_ImageFormat"
+                    },
+                    "GraphicImage": {
+                        "description": "Base 64 encoded High Value Report image.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Image"
+                },
+                "maximum": 1,
+                "description": "Container tag for the High Value Report image."
+            },
+            "LabelRecoveryResponse_TrackingCandidate": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "TrackingNumber"
+                ],
+                "properties": {
+                    "TrackingNumber": {
+                        "description": "Packaging Tracking Number  Only supported for the web small package shipment so only supported 18 digit",
+                        "type": "string"
+                    },
+                    "DestinationPostalCode": {
+                        "description": "Destination postal code candidate",
+                        "type": "string"
+                    },
+                    "DestinationCountryCode": {
+                        "description": "Destination country or territory code candidate, like US  USA, CA  Canada  Must be valid ups country or territory code",
+                        "type": "string"
+                    },
+                    "PickupDateRange": {
+                        "$ref": "#/components/schemas/TrackingCandidate_PickupDateRange"
+                    }
+                },
+                "xml": {
+                    "name": "TrackingCandidate"
+                },
+                "description": "Information containing the results of the users Label Recovery Request. Returned in the event the Shipper Number and Reference Number are supplied in the request."
+            },
+            "TrackingCandidate_TrackingNumber": {
+                "description": "Packaging Tracking Number  Only supported for the web small package shipment so only supported 18 digit",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 18,
+                "maxLength": 18
+            },
+            "TrackingCandidate_DestinationPostalCode": {
+                "description": "Destination postal code candidate",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 9
+            },
+            "TrackingCandidate_DestinationCountryCode": {
+                "description": "Destination country or territory code candidate, like US  USA, CA  Canada  Must be valid ups country or territory code",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 2
+            },
+            "TrackingCandidate_PickupDateRange": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "EndDate",
+                    "BeginDate"
+                ],
+                "properties": {
+                    "BeginDate": {
+                        "description": "The beginning of the date range for the candidate. Format: YYYYMMDD  Service is only supported for 30 days",
+                        "type": "string"
+                    },
+                    "EndDate": {
+                        "description": "The end of the date range for the candidate. Format: YYYYMMDD",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "PickupDateRange"
+                },
+                "description": "A range of time the package was picked up."
+            },
+            "PickupDateRange_BeginDate": {
+                "description": "The beginning of the date range for the candidate. Format: YYYYMMDD  Service is only supported for 30 days",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            },
+            "PickupDateRange_EndDate": {
+                "description": "The end of the date range for the candidate. Format: YYYYMMDD",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 8,
+                "maxLength": 8
+            }
+        }
+    }
+}

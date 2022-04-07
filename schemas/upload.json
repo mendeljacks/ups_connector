@@ -1,0 +1,422 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Paperless Document",
+        "description": "The Paperless Document API web service allows the users to upload,delete and push to image repository their own customized trade documents for customs clearance to Forms History. ",
+        "termsOfService": "https://www.ups.com/upsdeveloperkit/assets/html/serviceAgreement.html",
+        "version": "1.0.1"
+    },
+    "externalDocs": {
+        "description": "Find out more about Paperless Document , Error Codes and Appendix",
+        "url": "https://www.ups.com/upsdeveloperkit/assets/html/PaperlessDocumentStatic.html"
+    },
+    "servers": [
+        {
+            "url": "https://wwwcie.ups.com/rest/"
+        },
+        {
+            "url": "https://onlinetools.ups.com/rest/"
+        }
+    ],
+    "paths": {
+        "/PaperlessDocumentAPI": {
+            "post": {
+                "summary": "The Paperless Document API web service allows the users to upload,delete and push to image repository their own customized trade documents for customs clearance to Forms History. ",
+                "operationId": "Upload",
+                "requestBody": {
+                    "description": "The Paperless Document API web service allows the users to upload,delete and push to image repository their own customized trade documents for customs clearance to Forms History. ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PAPERLESSDOCUMENTRequestWrapper"
+                            },
+                            "examples": {
+                                "json": {
+                                    "summary": "A sample JSON request",
+                                    "value": {
+                                        "UPSSecurity": {
+                                            "UsernameToken": {
+                                                "Username": "Your User Id",
+                                                "Password": "Your Password"
+                                            },
+                                            "ServiceAccessToken": {
+                                                "AccessLicenseNumber": "Your Access License Number"
+                                            }
+                                        },
+                                        "UploadRequest": {
+                                            "ShipperNumber": "Your Shipper Number",
+                                            "Request": {
+                                                "TransactionReference": {}
+                                            },
+                                            "UserCreatedForm": {
+                                                "UserCreatedFormFileName": "TestFile.txt",
+                                                "UserCreatedFormFileFormat": "txt",
+                                                "UserCreatedFormDocumentType": "013",
+                                                "UserCreatedFormFile": "Tm90aWNlDQpJbiBhbGwgY29tbXVuaWNhdGlvbnMgd2l0aCBVUFMgY29uY2VybmluZyB0aGlzIGRvY3VtZW50LCBwbGVhc2UgcmVmZXIgdG8gdGhlIGRvY3VtZW50IGRhdGUgbG9jYXRlZCBvbiB0aGUgY292ZXIuDQpDb3B5cmlnaHQNClRoZSB1c2UsIGRpc2Nsb3N1cmUsIHJlcHJvZHVjdGlvbiwgbW9kaWZpY2F0aW9uLCB0cmFuc2Zlciwgb3IgdHJhbnNtaXR0YWwgb2YgdGhpcyB3b3JrIGZvciBhbnkgcHVycG9zZSBpbiBhbnkgZm9ybSBvciBieSBhbnkgbWVhbnMgd2l0aG91dCB0aGUgd3JpdHRlbiBwZXJtaXNzaW9uIG9mIFVuaXRlZCBQYXJjZWwgU2VydmljZSBpcyBzdHJpY3RseSBwcm9oaWJpdGVkLg0KwqkgQ29weXJpZ2h0IDIwMTYgVW5pdGVkIFBhcmNlbCBTZXJ2aWNlIG9mIEFtZXJpY2EsIEluYy4gQWxsIFJpZ2h0cyBSZXNlcnZlZC4NClRyYWRlbWFya3MNClVQUyBPbkxpbmXCriBpcyBhIHJlZ2lzdGVyZWQgdHJhZGVtYXJrIG9mIFVuaXRlZCBQYXJjZWwgU2VydmljZSBvZiBBbWVyaWNhLCBJbmMuIEFsbCBvdGhlciB0cmFkZW1hcmtzIGFyZSB0aGUgcHJvcGVydHkgb2YgdGhlaXIgcmVzcGVjdGl2ZSBvd25lcnMuDQpTb21lIG9mIHRoZSBVUFMgY29ycG9yYXRlIGFwcGxpY2F0aW9ucyB1c2UgVS5TLiBjaXR5LCBzdGF0ZSwgYW5kIHBvc3RhbCBjb2RlIGluZm9ybWF0aW9uIG9idGFpbmVkIGJ5IFVuaXRlZCBQYXJjZWwgU2VydmljZSBvZiBBbWVyaWNhLCBJbmMuIHVuZGVyIGEgbm9uLWV4Y2x1c2l2ZSBsaWNlbnNlIGZyb20gdGhlIFVuaXRlZCBTdGF0ZXMgUG9zdGFsIFNlcnZpY2UuIA0K"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "application/xml": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PAPERLESSDOCUMENTRequestWrapper"
+                            },
+                            "examples": {
+                                "xml": {
+                                    "summary": "A sample XML request",
+                                    "value": "<env:Envelope xmlns:env\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:xsd\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:upss\"http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\">\r\n<env:Header>\r\n<upss:UPSSecurity>\r\n<upss:UsernameToken>\r\n<upss:Username>Your User Id</upss:Username>\r\n<upss:Password>Your Password</upss:Password>\r\n</upss:UsernameToken>\r\n<upss:ServiceAccessToken>\r\n<upss:AccessLicenseNumber>Your Access License Number</upss:AccessLicenseNumber>\r\n</upss:ServiceAccessToken>\r\n</upss:UPSSecurity>\r\n</env:Header>\r\n<env:Body>\r\n<da:UploadRequest \r\nxmlns:da\"http://www.ups.com/XMLSchema/XOLTWS/PaperlessDocumentAPI/v1.0\" \r\nxmlns:common\"http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0\">\r\n<da:ShipperNumber>Your Shipper Number</da:ShipperNumber>\r\n<common:Request>\r\n<common:TransactionReference>\r\n<common:TransactionIdentifier>Your Transaction \r\nIdentifier</common:TransactionIdentifier>\r\n</common:TransactionReference>\r\n</common:Request>\r\n<da:UserCreatedForm>\r\n<da:UserCreatedFormFileName>TestFile.txt</da:UserCreatedFormFileName>\r\n<da:UserCreatedFormFileFormat>txt</da:UserCreatedFormFileFormat>\r\n<da:UserCreatedFormDocumentType>013</da:UserCreatedFormDocumentType>\r\n<da:UserCreatedFormFile>Tm90aWNlDQpJbiBhbGwgY29tbXVuaWNhdGlvbnMgd2l0aCBVUF\r\nMgY29uY2VybmluZyB0aGlzIGRvY3VtZW50L (truncated for example)\r\n</da:UserCreatedFormFile>\r\n</da:UserCreatedForm>\r\n</da:UploadRequest>\r\n</env:Body>\r\n</env:Envelope>\r\n"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {}
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PAPERLESSDOCUMENTRequestWrapper": {
+                "xml": {
+                    "name": "UploadRequest"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "UploadRequest"
+                ],
+                "properties": {
+                    "UploadRequest": {
+                        "$ref": "#/components/schemas/UploadRequest"
+                    }
+                }
+            },
+            "PAPERLESSDOCUMENTResponseWrapper": {
+                "xml": {
+                    "name": "UploadResponse"
+                },
+                "description": "N/A  ",
+                "maximum": 1,
+                "type": "object",
+                "required": [
+                    "UploadResponse"
+                ],
+                "properties": {
+                    "UploadResponse": {
+                        "$ref": "#/components/schemas/UploadResponse"
+                    }
+                }
+            },
+            "UploadRequest": {
+                "type": "object",
+                "required": [
+                    "Request",
+                    "UserCreatedForm",
+                    "ShipperNumber"
+                ],
+                "properties": {
+                    "Request": {
+                        "$ref": "#/components/schemas/UploadRequest_Request"
+                    },
+                    "ShipperNumber": {
+                        "description": "The Shipper's UPS Account Number.  Your UPS Account Number must have 'Upload Forms Created Offline' enabled to use this webservice.",
+                        "type": "string"
+                    },
+                    "UserCreatedForm": {
+                        "$ref": "#/components/schemas/UploadRequest_UserCreatedForm"
+                    }
+                },
+                "xml": {
+                    "name": "UploadRequest"
+                },
+                "maximum": 1,
+                "description": "Paperless Document API Request container for uploading User Created Forms.  N/A"
+            },
+            "UploadRequest_Request": {
+                "type": "object",
+                "properties": {
+                    "RequestOption": {
+                        "description": "Enables the user to specify optional processing. Currently, there is no optional process in Paperless Document API.  N/A",
+                        "type": "string"
+                    },
+                    "SubVersion": {
+                        "description": "Not Used.",
+                        "type": "string"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Request_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Request"
+                },
+                "maximum": 1,
+                "description": "Contains Paperless Document API upload request criteria components.  N/A"
+            },
+            "Request_RequestOption": {
+                "description": "Enables the user to specify optional processing. Currently, there is no optional process in Paperless Document API.  N/A",
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "Request_SubVersion": {
+                "description": "Not Used.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "Request_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response.",
+                        "type": "string"
+                    },
+                    "TransactionIdentifier": {
+                        "description": "Not Used.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "TransactionReference identifies transactions between client and server.  N/A"
+            },
+            "TransactionReference_CustomerContext": {
+                "description": "The CustomerContext Information which will be echoed during response.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+            },
+            "TransactionReference_TransactionIdentifier": {
+                "description": "Not Used.",
+                "maximum": 1,
+                "type": "string"
+            },
+            "UploadRequest_ShipperNumber": {
+                "description": "The Shipper's UPS Account Number.  Your UPS Account Number must have 'Upload Forms Created Offline' enabled to use this webservice.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 6,
+                "maxLength": 6
+            },
+            "UploadRequest_UserCreatedForm": {
+                "type": "object",
+                "maximum": 13,
+                "required": [
+                    "UserCreatedFormFile",
+                    "UserCreatedFormFileName",
+                    "UserCreatedFormFileFormat",
+                    "UserCreatedFormDocumentType"
+                ],
+                "properties": {
+                    "UserCreatedFormFileName": {
+                        "description": "The name of the file.  N/A",
+                        "type": "string"
+                    },
+                    "UserCreatedFormFile": {
+                        "description": "The user created form file.  The maximum allowable size of each file is restricted to 10 MB.                                                                                                                                                                                                         Note: The maximum allowable size of each file is restriced to 1MB in CIE (Customer Integration Environment).",
+                        "type": "string"
+                    },
+                    "UserCreatedFormFileFormat": {
+                        "description": "The UserCreatedForm file format.  The allowed file formats are bmp, doc, gif, jpg, pdf, png, rtf, tif, txt and xls. The only exceptions for having file format of length 4 character are docx and xlsx. All other file formats needs to be of length 3.",
+                        "type": "string"
+                    },
+                    "UserCreatedFormDocumentType": {
+                        "description": "The type of documents in UserCreatedForm file.  The allowed document types are 001 - Authorization Form, 002 - Commercial Invoice, 003 - Certificate of Origin, 004 - Export Accompanying Document, 005 - Export License, 006 - Import Permit, 007 - One Time NAFTA, 008 - Other Document, 009 - Power of Attorney, 010 - Packing List, 011 - SED Document, 012 - Shipper's Letter of Instruction, 013 - Declaration. The total number of documents allowed per file or per shipment is 13. Each document type needs to be three digits.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "UserCreatedForm"
+                },
+                "description": "The container for User Created Form. The container holds the file. Total number of allowed files per shipment is 13.  N/A"
+            },
+            "UserCreatedForm_UserCreatedFormFileName": {
+                "description": "The name of the file.  N/A",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+            },
+            "UserCreatedForm_UserCreatedFormFile": {
+                "description": "The user created form file.  The maximum allowable size of each file is restricted to 10 MB.                                                                                                                                                                                                         Note: The maximum allowable size of each file is restriced to 1MB in CIE (Customer Integration Environment).",
+                "maximum": 1,
+                "type": "string"
+            },
+            "UserCreatedForm_UserCreatedFormFileFormat": {
+                "description": "The UserCreatedForm file format.  The allowed file formats are bmp, doc, gif, jpg, pdf, png, rtf, tif, txt and xls. The only exceptions for having file format of length 4 character are docx and xlsx. All other file formats needs to be of length 3.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 4
+            },
+            "UserCreatedForm_UserCreatedFormDocumentType": {
+                "description": "The type of documents in UserCreatedForm file.  The allowed document types are 001 - Authorization Form, 002 - Commercial Invoice, 003 - Certificate of Origin, 004 - Export Accompanying Document, 005 - Export License, 006 - Import Permit, 007 - One Time NAFTA, 008 - Other Document, 009 - Power of Attorney, 010 - Packing List, 011 - SED Document, 012 - Shipper's Letter of Instruction, 013 - Declaration. The total number of documents allowed per file or per shipment is 13. Each document type needs to be three digits.",
+                "maximum": 13,
+                "type": "string",
+                "minLength": 3,
+                "maxLength": 3
+            },
+            "UploadResponse": {
+                "type": "object",
+                "required": [
+                    "Response"
+                ],
+                "properties": {
+                    "Response": {
+                        "$ref": "#/components/schemas/UploadResponse_Response"
+                    },
+                    "FormsHistoryDocumentID": {
+                        "$ref": "#/components/schemas/UploadResponse_FormsHistoryDocumentID"
+                    }
+                },
+                "xml": {
+                    "name": "UploadResponse"
+                },
+                "description": "Paperless Document API Response Container for upload request.  N/A",
+                "maximum": 1
+            },
+            "UploadResponse_Response": {
+                "type": "object",
+                "required": [
+                    "ResponseStatus"
+                ],
+                "properties": {
+                    "ResponseStatus": {
+                        "$ref": "#/components/schemas/Response_ResponseStatus"
+                    },
+                    "Alert": {
+                        "$ref": "#/components/schemas/Response_Alert"
+                    },
+                    "TransactionReference": {
+                        "$ref": "#/components/schemas/Response_TransactionReference"
+                    }
+                },
+                "xml": {
+                    "name": "Response"
+                },
+                "description": "Response container.",
+                "maximum": 1
+            },
+            "Response_ResponseStatus": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Identifies the success or failure of the transaction. Valid values are 0  Failed and 1  Successful.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Describes Response Status Code. Returns text of \"Success\" or \"Failure\".",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "ResponseStatus"
+                },
+                "description": "Response status container.  N/A"
+            },
+            "ResponseStatus_Code": {
+                "description": "Identifies the success or failure of the transaction. Valid values are 0  Failed and 1  Successful.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1
+            },
+            "ResponseStatus_Description": {
+                "description": "Describes Response Status Code. Returns text of \"Success\" or \"Failure\".",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 35
+            },
+            "Response_Alert": {
+                "type": "object",
+                "maximum": 1,
+                "required": [
+                    "Description",
+                    "Code"
+                ],
+                "properties": {
+                    "Code": {
+                        "description": "Warning code returned by the system.",
+                        "type": "string"
+                    },
+                    "Description": {
+                        "description": "Warning messages returned by the system.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "Alert"
+                },
+                "description": "Alert Container. There can be zero to many alert containers with code and description.  N/A"
+            },
+            "Alert_Code": {
+                "description": "Warning code returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 10
+            },
+            "Alert_Description": {
+                "description": "Warning messages returned by the system.",
+                "maximum": 1,
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150
+            },
+            "Response_TransactionReference": {
+                "type": "object",
+                "maximum": 1,
+                "properties": {
+                    "CustomerContext": {
+                        "description": "The CustomerContext Information which will be echoed during response.",
+                        "type": "string"
+                    },
+                    "TransactionIdentifier": {
+                        "description": "Not Used.",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "TransactionReference"
+                },
+                "description": "Transaction Reference Container.  N/A"
+            },
+            "UploadResponse_FormsHistoryDocumentID": {
+                "type": "object",
+                "required": [
+                    "DocumentID"
+                ],
+                "properties": {
+                    "DocumentID": {
+                        "description": "DocumentID represents a document uploaded to Forms History.  N/A",
+                        "type": "string"
+                    }
+                },
+                "xml": {
+                    "name": "FormsHistoryDocumentID"
+                },
+                "description": "The container for DocumentID(s).  N/A",
+                "maximum": 1
+            },
+            "FormsHistoryDocumentID_DocumentID": {
+                "description": "DocumentID represents a document uploaded to Forms History.  N/A",
+                "type": "string",
+                "minLength": 26,
+                "maxLength": 26
+            }
+        }
+    }
+}
